@@ -30,7 +30,7 @@ proportions <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
 
 ```
 
-The following estimates were based on several model inputs and assumptions. First, the total number of MSM in the model population was set to `r paste(format(input$msmpopsize, big.mark=","), sep="")`. Under the assumption that `r paste(round(((sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)-sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100), "%", sep="")` of all HIV-positive individuals were undiagnosed, the total number of HIV-positive individuals, undiagnosed (n=`r paste(format(input$undiagnosedcnt.mutex, big.mark=","), sep="")`) and diagnosed (n=`r paste(format(sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), sep="")`), was `r paste(format(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), sep="")`.
+The following estimates were based on several model inputs and assumptions. First, the total number of MSM in the model population was set to `r paste(format(input$msmpopsize, big.mark=","), sep="")`. Under the assumption that `r paste(round(input$msmdiagpct, 0))`, `r paste(round(input$msmdiagpct, 0))`, `r paste(round(input$msmdiagpct, 0))`, of newly diagnosed cases were attributable to MSM, heterosexuals (HET), or persons who inject drugs (PWID), respectively, of all HIV-positive individuals were undiagnosed, the total number of HIV-positive individuals, undiagnosed (n=`r paste(format(input$undiagnosedcnt.mutex, big.mark=","), sep="")`) and diagnosed (n=`r paste(format(sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), sep="")`), was `r paste(format(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), sep="")`.
 
 For the model, among those who had been diagnosed with HIV, `r paste(format(sum(input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)), "%)", sep="")` were retained in care, `r paste(format(sum(input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)), "%)", sep="")` had been prescribed antiretroviral medications (ARVs), and `r paste(format(sum(input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedsupcnt.mutex)/sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)), "%)", sep="")` were virally suppressed. Thus, the final counts of individuals at each stage of the HIV Care Continuum were `r paste(format(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)),"%)", sep="")` total HIV-positive persons, `r paste(format(sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)),"%)", sep="")` HIV-positive persons who had been diagnosed, `r paste(format(sum(input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)),"%)", sep="")` who were retained in care, `r paste(format(sum(input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round((sum(input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100),"%)", sep="")` who had been prescribed ARVs, and `r paste(format(sum(input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)),"%)", sep="")` who were virally suppressed.
 
@@ -75,61 +75,3 @@ Diagnosed, not retained in care       | `r paste(format(input$diagnosednrcnt.mut
 Retained in care, not prescribed ARVs | `r paste(format(input$diagnosedretcnt.mutex, big.mark=","), sep="")` | `r paste(round(input$diagnosedretcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")`
 Prescribed ARVs, not suppressed       | `r paste(format(input$diagnosedarvcnt.mutex, big.mark=","), sep="")` | `r paste(round(input$diagnosedarvcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")`
 Virally suppressed                    | `r paste(format(input$diagnosedsupcnt.mutex, big.mark=","), sep="")` | `r paste(round(input$diagnosedsupcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")`
-
-#####Figure 2. HIV Care Continuum (Mutually Exclusive)
-```{r echo=FALSE, fig.width=5, fig.height=4} 
-par(mai=c(.8, .4, .25, .25), mgp=c(1,1,0))
-stagescnt <- c(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)
-x.coordinates <- barplot(stagescnt, cex.axis=.7, col=colors, xpd=TRUE, axis.lty=TRUE)
-text(cex=.7, x=x.coordinates, y=-(max(stagescnt)/50), stagenames.mutex, xpd=TRUE, srt=30, pos=2, offset=-.5)
-text(cex=.7, x=x.coordinates, y=stagescnt, format(stagescnt, big.mark=","), pos=3, xpd=TRUE)
-```
-
-##Results: HIV Transmissions
-
-
-#####Table 1. Estimated Transmission Rates and Transmissions, by HIV Care Continuum Stage (Mutually Exclusive)
-
-HIV Care Continuum Stage              | n      | %     | Tx Rate (100PY) | Transmissions (n) | Transmissions (%)
-------------------------------------- | ------:| -----:| ---------------:| -----------------:| -----------------:
-Undiagnosed                           | `r paste(format(input$undiagnosedcnt.mutex, big.mark=","), sep="")` | `r paste(round(input$undiagnosedcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")` | `r rates[1]`          | `r txcnt[1]`          | `r paste(pcttxcnt[1], "%", sep="")`
-Diagnosed, not retained in care       | `r paste(format(input$diagnosednrcnt.mutex, big.mark=","), sep="")`  | `r paste(round(input$diagnosednrcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")` | `r rates[2]`           | `r txcnt[2]`              | `r paste(pcttxcnt[2], "%", sep="")`
-Retained in care, not prescribed ARVs | `r paste(format(input$diagnosedretcnt.mutex, big.mark=","), sep="")`  | `r paste(round(input$diagnosedretcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")` | `r rates[3]`           | `r txcnt[3]`               | `r paste(pcttxcnt[3], "%", sep="")`
-Prescribed ARVs, not suppressed       | `r paste(format(input$diagnosedarvcnt.mutex, big.mark=","), sep="")`  | `r paste(round(input$diagnosedarvcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")` | `r rates[4]`           | `r txcnt[4]`               | `r paste(pcttxcnt[4], "%", sep="")`
-Virally suppressed                    | `r paste(format(input$diagnosedsupcnt.mutex, big.mark=","), sep="")`  | `r paste(round(input$diagnosedsupcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")`  | `r rates[5]`           | `r txcnt[5]`              | `r paste(pcttxcnt[5], "%", sep="")`
-
-
-
-
-#####Figure 3. Estimated HIV Transmissions, by HIV Care Continuum Stage (Mutually Exclusive)
-```{r echo=FALSE, fig.width=5, fig.height=4}
-par(mai=c(.8, .4, .25, .25), mgp=c(1,1,0))
-rates <- tx.rates[[as.numeric(input$rateassumption)]]
-if (is.na(input$customUndiagnosedTxRate)==FALSE & is.na(input$customDiagnosedNRTxRate)==FALSE & is.na(input$customDiagnosedRetTxRate)==FALSE & is.na(input$customDiagnosedARVTxRate)==FALSE & is.na(input$customDiagnosedSupTxRate)==FALSE){
-  rates <- c(input$customUndiagnosedTxRate, input$customDiagnosedNRTxRate, input$customDiagnosedRetTxRate, input$customDiagnosedARVTxRate, input$customDiagnosedSupTxRate)
-}
-
-if (is.na(input$undiagnosedcnt.mutex)==FALSE & is.na(input$diagnosednrcnt.mutex)==FALSE & is.na(input$diagnosedretcnt.mutex)==FALSE & is.na(input$diagnosedarvcnt.mutex)==FALSE & is.na(input$diagnosedsupcnt.mutex)==FALSE){
-  stagescnt <- c(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)
-  txcnt <- round((rates/100) * stagescnt)
-  x.coordinates <- barplot(txcnt, cex.axis=.7, col=colors, xpd=TRUE, axis.lty=TRUE)
-  text(cex=.7, x=x.coordinates, y=-(max(txcnt)/50), stagenames.mutex, xpd=TRUE, srt=30, pos=2, offset=-.5)
-  text(cex=.7, x=x.coordinates, y=txcnt, format(txcnt, big.mark=","), pos=3, xpd=TRUE)
-}
-```
-
-#####Figure 4. Percentage of Estimated HIV Transmissions, by HIV Care Continuum Stage (Mutually Exclusive)
-```{r echo=FALSE, fig.width=6.5, fig.height=4} 
-par(mai=c(.05, 1, .05, 1.25), mgp=c(1,1,0))
-rates <- tx.rates[[as.numeric(input$rateassumption)]]
-if (is.na(input$customUndiagnosedTxRate)==FALSE & is.na(input$customDiagnosedNRTxRate)==FALSE & is.na(input$customDiagnosedRetTxRate)==FALSE & is.na(input$customDiagnosedARVTxRate)==FALSE & is.na(input$customDiagnosedSupTxRate)==FALSE){
-  rates <- c(input$customUndiagnosedTxRate, input$customDiagnosedNRTxRate, input$customDiagnosedRetTxRate, input$customDiagnosedARVTxRate, input$customDiagnosedSupTxRate)
-}
-
-if (is.na(input$undiagnosedcnt.mutex)==FALSE & is.na(input$diagnosednrcnt.mutex)==FALSE & is.na(input$diagnosedretcnt.mutex)==FALSE & is.na(input$diagnosedarvcnt.mutex)==FALSE & is.na(input$diagnosedsupcnt.mutex)==FALSE){
-  stagescnt <- c(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)
-  txcnt <- round((rates/100) * stagescnt)
-  stagenamespct <- paste(stagenames.mutex, " (", round((txcnt/sum(txcnt))*100), "%)", sep="")
-  pie(txcnt, labels=stagenamespct, col=colors, cex=.7, xpd=TRUE)
-}
-```
