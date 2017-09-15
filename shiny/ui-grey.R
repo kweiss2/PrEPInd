@@ -5,6 +5,13 @@ suppressMessages(library("EpiModel"))
 library("plotly")
 
 shinyUI(fluidPage(
+
+  conditionalPanel(condition="output.incorrect == true",
+                   textInput("password", "Password", value="")
+  ),
+
+  conditionalPanel(condition="output.correct == true",
+                   tabsetPanel(
                      tabPanel("HIV Care Continuum",
                               titlePanel(HTML("Estimate the HIV Care Continuum")),
                               h5("Start on the left and work your way to the right!"),
@@ -15,39 +22,27 @@ shinyUI(fluidPage(
                                                 #          HTML("<div style=\"width:3;height:3;border:3px solid #000;background:#46B7EB\"><h4 style=\"color:#2A268B\">1. Basic Inputs</h4>"),
                                                 HTML("<h4 style=\"color:#2A268B\">1. Basic Inputs & Assumptions</h4>"),
 
-                                                numericInput("msmpopsize",
-                                                             "Jurisdiction MSM Population Size",
-                                                             min = 0,
-                                                             value = NA),
+                                                numericInput("diagnosedcnt1",
+                                                             "Living with HIV diagnosis (#)",
+                                                             min=0,
+                                                             value=NA),
 
-                                                selectInput("state", label = "State",
-                                                            c("Total" = 1, "Alabama" = 2,
-                                                              "Alaska" = 3, "Arizona" = 4,
-                                                              "Arkansas" = 5, "California" = 6,
-                                                              "Colorado" = 7, "Connecticut" = 8,
-                                                              "Delaware" = 9, "Florida" = 10,
-                                                              "Georgia" = 11, "Hawaii" = 12,
-                                                              "Idaho" = 13, "Illinois" = 14,
-                                                              "Indiana" = 15, "Iowa" = 16,
-                                                              "Kansas" = 17, "Kentucky" = 18,
-                                                              "Louisiana" = 19, "Maine" = 20,
-                                                              "Maryland" = 21, "Massachusetts" = 22,
-                                                              "Michigan" = 23, "Minnesota" = 24,
-                                                              "Mississippi" = 25, "Missouri" = 26,
-                                                              "Montana" = 27, "Nebraska" = 28,
-                                                              "Nevada" = 29, "New Hampshire" = 30,
-                                                              "New Jersey" = 31, "New Mexico" = 32,
-                                                              "New York" = 33, "North Carolina" = 34,
-                                                              'North Dakota' = 35, "Ohio" = 36,
-                                                              "Oklahoma" = 37, "Oregon" = 38,
-                                                              "Pennsylvania" = 39, "Rhode Island" = 40,
-                                                              "South Carolina" = 41, "South Dakota" = 42,
-                                                              "Tennessee" = 43, "Texas" = 44,
-                                                              "Utah" = 45, "Vermont" = 46,
-                                                              "Virginia" = 47, "Washington" = 48,
-                                                              "West Virginia" = 49, "Wisconsin" = 50,
-                                                              "Wyoming" = 51, "Washington, D.C." = 52),
+                                                selectInput("pctassumption", label="Population (percentages)",
+                                                            c("Total" = 1,
+                                                              "Male" = 2, "Female" = 3,
+                                                              "MSM" = 4, "IDU: Male" = 5, "IDU: Female" = 6, "IDU: MSM" = 7, "Heterosexual male" = 8, "Heterosexual female" = 9,
+                                                              "Age group: 25-34" = 10, "Age group: 35-44" = 11, "Age group: 45-54" = 12, "Age group: 55-64" = 13, "Age group: 65+" = 14
+                                                            ),
                                                             selected = 1),
+
+                                                selectInput("rateassumption", label="Population (rates)",
+                                                            c("Total" = 1,
+                                                              "Male" = 2, "Female" = 3,
+                                                              "MSM" = 4, "IDU: Male" = 5, "IDU: Female" = 6, "IDU: MSM" = 7, "Heterosexual male" = 8, "Heterosexual female" = 9,
+                                                              "Age group: 25-34" = 10, "Age group: 35-44" = 11, "Age group: 45-54" = 12, "Age group: 55-64" = 13, "Age group: 65+" = 14
+                                                            ),
+                                                            selected = 1)
+                                         ),
 
                                          column(3,
                                                 #          HTML("<div style=\"width:3;height:3;border:3px solid #000;background:#46B7EB\"><h4 style=\"color:#2A268B\">2. Local Continuum Information</h4>"),
@@ -137,7 +132,7 @@ shinyUI(fluidPage(
                                                              value = NA)
 
                                          ),
-                                         conditionalPanel(condition = "output.warningText1 == \"\" & output.warningText2 == \"\"",
+                                         conditionalPanel(condition="output.warningText1 == \"\" & output.warningText2 == \"\"",
                                                           mainPanel(
                                                             tabsetPanel(
                                                               tabPanel("Current Scenario",
@@ -201,15 +196,15 @@ shinyUI(fluidPage(
                                                               "Age group: 25-34" = 10, "Age group: 35-44" = 11, "Age group: 45-54" = 12, "Age group: 55-64" = 13, "Age group: 65+" = 14
                                                             ),
                                                             selected = 0),
-                                                numericInput("customUndiagnosedTxRate", "Undiagnosed Tx rate", min = 0, value = NA),
-                                                numericInput("customDiagnosedNRTxRate", "Diagnosed (not retained in care) Tx rate", min = 0, value = NA),
-                                                numericInput("customDiagnosedRetTxRate", "Diagnosed, retained in care (not prescribed ARVs) Tx rate", min = 0, value = NA),
-                                                numericInput("customDiagnosedARVTxRate", "Diagnosed, prescribed ARVs (not suppressed) Tx rate", min = 0, value = NA),
-                                                numericInput("customDiagnosedSupTxRate", "Diagnosed, suppressed Tx rate", min = 0, value = NA)
+                                                numericInput("customUndiagnosedTxRate", "Undiagnosed Tx rate", min=0, value=NA),
+                                                numericInput("customDiagnosedNRTxRate", "Diagnosed (not retained in care) Tx rate", min=0, value=NA),
+                                                numericInput("customDiagnosedRetTxRate", "Diagnosed, retained in care (not prescribed ARVs) Tx rate", min=0, value=NA),
+                                                numericInput("customDiagnosedARVTxRate", "Diagnosed, prescribed ARVs (not suppressed) Tx rate", min=0, value=NA),
+                                                numericInput("customDiagnosedSupTxRate", "Diagnosed, suppressed Tx rate", min=0, value=NA)
                                          )
                                 )
-                              ) # End tabset panel
-                     ), # End Tab Panel
+                              )
+                     ),
                      tabPanel("HIV Transmissions",
                               tabsetPanel(
                                 tabPanel("Tx Bar Chart",
@@ -228,5 +223,7 @@ shinyUI(fluidPage(
                                 )
                               )
                      )
-) # End Fluid Page
-) # End ShinyUI
+                   )
+  )
+)
+)
