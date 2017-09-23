@@ -103,7 +103,7 @@ shinyUI(dashboardPage(
 
                     HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h3>"),
                     numericInput("hetdiagpct",
-                                 "% of new diagnoses attributed to Heterosexuals",
+                                 "% of new diagnoses attributed to HET",
                                  min = 0, value = NA),
 
                     HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h3>"),
@@ -173,7 +173,7 @@ shinyUI(dashboardPage(
                                           "White (#)",
                                           min = 0, value = NA)),
                            column(width = 4,
-                             HTML("<h4 style=\"color:green\">Heterosexuals Indicated for PrEP</u>:</h3>"),
+                             HTML("<h4 style=\"color:green\">HET Indicated for PrEP</u>:</h3>"),
                              numericInput("blackhetprep",
                                           "Black (#)",
                                           min = 0, value = NA),

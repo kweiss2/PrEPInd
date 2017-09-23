@@ -329,92 +329,92 @@ shinyServer(function(input, output, session) {
   #http://stackoverflow.com/questions/23236944/add-values-to-a-reactive-table-in-shiny/23243820#23243820
 
   ## Save and remove and compare scenarios -------------------------------------
-  observe({
-    if (input$saveButton > 0) {
-      newData <- isolate(cbind(input$saveButton, input$scenarioName, currentData()))
-      isolate(colnames(newData) <- c("Scenario", "Name", "Stage", "#", "
-                                     % of HIV+", "Rate/100PY", "# Tx", "% of Tx"))
-      isolate(colnames(values$df) <- c("Scenario", "Name", "Stage", "#",
-                                       "% of HIV+", "Rate/100PY", "# Tx", "% of Tx"))
-      isolate(values$df <- rbind(values$df, newData))
-      isolate(values$df <- values$df[which(values$df$Scenario != 0), ])
-
-      isolate(updateSelectInput(session, "removeScenarioNum",
-                                choices = unique(values$df$"Scenario")))
-      isolate(updateSelectInput(session, "compareScenario1",
-                                choices = unique(values$df$"Scenario")))
-      isolate(updateSelectInput(session, "compareScenario2",
-                                choices = unique(values$df$"Scenario")))
-      isolate(updateTextInput(session, "scenarioName", value = ""))
-    }
-  })
-
-  observe({
-    if (input$removeButton > 0) {
-      isolate(values$df <- values$df[which(values$df$"Scenario" != input$removeScenarioNum), ])
-    }
-  })
-
-  output$comparisonText1 <- renderText({
-    if (input$compareScenarios > 0) {
-      if (isolate(input$compareScenario1 > 0) &
-          isolate(input$compareScenario2 > 0) &
-          isolate(input$compareScenario1 != input$compareScenario2)) {
-
-        name1 <- values$df$"Name"[which(values$df$"Scenario" == isolate(input$compareScenario1))][1]
-        name2 <- values$df$"Name"[which(values$df$"Scenario" == isolate(input$compareScenario2))][1]
-
-        total1 <- sum(as.numeric(as.character(gsub(",", "",
-                                                   values$df$"# indicated for PrEP"[which(values$df$"Scenario" == isolate(input$compareScenario1))]))))
-        total2 <- sum(as.numeric(as.character(gsub(",", "",
-                                                   values$df$"# Tx"[which(values$df$"Scenario" == isolate(input$compareScenario2))]))))
-
-        difference <- total2 - total1
-        abs.difference <- abs(difference)
-        if (difference < 0) comparison.phrase <- paste(", or ",
-                                                       format(abs.difference,
-                                                              digits = 12,
-                                                              decimal.mark = ",",
-                                                              big.mark = ",",
-                                                              small.mark = "."),
-                                                       " fewer HIV transmissions than \"",
-                                                       name1,
-                                                       ".\"",
-                                                       sep = "")
-        if (difference > 0) comparison.phrase <- paste(", or ",
-                                                       format(abs.difference,
-                                                              digits = 12,
-                                                              decimal.mark = ",",
-                                                              big.mark = ",",
-                                                              small.mark = "."),
-                                                       " more HIV transmissions than \"",
-                                                       name1,
-                                                       ".\"",
-                                                       sep = "")
-        if (difference == 0) comparison.phrase <- paste(", the same number of HIV transmissions as \"",
-                                                        name1,
-                                                        ".\"",
-                                                        sep = "")
-
-        comparison.text <- paste("The first comparison scenario, \"",
-                                 name1, ",\" resulted in ",
-                                 format(total1, digits = 12,
-                                        decimal.mark = ",", big.mark = ",",
-                                        small.mark = "."),
-                                 " total HIV transmissions. The second comparison scenario,
-                                 \"",
-                                 name2,
-                                 ",\" resulted in ",
-                                 format(total2, digits = 12,
-                                        decimal.mark = ",", big.mark = ",",
-                                        small.mark = "."),
-                                 " total HIV transmissions", comparison.phrase,
-                                 sep = "")
-
-        return(comparison.text)
-      }
-    }
-  })
+  # observe({
+  #   if (input$saveButton > 0) {
+  #     newData <- isolate(cbind(input$saveButton, input$scenarioName, currentData()))
+  #     isolate(colnames(newData) <- c("Scenario", "Name", "Stage", "#", "
+  #                                    % of HIV+", "Rate/100PY", "# Tx", "% of Tx"))
+  #     isolate(colnames(values$df) <- c("Scenario", "Name", "Stage", "#",
+  #                                      "% of HIV+", "Rate/100PY", "# Tx", "% of Tx"))
+  #     isolate(values$df <- rbind(values$df, newData))
+  #     isolate(values$df <- values$df[which(values$df$Scenario != 0), ])
+  #
+  #     isolate(updateSelectInput(session, "removeScenarioNum",
+  #                               choices = unique(values$df$"Scenario")))
+  #     isolate(updateSelectInput(session, "compareScenario1",
+  #                               choices = unique(values$df$"Scenario")))
+  #     isolate(updateSelectInput(session, "compareScenario2",
+  #                               choices = unique(values$df$"Scenario")))
+  #     isolate(updateTextInput(session, "scenarioName", value = ""))
+  #   }
+  # })
+  #
+  # observe({
+  #   if (input$removeButton > 0) {
+  #     isolate(values$df <- values$df[which(values$df$"Scenario" != input$removeScenarioNum), ])
+  #   }
+  # })
+  #
+  # output$comparisonText1 <- renderText({
+  #   if (input$compareScenarios > 0) {
+  #     if (isolate(input$compareScenario1 > 0) &
+  #         isolate(input$compareScenario2 > 0) &
+  #         isolate(input$compareScenario1 != input$compareScenario2)) {
+  #
+  #       name1 <- values$df$"Name"[which(values$df$"Scenario" == isolate(input$compareScenario1))][1]
+  #       name2 <- values$df$"Name"[which(values$df$"Scenario" == isolate(input$compareScenario2))][1]
+  #
+  #       total1 <- sum(as.numeric(as.character(gsub(",", "",
+  #                                                  values$df$"# indicated for PrEP"[which(values$df$"Scenario" == isolate(input$compareScenario1))]))))
+  #       total2 <- sum(as.numeric(as.character(gsub(",", "",
+  #                                                  values$df$"# Tx"[which(values$df$"Scenario" == isolate(input$compareScenario2))]))))
+  #
+  #       difference <- total2 - total1
+  #       abs.difference <- abs(difference)
+  #       if (difference < 0) comparison.phrase <- paste(", or ",
+  #                                                      format(abs.difference,
+  #                                                             digits = 12,
+  #                                                             decimal.mark = ",",
+  #                                                             big.mark = ",",
+  #                                                             small.mark = "."),
+  #                                                      " fewer HIV transmissions than \"",
+  #                                                      name1,
+  #                                                      ".\"",
+  #                                                      sep = "")
+  #       if (difference > 0) comparison.phrase <- paste(", or ",
+  #                                                      format(abs.difference,
+  #                                                             digits = 12,
+  #                                                             decimal.mark = ",",
+  #                                                             big.mark = ",",
+  #                                                             small.mark = "."),
+  #                                                      " more HIV transmissions than \"",
+  #                                                      name1,
+  #                                                      ".\"",
+  #                                                      sep = "")
+  #       if (difference == 0) comparison.phrase <- paste(", the same number of HIV transmissions as \"",
+  #                                                       name1,
+  #                                                       ".\"",
+  #                                                       sep = "")
+  #
+  #       comparison.text <- paste("The first comparison scenario, \"",
+  #                                name1, ",\" resulted in ",
+  #                                format(total1, digits = 12,
+  #                                       decimal.mark = ",", big.mark = ",",
+  #                                       small.mark = "."),
+  #                                " total HIV transmissions. The second comparison scenario,
+  #                                \"",
+  #                                name2,
+  #                                ",\" resulted in ",
+  #                                format(total2, digits = 12,
+  #                                       decimal.mark = ",", big.mark = ",",
+  #                                       small.mark = "."),
+  #                                " total HIV transmissions", comparison.phrase,
+  #                                sep = "")
+  #
+  #       return(comparison.text)
+  #     }
+  #   }
+  # })
 
   ## Generate report -----------------------------------------------------------
   output$downloadReport <- downloadHandler(
