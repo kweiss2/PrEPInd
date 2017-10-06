@@ -19,63 +19,59 @@ colors <- c("#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0")
 # Black among MSM, Hisp among MSM, white among MSM
 # Black among HET, Hisp among HET, white among HET
 # Black among PWID,Hisp among PWID, white among PWID
-race.diagnosis.percents <-
-  100 * c(309190/813970, 220760/813970, 238670/813970,
-          164660/258080, 46580/258080, 36540/258080,
-          26490/72510, 14920/72510, 28020/72510)
-      # list(
-      # c(61.8, 32.9, 5.3, 78.2, 16.5, 5.3, 78.7, 12.1, 9.2), # Natl. Avg
-      # c(62.7, 34.1, 3.2, 78.0, 17.1, 4.9, 69.7, 21.3, 9.0), # Alabama
-      # c(50.0, 50.0, 0.0, 100, 0.0, 0.0, 74.7, 25.3, 0.0), # Alaska
-      # c(56.2, 37.7, 6.1, 78.1, 12.5, 9.4, 82.1, 9.1, 8.8), # Arizona
-      # c(67.5, 26.7, 5.8, 62.9, 31.4, 5.7, 81.0, 11.5, 7.5), # Arkansas
-      # c(71.2, 23.0, 5.8, 85.9, 10.7, 3.4, 85.5, 7.2, 7.3), # California
-      # c(58.3, 36.6, 5.1, 82.6, 13.0, 4.4, 90.3, 7.0, 2.7), # Colorado
-      # c(43.5, 50.6, 6.0, 63.7, 31.3, 4.9, 81.2, 9.4, 9.4), # Connecticut
-      # c(50.0, 48.1, 1.9, 41.9, 41.9, 16.3, 78.1, 19.0, 2.9), # Delaware
-      # c(48.7, 48.0, 3.3, 77.6, 19.7, 2.6, 72.6, 19.1, 8.3), # Florida
-      # c(68.3, 27.7, 3.9, 82.0, 16.8, 1.2, 76.9, 17.3, 5.8), # Georgia
-      # c(72.3, 8.5, 19.1, 79.1, 20.9, 0.0, 75.4, 14.9, 9.7), # Hawaii
-      # c(11.0, 78.0, 11.0, 100.0, 0.0, 0.0, 89.6, 10.4, 0.0), # Idaho
-      # c(69.3, 26.6, 4.1, 86.3, 12.0, 1.7, 85.1, 10.1, 4.7), # Illinois
-      # c(68.4, 29.1, 2.5, 70.3, 25.9, 3.8, 40.9, 10.9, 48.2), # Indiana
-      # c(53.8, 46.3, 0.0, 68.5, 18.5, 13.0, 74.8, 13.2, 12.0), # Iowa
-      # c(56.8, 38.5, 4.5, 85.8, 11.3, 2.8, 86.0, 12.2, 1.7), # Kansas
-      # c(66.9, 29.9, 3.2, 91.7, 8.3, 0.0, 80.2, 12.1, 7.7), # Kentucky
-      # c(58.5, 34.8, 6.7, 65.3, 25.3, 9.3, 75.7, 13.6, 10.7), # Louisiana
-      # c(25.0, 67.0, 8.0, 81.1, 0.0, 18.9, 88.5, 0.0, 11.5), # Maine
-      # c(53.6, 41.8, 4.6, 67.8, 28.2, 4.0, 70.1, 17.2, 12.7), # Maryland
-      # c(32.0, 55.8, 12.2, 56.7, 28.9, 14.4, 76.0, 10.5, 13.4), # Massachusetts
-      # c(71.6, 23.4, 5.0, 83.2, 14.3, 2.5, 79.3, 12.2, 8.5), # Michigan
-      # c(49.2, 46.0, 4.9, 83.2, 12.5, 4.3, 87.4, 9.2, 3.4), # Minnesota
-      # c(68.8, 27.3, 4.0, 71.4, 28.6, 0.0, 76.0, 20.0, 4.0), # Mississippi
-      # c(65.0, 31.4, 3.7, 72.9, 17.6, 69.4, 83.4, 9.6, 7.1), # Missouri
-      # c(100.0, 0.0, 0.0, 100.0, 0.0, 0.0, 73.0, 20.1, 6.9), # Montana
-      # c(52.9, 41.2, 5.9, 81.8, 18.2, 0.0, 87.1, 12.9, 0.0), # Nebraska
-      # c(66.4, 28.7, 4.9, 89.2, 8.8, 2.0, 80.2, 9.6, 10.2), # Nevada
-      # c(NA, NA, NA, NA, NA, NA, NA, NA, NA), # New Hampshire
-      # c(45.9, 42.3, 11.8, 66.6, 25.3, 8.0, 68.3, 17.3, 14.3), # New Jersey
-      # c(100.0, 0.0, 0.0, 75.6, 9.0, 15.4, 94.0, 5.2, 0.0), # New Mexico
-      # c(51.6, 39.0, 9.4, 75.2, 17.0, 7.8, 81.8, 11.7, 6.5), # New York
-      # c(66.8, 29.0, 4.2, 77.8, 20.7, 1.5, 79.5, 15.2, 5.3), # North Carolina
-      # c(17.5, 73.0, 9.5, 50.0, 0.0, 50.0, 85.0, 0.0, 15.0), # North Dakota
-      # c(69.3, 26.9, 3.8, 73.6, 20.4, 6.0, 78.0, 12.6, 9.3), # Ohio
-      # c(74.5, 24.1, 1.4, 85.8, 11.7, 2.5, 79.9, 12.2, 8.0), # Oklahoma
-      # c(50.0, 50.0, 0.0, 84.8, 9.1, 6.1, 83.0, 6.1, 10.9), # Oregon
-      # c(55.0, 40.4, 4.6, 47.7, 39.5, 12.8, 71.9, 19.5, 8.6), # Pennsylvania
-      # c(29.2, 64.6, 6.2, 66.9, 23.8, 9.4, 78.3, 17.1, 4.6), # Rhode Island
-      # c(63.6, 30.6, 5.8, 68.3, 20.6, 11.1, 75.9, 19.2, 4.9), # South Carolina
-      # c(33.3, 66.7, 0.0, 33.3, 33.3, 33.3, 72.3, 27.7, 0.0), # South Dakota
-      # c(66.1, 30.6, 3.3, 76.3, 23.7, 0.0, 69.6, 19.5, 10.9), # Tennessee
-      # c(63.5, 31.0, 5.5, 79.1, 17.0, 4.0, 80.3, 12.2, 7.4), # Texas
-      # c(38.3, 61.7, 0.0, 83.6, 13.1, 3.3, 88.3, 7.3, 4.5), # Utah
-      # c(NA, NA, NA, 50.0, 0.0, 50.0, 44.6, 33.2, 22.3), # Vermont
-      # c(63.5, 33.6, 2.9, 80.2, 17.0, 2.8, 79.4, 16.1, 4.5), # Virginia
-      # c(56.6, 37.8, 5.5, 86.8, 7.2, 6.0, 82.2, 6.8, 10.9), # Washington
-      # c(25.5, 66.7, 7.8, 100.0, 0.0, 0.0, 83.9, 12.6, 3.5), # West Virginia
-      # c(74.4, 22.4, 3.2, 7.7, 14.4, 5.9, 85.8, 10.6, 3.5), # Wisconsin
-      # c(50.0, 0.0, 50.0, 67.4, 0.0, 32.6, 50.4, 37.4, 12.2), # Wyoming
-      # c(52.5, 41.0, 6.5, 95.8, 2.1, 2.1, 94.8, 2.6, 2.6))  # Washington D.C
+race.diagnosis.percents <- list(
+          c(37.9851, 27.121, 29.3218, 36.5408, 20.5847, 38.6521, 63.8007, 18.0471, 14.1581),    #Natl. Avg
+          c(68.9103, 4.1667, 22.1154, 52.381, 4.7619, 42.8571, 79.0541, 2.027, 14.1892),    #Alabama
+          c(13.3333, 13.3333, 40, 0, 0, 0, 22.2222, 0, 22.2222),    #Alaska
+          c(13.6194, 37.3134, 38.4328, 12.9032, 38.7097, 35.4839, 40.8333, 26.6667, 19.1667),    #Arizona
+          c(48.9247, 6.4516, 41.9355, 50, 6.25, 43.75, 66.6667, 11.1111, 20.3704),    #Arkansas
+          c(16.1224, 45.3316, 29.5408, 22.2222, 29.9145, 42.3077, 36.2345, 39.4316, 17.2291),    #California
+          c(11.4007, 30.9446, 54.3974, 23.0769, 38.4615, 38.4615, 43.1373, 29.4118, 25.4902),    #Colorado
+          c(26.2195, 31.0976, 41.4634, 30, 20, 40, 57.4713, 28.7356, 9.1954),    #Connecticut
+          c(44.6154, 7.6923, 44.6154, 25, 50, 25, 70, 12.5, 17.5),    #Delaware
+          c(32.3529, 37.3626, 27.9573, 32.5359, 18.6603, 47.3684, 63.9429, 19.0661, 14.786),    #Florida
+          c(72.1992, 7.8838, 16.8346, 72.9167, 2.0833, 21.875, 83.0252, 4.5378, 10.7563),    #Georgia
+          c(9.1954, 9.1954, 35.6322, 18.1818, 0, 36.3636, 5.8824, 11.7647, 35.2941),    #Hawaii
+          c(3.7037, 29.6296, 62.963, 50, 0, 0, 77.7778, 0, 22.2222),    #Idaho
+          c(45.325, 23.1523, 25.4675, 56.6038, 9.434, 30.1887, 70.3971, 12.9964, 12.2744),    #Illinois
+          c(42.5982, 10.574, 44.1088, 2.7624, 1.105, 95.0276, 50.4202, 10.9244, 32.7731),    #Indiana
+          c(15.2941, 12.9412, 65.8824, 0, 16.6667, 75, 39.2857, 10.7143, 35.7143),    #Iowa
+          c(22.1239, 26.5487, 43.3628, 40, 20, 20, 60.7143, 14.2857, 25),    #Kansas
+          c(34, 4.8, 58.4, 22.2222, 0, 77.7778, 56.7164, 1.4925, 32.8358),    #Kentucky
+          c(67.234, 5.8156, 25.2482, 62.5, 6.8182, 28.4091, 84.6847, 4.8048, 9.6096),    #Louisiana
+          c(10, 13.3333, 76.6667, 20, 20, 60, 88.8889, 0, 0),    #Maine
+          c(70.7792, 8.7013, 15.8442, 61.8421, 5.2632, 28.9474, 85.5131, 5.6338, 6.0362),    #Maryland
+          c(16.8116, 27.2464, 47.8261, 28.9474, 31.5789, 38.1579, 57.7143, 27.4286, 13.1429),    #Massachusetts
+          c(58.6716, 6.4576, 30.9963, 52.381, 2.381, 42.8571, 75.9124, 4.3796, 18.9781),    #Michigan
+          c(30.6533, 10.0503, 52.7638, 50, 8.3333, 33.3333, 76, 4, 14.6667),    #Minnesota
+          c(79.0368, 2.8329, 16.4306, 80, 0, 15, 81.4815, 2.963, 11.1111),    #Mississippi
+          c(41.691, 4.6647, 48.105, 32, 8, 56, 71.134, 4.1237, 19.5876),    #Missouri
+          c(6.6667, 20, 73.3333, 0, 0, 50, 0, 0, 100),    #Montana
+          c(14.0625, 14.0625, 62.5, 50, 0, 0, 43.75, 12.5, 37.5),    #Nebraska
+          c(20.8226, 33.9332, 34.4473, 22.2222, 11.1111, 62.963, 50, 18.5714, 22.8571),    #Nevada
+          c(NA, NA, NA, NA, NA, NA, NA, NA, NA),# New Hampshire
+          c(35.6204, 38.8321, 20.7299, 49.2188, 25, 23.4375, 60.4839, 27.1505, 9.6774),    #New Jersey
+          c(4.5455, 53.6364, 31.8182, 0, 92.3077, 0, 0, 58.3333, 16.6667),    #New Mexico
+          c(30.8648, 36.3115, 23.3636, 47.7733, 31.9838, 15.7895, 62.7249, 22.108, 8.9974),    #New York
+          c(60.2116, 9.9471, 25.5026, 65.4545, 3.6364, 29.0909, 74.3976, 7.5301, 13.8554),    #North Carolina
+          c(18.1818, 9.0909, 54.5455, 33.3333, 33.3333, 33.3333, 88.8889, 0, 0),    #North Dakota
+          c(48.5926, 5.3333, 42.0741, 31.5789, 5.2632, 59.6491, 65.4639, 5.1546, 23.7113),    #Ohio
+          c(22.4, 14.4, 47.6, 5.8824, 5.8824, 70.5882, 34.6154, 9.6154, 34.6154),    #Oklahoma
+          c(5.3892, 16.7665, 73.0539, 0, 10, 80, 37.5, 12.5, 37.5),    #Oregon
+          c(49.5677, 10.8069, 36.0231, 35.3659, 24.3902, 36.5854, 64.2132, 15.736, 17.2589),    #Pennsylvania
+          c(12.8205, 35.8974, 46.1538, 25, 50, 25, 52.381, 23.8095, 19.0476),    #Rhode Island
+          c(65.3017, 7.1121, 25.431, 66.6667, 11.9048, 19.0476, 77.6596, 5.3191, 15.9574),    #South Carolina
+          c(16.6667, 8.3333, 66.6667, 0, 100, 0, 44.4444, 11.1111, 33.3333),    #South Dakota
+          c(57.2314, 6.6116, 34.0909, 33.3333, 0, 61.9048, 68.4492, 5.3476, 24.5989),    #Tennessee
+          c(31.9525, 40.9382, 22.9668, 38.2979, 28.5106, 29.7872, 53.6688, 30.2935, 12.0545),    #Texas
+          c(3.125, 27.0833, 62.5, 0, 20, 60, 33.3333, 26.6667, 33.3333),    #Utah
+          c(0, 20, 80, 0, 33.3333, 66.6667, 0, 0, 75),    #Vermont
+          c(56.4759, 12.8012, 26.8072, 53.125, 9.375, 31.25, 76.1538, 6.9231, 13.8462),    #Virginia
+          c(14.8256, 20.9302, 52.3256, 13.1579, 13.1579, 63.1579, 54.8387, 9.6774, 24.1935),    #Washington
+          c(5.6604, 3.7736, 86.7925, 20, 0, 40, 53.3333, 0, 46.6667),    #West Virginia
+          c(37.8378, 15.1351, 39.4595, 37.5, 25, 37.5, 58.3333, 13.8889, 25),    #Wisconsin
+          c(14.2857, 28.5714, 57.1429, 33.3333, 33.3333, 33.3333, 0, 0, 75),    #Wyoming
+          c(59.4262, 20.4918, 16.3934, 85.7143, 4.7619, 4.7619, 97.4138, 0.8621, 0.8621))    #Washington, D.C.
 
 trans.diagnosis.percents <- list(
   100 * c(813970/1144550, 258080/1144550, 72510/1144550), # Natl. Avg
@@ -138,7 +134,7 @@ shinyServer(function(input, output, session) {
   ## Get diagnosis percents ----------------------------------------------------
   observe({
     # Transmission category within race
-    x <- race.diagnosis.percents
+    x <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
     updateNumericInput(session, "blackmsmdiagpct", value = round(x[1], 1))
     updateNumericInput(session, "blackhetdiagpct", value = round(x[2], 1))
     updateNumericInput(session, "blackpwiddiagpct", value = round(x[3], 1))
@@ -160,7 +156,7 @@ shinyServer(function(input, output, session) {
 
     ## Calculate number indicated for PrEP -------------------------------------
     totmsm <- input$msmpopsize
-    x <- race.diagnosis.percents
+    x <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
     y <- trans.diagnosis.percents[[as.numeric(input$jurisdiction)]]
 
     updateNumericInput(session, "totalmsm",
@@ -230,15 +226,15 @@ shinyServer(function(input, output, session) {
 
   observe({
     # if (is.na(input$existingprop) == FALSE) {
-    updateNumericInput(session, "customblackmsmdiagpct", value = round(race.diagnosis.percents[1], 1))
-    updateNumericInput(session, "customblackhetdiagpct", value = round(race.diagnosis.percents[4], 1))
-    updateNumericInput(session, "customblackpwiddiagpct", value = round(race.diagnosis.percents[7], 1))
-    updateNumericInput(session, "customhispmsmdiagpct", value = round(race.diagnosis.percents[2], 1))
-    updateNumericInput(session, "customhisphetdiagpct", value = round(race.diagnosis.percents[5], 1))
-    updateNumericInput(session, "customhisppwiddiagpct", value = round(race.diagnosis.percents[8], 1))
-    updateNumericInput(session, "customwhitemsmdiagpct", value = round(race.diagnosis.percents[3], 1))
-    updateNumericInput(session, "customwhitehetdiagpct", value = round(race.diagnosis.percents[6], 1))
-    updateNumericInput(session, "customwhitepwiddiagpct", value = round(race.diagnosis.percents[9], 1))
+    updateNumericInput(session, "customblackmsmdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][1], 1))
+    updateNumericInput(session, "customblackhetdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][4], 1))
+    updateNumericInput(session, "customblackpwiddiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][7], 1))
+    updateNumericInput(session, "customhispmsmdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][2], 1))
+    updateNumericInput(session, "customhisphetdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][5], 1))
+    updateNumericInput(session, "customhisppwiddiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][8], 1))
+    updateNumericInput(session, "customwhitemsmdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][3], 1))
+    updateNumericInput(session, "customwhitehetdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][6], 1))
+    updateNumericInput(session, "customwhitepwiddiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][9], 1))
     # }
   })
   ## Warning text --------------------------------------------------------------
