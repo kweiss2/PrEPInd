@@ -2,7 +2,8 @@ library(shiny)
 library(shinydashboard)
 library(wesanderson)
 library(plotly)
-#source("fx.R")
+
+options(shiny.error = browser)
 
 shinyUI(dashboardPage(
     dashboardHeader(title = "PrEP Indications"),
@@ -234,9 +235,9 @@ shinyUI(dashboardPage(
                       ) # End all scenarios tabPanel
                     ) # End tabsetPanel
                         ) # End box
-                )
-            )
-            )
+                ) #End fluidRow
+            ) # End tabItem
+            ) # End tabItems
                            ) # End dashboardBody
                            ) # End dashboardPage
                            ) # End ShinyUI

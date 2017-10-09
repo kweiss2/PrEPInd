@@ -4,7 +4,7 @@ output: word_document
 #`r paste(input$reportTitle, sep="")`  
 #####`r paste(format(Sys.Date(), "%B %d, %Y"), sep="")`
 
-This report was generated using the HIV Continuum and Transmission Estimation Tool (CATET). The tool was created as part of a partnership between the Centers for Disease Control and Prevention (CDC) and researchers at Emory University's Rollins School of Public Health.
+This report was generated using the PrEP Indications Estimation Tool. The tool was created as part of a partnership between the Centers for Disease Control and Prevention (CDC) and researchers at Emory University's Rollins School of Public Health.
 
 ##Methods
 ```{r echo=FALSE}
@@ -25,53 +25,66 @@ proportions <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
                  input$customwhitemsmdiagpct, input$customwhitehetdiagpct,
                  input$customwhitepwiddiagpct)
     }
-    totalind <- 1000000
-    nind <- round((proportions / 100) * totalind)
-
 ```
 
-The following estimates were based on several model inputs and assumptions. First, the total number of MSM in the model population was set to `r paste(format(input$msmpopsize, big.mark=","), sep="")`. Under the assumption that `r paste(round(input$msmdiagpct, 0))`, `r paste(round(input$msmdiagpct, 0))`, `r paste(round(input$msmdiagpct, 0))`, of newly diagnosed cases were attributable to MSM, heterosexuals (HET), or persons who inject drugs (PWID), respectively, of all HIV-positive individuals were undiagnosed, the total number of HIV-positive individuals, undiagnosed (n=`r paste(format(input$undiagnosedcnt.mutex, big.mark=","), sep="")`) and diagnosed (n=`r paste(format(sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), sep="")`), was `r paste(format(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), sep="")`.
+The following estimates were based on several model inputs and assumptions. First, the total number of MSM in the model population was set to `r paste(format(input$msmpopsize, big.mark=","), sep="")`. Second, `r paste(format(input$jurisdiction, big.mark=","), sep="")` was used as a base for assumptions about the proportion of new HIV diagnoses attributable to each of three transmission categories. Under the assumptions of this jurisdiction, that `r paste(round(input$msmdiagpct, 0))` of newly diagnosed cases were attributable to MSM, `r paste(round(input$hetdiagpct, 0))` of newly diagnosed cases were attributable to heterosexuals (HET), and `r paste(round(input$pwiddiagpct, 0))` of newly diagnosed cases were attributable to persons who inject drugs (PWID), the total number of individuals with indications for PrEP is `r paste(format(input$totalprep, big.mark=","), sep="")`. The estimated number of MSM  with indications for PrEP is `r paste(format(input$msmprep, big.mark=","), sep="")`, the estimated number of heterosexuals  with indications for PrEP is `r paste(format(input$hetprep, big.mark=","), sep="")`, and the estimated number of heterosexuals  with indications for PrEP is `r paste(format(input$pwidprep, big.mark=","), sep="")`.
 
-For the model, among those who had been diagnosed with HIV, `r paste(format(sum(input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)), "%)", sep="")` were retained in care, `r paste(format(sum(input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)), "%)", sep="")` had been prescribed antiretroviral medications (ARVs), and `r paste(format(sum(input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedsupcnt.mutex)/sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)), "%)", sep="")` were virally suppressed. Thus, the final counts of individuals at each stage of the HIV Care Continuum were `r paste(format(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)),"%)", sep="")` total HIV-positive persons, `r paste(format(sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)),"%)", sep="")` HIV-positive persons who had been diagnosed, `r paste(format(sum(input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)),"%)", sep="")` who were retained in care, `r paste(format(sum(input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), big.mark=","), " (", round((sum(input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100),"%)", sep="")` who had been prescribed ARVs, and `r paste(format(sum(input$diagnosedsupcnt.mutex), big.mark=","), " (", round(((sum(input$diagnosedsupcnt.mutex)/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100)),"%)", sep="")` who were virally suppressed.
-
-To estimate the number of HIV transmissions along the HIV Care Continuum, the model assumed rates of transmission for individuals at each stage of the HIV Care Continuum. Rates were multiplied by the mutually exclusive number of persons at each stage, or `r paste(format(input$undiagnosedcnt.mutex, big.mark=","), " (", round((input$undiagnosedcnt.mutex/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100),"%)", sep="")` individuals who were undiagnosed, `r paste(format(input$diagnosednrcnt.mutex, big.mark=","), " (", round((input$diagnosednrcnt.mutex/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100),"%)", sep="")` individuals who had been diagnosed but who were not retained in care, `r paste(format(input$diagnosedretcnt.mutex, big.mark=","), " (", round((input$diagnosedretcnt.mutex/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100),"%)", sep="")` individuals who were retained in care but who had not been prescribed ARVs, `r paste(format(input$diagnosedarvcnt.mutex, big.mark=","), " (", round((input$diagnosedarvcnt.mutex/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100),"%)", sep="")` individuals who had been prescribed ARVs but who were not virally suppressed, and `r paste(format(input$diagnosedsupcnt.mutex, big.mark=","), " (", round((input$diagnosedsupcnt.mutex/sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex))*100),"%)", sep="")` individuals who were virally suppressed. The estimated transmission rates, per 100 persons per year, were `r rates[1]` (undiagnosed), `r rates[2]` (diagnosed, not retained in care), `r rates[3]` (retained in care, not prescribed ARVs), `r rates[4]` (prescribed ARVs, not virally suppressed), and `r rates[5]` (virally suppressed), yielding an estimated `r paste(format(txcnt[1], big.mark=","), sep="")` HIV transmissions from undiagnosed HIV-positive individuals, `r paste(format(txcnt[2], big.mark=","), sep="")` HIV transmissions from individuals who were diagnosed but not retained in care, `r paste(format(txcnt[3], big.mark=","), sep="")` from individuals in care who were not prescribed ARVs, `r paste(format(txcnt[4], big.mark=","), sep="")` HIV transmissions from individuals who were prescribed ARVs but who had not achieved viral suppression, and `r paste(format(txcnt[5], big.mark=","), sep="")` transmissions from individuals who were virally suppressed.
+To generate race-specific estimates of the number of individuals within each transmission category who have indications for PrEP, assumptions were drawn from `r paste(format(input$jurisdiction, big.mark=","), sep="")`.Under the assumptions of this jurisdiction, that 
+`r paste(round(format(input$blackmsmdiagpct, big.mark=","), 0))` of newly diagnosed cases among MSM occurred among African-American MSM,
+`r paste(round(format(input$hispmsmdiagpct, big.mark=","), 0))` of newly diagnosed cases among MSM occurred among Hispanic MSM,
+`r paste(round(format(input$whitemsmdiagpct, big.mark=","), 0))` of newly diagnosed cases among MSM occurred among White MSM,
+`r paste(round(format(input$blackhetdiagpct, big.mark=","), 0))` of newly diagnosed cases among heterosexuals occurred among African-American heterosexuals,
+`r paste(round(format(input$hisphetdiagpct, big.mark=","), 0))` of newly diagnosed cases among heterosexuals occurred among Hispanic heterosexuals,
+`r paste(round(format(input$whitehetdiagpct, big.mark=","), 0))` of newly diagnosed cases among heterosexuals occurred among White heterosexuals,
+`r paste(round(format(input$blackpwiddiagpct, big.mark=","), 0))` of newly diagnosed cases among PWID occurred among African-American PWID,
+`r paste(round(format(input$hisppwiddiagpct, big.mark=","), 0))` of newly diagnosed cases among PWID occurred among Hispanic PWID,
+`r paste(round(format(input$whitepwiddiagpct, big.mark=","), 0))` of newly diagnosed cases among PWID occurred among White PWID, the estimated number of African-American MSM with indications for PrEP is `r paste(format(input$blackmsmprep, big.mark=","), sep="")`, the estimated number of Hispanic MSM with indications for PrEP is `r paste(format(input$hispmsmprep, big.mark=","), sep="")`, the estimated number of White MSM  with indications for PrEP is `r paste(format(input$whitemsmprep, big.mark=","), sep="")`, the estimated number of African-American heterosexuals with indications for PrEP is `r paste(format(input$blackHetprep, big.mark=","), sep="")`, the estimated number of Hispanic heterosexuals with indications for PrEP is `r paste(format(input$hisphetprep, big.mark=","), sep="")`, the estimated number of White heterosexuals with indications for PrEP is `r paste(format(input$whitehetprep, big.mark=","), sep="")`, the estimated number of African-American PWID with indications for PrEP is `r paste(format(input$blackpwidprep, big.mark=","), sep="")`, the estimated number of Hispanic PWID with indications for PrEP is `r paste(format(input$hisppwidprep, big.mark=","), sep="")`, and the estimated number of White PWID with indications for PrEP is `r paste(format(input$whitepwidprep, big.mark=","), sep="")`.
 
 The remaining sections of this report display the outputs from this model. The first section shows the estimated HIV Care Continuum described above, while the second section shows the estimated number of HIV transmissions based on that continuum.
 
 
-##Results: Estimated HIV Care Continuum
+##Results: PrEP Indications
 
-###Cascade
-```{r echo=FALSE, }
-stagescnt <- c(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), sum(input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), sum(input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), sum(input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex), input$diagnosedsupcnt.mutex)
-```
-
-HIV Care Continuum Stage | n      | %
+##### Tables
+Transmission Category | n      | %
 ------------------------ | ------:| -----:
-HIV-positive             | `r paste(format(stagescnt[1], big.mark=","), sep="")` | `r paste(round(stagescnt[1]/stagescnt[1], 3)*100, "%", sep="")`
-Diagnosed                | `r paste(format(stagescnt[2], big.mark=","), sep="")` | `r paste(round(stagescnt[2]/stagescnt[1], 3)*100, "%", sep="")`
-Retained in care         | `r paste(format(stagescnt[3], big.mark=","), sep="")` | `r paste(round(stagescnt[3]/stagescnt[1], 3)*100, "%", sep="")`
-Prescribed ARVs          | `r paste(format(stagescnt[4], big.mark=","), sep="")` | `r paste(round(stagescnt[4]/stagescnt[1], 3)*100, "%", sep="")`
-Virally suppressed       | `r paste(format(stagescnt[5], big.mark=","), sep="")` | `r paste(round(stagescnt[5]/stagescnt[1], 3)*100, "%", sep="")`
+MSM             | `r paste(format(input$msmprep, big.mark=","), sep="")` | `r paste(format(input$msmdiagpct, big.mark=","), sep="")`
+Heterosexuals                | `r paste(format(input$hetprep, big.mark=","), sep="")` | `r paste(format(input$hetdiagpct, big.mark=","), sep="")`
+Persons who inject drugs         | `r paste(format(input$pwidprep, big.mark=","), sep="")` | `r paste(format(input$pwiddiagpct, big.mark=","), sep="")`
+
+
+Race by Transmission Category | n      | % (within transmission category)
+------------------------ | ------:| -----:
+Black MSM             | `r paste(format(input$blackmsmprep, big.mark=","), sep="")` | `r paste(format(proportions[1], big.mark=","), sep="")`
+Hispanic MSM             | `r paste(format(input$hispmsmprep, big.mark=","), sep="")` |`r paste(format(proportions[2], big.mark=","), sep="")`
+White MSM             | `r paste(format(input$whitemsmprep, big.mark=","), sep="")` |`r paste(format(proportions[3], big.mark=","), sep="")`
+Black HET             | `r paste(format(input$blackhetprep, big.mark=","), sep="")` | `r paste(format(proportions[4, big.mark=","), sep="")`
+Hispanic HET             | `r paste(format(input$hisphetprep, big.mark=","), sep="")` |`r paste(format(proportions[5], big.mark=","), sep="")`
+White HET             | `r paste(format(input$whitehetprep, big.mark=","), sep="")` |`r paste(format(proportions[6], big.mark=","), sep="")`
+Black PWID             | `r paste(format(input$blackpwidprep, big.mark=","), sep="")` | `r paste(format(proportions[7], big.mark=","), sep="")`
+Hispanic PWID             | `r paste(format(input$hisppwidprep, big.mark=","), sep="")` |`r paste(format(proportions[8], big.mark=","), sep="")`
+White PWID             | `r paste(format(input$whitepwidprep, big.mark=","), sep="")` |`r paste(format(proportions[9], big.mark=","), sep="")`
 
 
 
-#####Figure 1. HIV Care Continuum (Cascade)
-```{r echo=FALSE, fig.width=5, fig.height=4} 
-par(mai=c(.8, .4, .25, .25), mgp=c(1,1,0))
-
-x.coordinates <- barplot(stagescnt, cex.axis=.7, col=colors, xpd=TRUE, axis.lty=TRUE)
-text(cex=.7, x=x.coordinates, y=-(max(stagescnt)/50), stagenames.casc, xpd=TRUE, srt=30, pos=2, offset=-.5)
-text(cex=.7, x=x.coordinates, y=stagescnt, format(stagescnt, big.mark=","), pos=3, xpd=TRUE)
+#####Figure 1. PrEP Indications by transmission category
+```{r echo=FALSE, fig.width=5, fig.height=4}
+slices <- c(input$msmdiagpct, input$hetdiagpct, input$pwiddiagpct, (100 - input$msmdiagpct - input$hetdiagpct - input$pwiddiagpct))
+lbls <- c("MSM", "Heterosexuals", "PWID", "Other")
+pie(slices, labels = lbls, main ="Pie Chart of Individuals Indicated for PrEP by Transmission Category")
 ```
 
-###Mutually Exclusive
+#####Figure 2. PrEP Indications by race/ethnicity
+```{r echo=FALSE, fig.width=5, fig.height=4}
+slices <- c(input$blackmsmdiagpct, input$blackhetdiagpct, input$blackpwiddiagpct, (100 - input$blackmsmdiagpct - input$blackhetdiagpct - input$blackpwiddiagpct))
+lbls <- c("African-American MSM", "African-American Heterosexuals", "African-American PWID", "Other Category")
+pie(slices, labels = lbls, main ="Pie Chart of African-American Individuals Indicated for PrEP by Transmission Category")
 
+slices <- c(input$hispmsmdiagpct, input$hisphetdiagpct, input$hisppwiddiagpct, (100 - input$hispmsmdiagpct - input$hisphetdiagpct - input$hisppwiddiagpct))
+lbls <- c("Hispanic MSM", "Hispanic Heterosexuals", "Hispanic PWID", "Other Category")
+pie(slices, labels = lbls, main = "Pie Chart of Hispanic Individuals Indicated for PrEP by Transmission Category")
 
-HIV Care Continuum Stage              | n      | %
-------------------------------------- | ------:| -----:
-Undiagnosed                           | `r paste(format(input$undiagnosedcnt.mutex, big.mark=","), sep="")` | `r paste(round(input$undiagnosedcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")`
-Diagnosed, not retained in care       | `r paste(format(input$diagnosednrcnt.mutex, big.mark=","), sep="")` | `r paste(round(input$diagnosednrcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")`
-Retained in care, not prescribed ARVs | `r paste(format(input$diagnosedretcnt.mutex, big.mark=","), sep="")` | `r paste(round(input$diagnosedretcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")`
-Prescribed ARVs, not suppressed       | `r paste(format(input$diagnosedarvcnt.mutex, big.mark=","), sep="")` | `r paste(round(input$diagnosedarvcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")`
-Virally suppressed                    | `r paste(format(input$diagnosedsupcnt.mutex, big.mark=","), sep="")` | `r paste(round(input$diagnosedsupcnt.mutex/(sum(input$undiagnosedcnt.mutex, input$diagnosednrcnt.mutex, input$diagnosedretcnt.mutex, input$diagnosedarvcnt.mutex, input$diagnosedsupcnt.mutex)), 3)*100, "%", sep="")`
+slices <- c(input$whitemsmdiagpct, input$whitehetdiagpct, input$whitepwiddiagpct, (100 - input$whitemsmdiagpct - input$whitehetdiagpct - input$whitepwiddiagpct))
+lbls <- c("White MSM", "White Heterosexuals", "White PWID", "Other Category")
+pie(slices, labels = lbls, main = "Pie Chart of White Individuals Indicated for PrEP by Transmission Category")
+```

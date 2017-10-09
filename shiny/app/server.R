@@ -419,9 +419,7 @@ shinyServer(function(input, output, session) {
 
   ## Generate report -----------------------------------------------------------
   output$downloadReport <- downloadHandler(
-    filename = function(){
-      paste("Custom HIV Continuum Report ", Sys.Date(), ".docx", sep = "")
-    },
+    filename = paste0("Custom HIV Continuum Report ", Sys.Date(), ".docx"),
     content = function(file){
       src <- normalizePath("report.Rmd")
 
@@ -429,7 +427,7 @@ shinyServer(function(input, output, session) {
       on.exit(setwd(owd))
       file.copy(src, "report.Rmd")
 
-      out <- render("report.Rmd",word_document())
+      out <- render("report.Rmd", word_document())
       file.rename(out, file)
     })
 })
