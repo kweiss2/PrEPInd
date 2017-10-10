@@ -1,11 +1,10 @@
 library(shiny)
 library(shinydashboard)
-library(wesanderson)
-library(shiny)
 library(knitr)
 library(rmarkdown)
+library(ggplot2)
 
-
+options(shiny.trace = TRUE)
 ## Group names -----------------------------------------------------------------
 stagenames.transcat <- c("Total", "MSM", "HET", "PWID")
 stagenames.racetranscat <- c("Black MSM", "Black HET",
@@ -157,9 +156,9 @@ shinyServer(function(input, output, session) {
     updateNumericInput(session, "pwiddiagpct", value = round(y[3], 1))
   })
 
+  ## Calculate number indicated for PrEP -------------------------------------
   observe({
 
-    ## Calculate number indicated for PrEP -------------------------------------
     totmsm <- input$msmpopsize
     x <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
     y <- trans.diagnosis.percents[[as.numeric(input$jurisdiction)]]
@@ -169,34 +168,34 @@ shinyServer(function(input, output, session) {
     updateNumericInput(session, "msmprep",
                        value = round((totmsm * 0.247), 0))
     updateNumericInput(session, "hetprep",
-                       value = round(((totmsm * 0.247) * (y[2] / y[1])), 0))
+                       value = round(((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct)), 0))
     updateNumericInput(session, "pwidprep",
-                       value = round(((totmsm * 0.247) * (y[3] / y[1])), 0))
+                       value = round(((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct)), 0))
     updateNumericInput(session, "totalprep",
                        value = round((totmsm * 0.247), 0) +
-                         round(((totmsm * 0.247) * (y[2] / y[1])), 0) +
-                         round(((totmsm * 0.247) * (y[3] / y[1])), 0))
+                         round(((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct)), 0) +
+                         round(((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct)), 0))
     updateNumericInput(session, "blackmsmprep",
-                       value = round((totmsm * 0.247) * (x[1] / 100), 0))
+                       value = round((totmsm * 0.247) * (input$blackmsmdiagpct / 100), 0))
     updateNumericInput(session, "blackhetprep",
-                       value = round((totmsm * 0.247) * (y[2] / y[1]) * (x[4] / 100), 0))
+                       value = round((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct) * (input$blackhetdiagpct / 100), 0))
     updateNumericInput(session, "blackpwidprep",
-                       value = round((totmsm * 0.247) * (y[3] / y[1]) * (x[7] / 100), 0))
+                       value = round((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct) * (input$blackpwiddiagpct / 100), 0))
     updateNumericInput(session, "hispmsmprep",
-                       value = round((totmsm * 0.247) * (x[2] / 100), 0))
+                       value = round((totmsm * 0.247) * ((input$hispmsmdiagpct) / 100), 0))
     updateNumericInput(session, "hisphetprep",
-                       value = round((totmsm * 0.247) * (y[2] / y[1]) * (x[5] / 100), 0))
+                       value = round((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct) * (input$hisphetdiagpct / 100), 0))
     updateNumericInput(session, "hisppwidprep",
-                       value = round((totmsm * 0.247) * (y[3] / y[1]) * (x[8] / 100), 0))
+                       value = round((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct) * (input$hisppwiddiagpct / 100), 0))
     updateNumericInput(session, "whitemsmprep",
-                       value = round((totmsm * 0.247) * (x[3] / 100), 0))
+                       value = round((totmsm * 0.247) * (input$whitemsmdiagpct / 100), 0))
     updateNumericInput(session, "whitehetprep",
-                       value = round((totmsm * 0.247) * (y[2] / y[1]) * (x[6] / 100), 0))
+                       value = round((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct) * (input$whitehetdiagpct / 100), 0))
     updateNumericInput(session, "whitepwidprep",
-                       value = round((totmsm * 0.247) * (y[3] / y[1]) * (x[9] / 100), 0))
+                       value = round((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct) * (input$whitepwiddiagpct / 100), 0))
 
 
-
+  # Vermont values
     if (input$jurisdiction == 46) {
       updateNumericInput(session, "blackmsmprep",
                          value = NA)
@@ -206,6 +205,7 @@ shinyServer(function(input, output, session) {
                          value = NA)
     }
 
+  # New Hampshire values
     if (input$jurisdiction == 30) {
       updateNumericInput(session, "blackmsmprep",
                          value = NA)
@@ -229,21 +229,9 @@ shinyServer(function(input, output, session) {
 
   })
 
-  observe({
-    # if (is.na(input$existingprop) == FALSE) {
-    updateNumericInput(session, "customblackmsmdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][1], 1))
-    updateNumericInput(session, "customblackhetdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][4], 1))
-    updateNumericInput(session, "customblackpwiddiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][7], 1))
-    updateNumericInput(session, "customhispmsmdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][2], 1))
-    updateNumericInput(session, "customhisphetdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][5], 1))
-    updateNumericInput(session, "customhisppwiddiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][8], 1))
-    updateNumericInput(session, "customwhitemsmdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][3], 1))
-    updateNumericInput(session, "customwhitehetdiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][6], 1))
-    updateNumericInput(session, "customwhitepwiddiagpct", value = round(race.diagnosis.percents[[as.numeric(input$jurisdiction)]][9], 1))
-    # }
-  })
   ## Warning text --------------------------------------------------------------
 
+  # State warnings
   output$warningText1 <- renderText({
     warning.text <- ""
     if (input$jurisdiction == 46) {
@@ -252,174 +240,162 @@ shinyServer(function(input, output, session) {
     if (input$jurisdiction == 30) {
       warning.text <- "Race-specific estimates by transmission category are not available for New Hampshire"
     }
-    #   if (input$blackpwiddiagpct != x[3]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
 
-    # output$warningText1 <- renderText({
-    #   warning.text <- ""
-    #   if (input$blackmsmdiagpct != x[1]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
-    #   if (input$blackhetdiagpct != x[2]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
-    #   if (input$blackpwiddiagpct != x[3]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
-    #   if (input$hispmsmdiagpct != x[4]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
-    #   if (input$hisphetdiagpct != x[5]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
-    #   if (input$hisppwiddiagpct != x[6]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
-    #   if (input$whitemsmdiagpct != x[7]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
-    #   if (input$whitehetdiagpct != x[8]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
-    #   if (input$whitepwiddiagpct != x[9]) {
-    #     warning.text <- "You are changing proportions."
-    #   }
-    #   return(warning.text)
-    # })
     return(warning.text)
   })
 
-  ## Calculate data for output table -------------------------------------------
-  currentData <- reactive({
+  # Changing transmission category assumptions
+  output$warningText2 <- renderText({
 
-    # Input custom data
-    if (is.na(input$customblackmsmdiagpct) == FALSE &
-        is.na(input$customblackhetdiagpct) == FALSE &
-        is.na(input$customblackpwiddiagpct) == FALSE &
-        is.na(input$customhispmsmdiagpct) == FALSE &
-        is.na(input$customhisphetdiagpct) == FALSE &
-        is.na(input$customhisppwiddiagpct) == FALSE &
-        is.na(input$customwhitemsmdiagpct) == FALSE &
-        is.na(input$customwhitehetdiagpct) == FALSE &
-        is.na(input$customwhitepwiddiagpct) == FALSE) {
-      proportions <- c(input$customblackmsmdiagpct, input$customblackhetdiagpct,
-                       input$customblackpwiddiagpct, input$customhispmsmdiagpct,
-                       input$customhisphetdiagpct, input$customhisppwiddiagpct,
-                       input$customwhitemsmdiagpct, input$customwhitehetdiagpct,
-                       input$customwhitepwiddiagpct)
-    }
-    else {
-      proportions <- race.diagnosis.percents
-    }
-    totalind <- 1000000
-    nind <- round((proportions / 100) * totalind)
-    txTableCnt <- cbind(stagenames.racetranscat,
-                        format(nind, digits = 12, decimal.mark = ",",
-                               big.mark = ",", small.mark = "."),
-                        paste(as.character(proportions),
-                              "%",
-                              sep = "")
-    )
-    colnames(txTableCnt) <- c("Group", "#", "Proportion of diagnosed (sums to 100% within race)")
+    warning.text <- ""
+    y <- trans.diagnosis.percents[[as.numeric(input$jurisdiction)]]
+    if (is.na(input$msmdiagpct) == FALSE & is.na(input$hetdiagpct) == FALSE & is.na(input$pwiddiagpct) == FALSE) {
 
-    return(txTableCnt)
-    # }
+      if (input$msmdiagpct != y[1]) {
+        warning.text <- "You are changing the jurisdiction assumptions."
+      }
+      if (input$hetdiagpct != y[2]) {
+        warning.text <- "You are changing the jurisdiction assumptions"
+      }
+      if (input$pwiddiagpct != y[3]) {
+        warning.text <- "You are changing the jurisdiction assumptions"
+      }
+      }
+
+      return(warning.text)
   })
+
+  # Changing race assumptions
+  output$warningText3 <- renderText({
+
+      warning.text <- ""
+      x <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
+
+      if (is.na(input$blackmsmdiagpct) == FALSE & is.na(input$blackhetdiagpct) == FALSE & is.na(input$blackpwiddiagpct) == FALSE &
+          is.na(input$hispmsmdiagpct) == FALSE & is.na(input$hisphetdiagpct) == FALSE & is.na(input$hisppwiddiagpct) == FALSE &
+          is.na(input$whitemsmdiagpct) == FALSE & is.na(input$whitehetdiagpct) == FALSE & is.na(input$whitepwiddiagpct) == FALSE) {
+
+
+          if (input$blackmsmdiagpct != x[1]) {
+            warning.text <- "You are changing the jurisdiction assumptions"
+          }
+          if (input$blackhetdiagpct != x[2]) {
+            warning.text <- "You are changing the jurisdiction assumptions"
+          }
+          if (input$blackpwiddiagpct != x[3]) {
+            warning.text <- "You are changing the jurisdiction assumptions"
+          }
+          if (input$hispmsmdiagpct != x[4]) {
+            warning.text <- "You are changing the jurisdiction assumptions"
+          }
+          if (input$hisphetdiagpct != x[5]) {
+            warning.text <- "You are changing the jurisdiction assumptions"
+          }
+          if (input$hisppwiddiagpct != x[6]) {
+            warning.text <- "You are changing the jurisdiction assumptions"
+          }
+          if (input$whitemsmdiagpct != x[7]) {
+            warning.text <- "You are changing the jurisdiction assumptions"
+          }
+          if (input$whitehetdiagpct != x[8]) {
+            warning.text <- "You are changing the jurisdiction assumptions"
+          }
+          if (input$whitepwiddiagpct != x[9]) {
+            warning.text <- "You are changing the jurisdiction assumptions"
+          }
+      }
+
+      return(warning.text)
+    })
+
+  # Sum of transmission category
+  output$warningText4 <- renderText({
+
+    warning.text <- ""
+    if (sum(c(input$msmdiagpct, input$hetdiagpct, input$pwiddiagpct)) > 100.0) {
+      warning.text <- "The sum of categories must not be greater than 100%."
+    }
+
+    return(warning.text)
+  })
+
+  # African-American sum
+  output$warningText5 <- renderText({
+
+    warning.text <- ""
+    if (sum(c(input$blackmsmdiagpct, input$whitemsmdiagpct, input$hispmsmdiagpct)) > 100.0) {
+      warning.text <- "The sum of MSM by race must not be greater than 100%."
+    }
+
+    return(warning.text)
+  })
+
+  # Hispanic sum
+  output$warningText6 <- renderText({
+
+    warning.text <- ""
+    if (sum(c(input$blackhetdiagpct, input$whitehetdiagpct, input$hisphetdiagpct)) > 100.0) {
+      warning.text <- "The sum of HET by race must not be greater than 100%."
+    }
+
+    return(warning.text)
+  })
+
+  # White sum
+  output$warningText7 <- renderText({
+    warning.text <- ""
+
+    if (sum(input$blackpwiddiagpct, input$whitepwiddiagpct, input$hisppwiddiagpct) > 100.0) {
+      warning.text <- "The sum of PWID by race  must not be greater than 100%."
+    }
+
+    return(warning.text)
+    })
+
+
+  ## Calculate data for output table -------------------------------------------
+  # currentData <- reactive({
+  #
+  #   # Input custom data
+  #   if (is.na(input$blackmsmdiagpct) == FALSE &
+  #       is.na(input$blackhetdiagpct) == FALSE &
+  #       is.na(input$blackpwiddiagpct) == FALSE &
+  #       is.na(input$hispmsmdiagpct) == FALSE &
+  #       is.na(input$hisphetdiagpct) == FALSE &
+  #       is.na(input$hisppwiddiagpct) == FALSE &
+  #       is.na(input$whitemsmdiagpct) == FALSE &
+  #       is.na(input$whitehetdiagpct) == FALSE &
+  #       is.na(input$whitepwiddiagpct) == FALSE) {
+  #     proportions <- c(input$blackmsmdiagpct, input$blackhetdiagpct,
+  #                      input$blackpwiddiagpct, input$hispmsmdiagpct,
+  #                      input$hisphetdiagpct, input$hisppwiddiagpct,
+  #                      input$whitemsmdiagpct, input$whitehetdiagpct,
+  #                      input$whitepwiddiagpct)
+  #   }
+  #   else {
+  #     proportions <- race.diagnosis.percents
+  #   }
+  #   totalind <- 1000000
+  #   nind <- round((proportions / 100) * totalind)
+  #   txTableCnt <- cbind(stagenames.racetranscat,
+  #                       format(nind, digits = 12, decimal.mark = ",",
+  #                              big.mark = ",", small.mark = "."),
+  #                       paste(as.character(proportions),
+  #                             "%",
+  #                             sep = "")
+  #   )
+  #   colnames(txTableCnt) <- c("Group", "#", "Proportion of diagnosed (sums to 100% within race)")
+  #
+  #   return(txTableCnt)
+  #   # }
+  # })
 
   #http://stackoverflow.com/questions/23236944/add-values-to-a-reactive-table-in-shiny/23243820#23243820
 
-  ## Save and remove and compare scenarios -------------------------------------
-  # observe({
-  #   if (input$saveButton > 0) {
-  #     newData <- isolate(cbind(input$saveButton, input$scenarioName, currentData()))
-  #     isolate(colnames(newData) <- c("Scenario", "Name", "Stage", "#", "
-  #                                    % of HIV+", "Rate/100PY", "# Tx", "% of Tx"))
-  #     isolate(colnames(values$df) <- c("Scenario", "Name", "Stage", "#",
-  #                                      "% of HIV+", "Rate/100PY", "# Tx", "% of Tx"))
-  #     isolate(values$df <- rbind(values$df, newData))
-  #     isolate(values$df <- values$df[which(values$df$Scenario != 0), ])
-  #
-  #     isolate(updateSelectInput(session, "removeScenarioNum",
-  #                               choices = unique(values$df$"Scenario")))
-  #     isolate(updateSelectInput(session, "compareScenario1",
-  #                               choices = unique(values$df$"Scenario")))
-  #     isolate(updateSelectInput(session, "compareScenario2",
-  #                               choices = unique(values$df$"Scenario")))
-  #     isolate(updateTextInput(session, "scenarioName", value = ""))
-  #   }
-  # })
-  #
-  # observe({
-  #   if (input$removeButton > 0) {
-  #     isolate(values$df <- values$df[which(values$df$"Scenario" != input$removeScenarioNum), ])
-  #   }
-  # })
-  #
-  # output$comparisonText1 <- renderText({
-  #   if (input$compareScenarios > 0) {
-  #     if (isolate(input$compareScenario1 > 0) &
-  #         isolate(input$compareScenario2 > 0) &
-  #         isolate(input$compareScenario1 != input$compareScenario2)) {
-  #
-  #       name1 <- values$df$"Name"[which(values$df$"Scenario" == isolate(input$compareScenario1))][1]
-  #       name2 <- values$df$"Name"[which(values$df$"Scenario" == isolate(input$compareScenario2))][1]
-  #
-  #       total1 <- sum(as.numeric(as.character(gsub(",", "",
-  #                                                  values$df$"# indicated for PrEP"[which(values$df$"Scenario" == isolate(input$compareScenario1))]))))
-  #       total2 <- sum(as.numeric(as.character(gsub(",", "",
-  #                                                  values$df$"# Tx"[which(values$df$"Scenario" == isolate(input$compareScenario2))]))))
-  #
-  #       difference <- total2 - total1
-  #       abs.difference <- abs(difference)
-  #       if (difference < 0) comparison.phrase <- paste(", or ",
-  #                                                      format(abs.difference,
-  #                                                             digits = 12,
-  #                                                             decimal.mark = ",",
-  #                                                             big.mark = ",",
-  #                                                             small.mark = "."),
-  #                                                      " fewer HIV transmissions than \"",
-  #                                                      name1,
-  #                                                      ".\"",
-  #                                                      sep = "")
-  #       if (difference > 0) comparison.phrase <- paste(", or ",
-  #                                                      format(abs.difference,
-  #                                                             digits = 12,
-  #                                                             decimal.mark = ",",
-  #                                                             big.mark = ",",
-  #                                                             small.mark = "."),
-  #                                                      " more HIV transmissions than \"",
-  #                                                      name1,
-  #                                                      ".\"",
-  #                                                      sep = "")
-  #       if (difference == 0) comparison.phrase <- paste(", the same number of HIV transmissions as \"",
-  #                                                       name1,
-  #                                                       ".\"",
-  #                                                       sep = "")
-  #
-  #       comparison.text <- paste("The first comparison scenario, \"",
-  #                                name1, ",\" resulted in ",
-  #                                format(total1, digits = 12,
-  #                                       decimal.mark = ",", big.mark = ",",
-  #                                       small.mark = "."),
-  #                                " total HIV transmissions. The second comparison scenario,
-  #                                \"",
-  #                                name2,
-  #                                ",\" resulted in ",
-  #                                format(total2, digits = 12,
-  #                                       decimal.mark = ",", big.mark = ",",
-  #                                       small.mark = "."),
-  #                                " total HIV transmissions", comparison.phrase,
-  #                                sep = "")
-  #
-  #       return(comparison.text)
-  #     }
-  #   }
-  # })
 
   ## Generate report -----------------------------------------------------------
   output$downloadReport <- downloadHandler(
-    filename = paste0("Custom HIV Continuum Report ", Sys.Date(), ".docx"),
+    filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".docx"),
     content = function(file){
       src <- normalizePath("report.Rmd")
 
