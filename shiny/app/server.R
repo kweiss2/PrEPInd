@@ -260,9 +260,9 @@ shinyServer(function(input, output, session) {
       if (input$pwiddiagpct != y[3]) {
         warning.text <- "You are changing the jurisdiction assumptions"
       }
-      }
+    }
 
-      return(warning.text)
+    return(warning.text)
   })
 
   # Changing race assumptions
@@ -312,41 +312,50 @@ shinyServer(function(input, output, session) {
   output$warningText4 <- renderText({
 
     warning.text <- ""
-    if (sum(c(input$msmdiagpct, input$hetdiagpct, input$pwiddiagpct)) > 100.0) {
-      warning.text <- "The sum of categories must not be greater than 100%."
+    if (is.na(input$msmdiagpct) == FALSE & is.na(input$hetdiagpct) == FALSE & is.na(input$pwiddiagpct) == FALSE) {
+      if (sum(c(input$msmdiagpct, input$hetdiagpct, input$pwiddiagpct)) > 100.0) {
+        warning.text <- "The sum of categories must not be greater than 100%."
+      }
     }
-
     return(warning.text)
   })
 
-  # African-American sum
+  # MSM sum
   output$warningText5 <- renderText({
 
     warning.text <- ""
-    if (sum(c(input$blackmsmdiagpct, input$whitemsmdiagpct, input$hispmsmdiagpct)) > 100.0) {
-      warning.text <- "The sum of MSM by race must not be greater than 100%."
-    }
+    if (is.na(input$blackmsmdiagpct) == FALSE & is.na(input$whitemsmdiagpct) == FALSE & is.na(input$whitemsmdiagpct) == FALSE) {
 
+      if (sum(c(input$blackmsmdiagpct, input$hispmsmdiagpct, input$whitemsmdiagpct)) > 100.0) {
+        warning.text <- "The sum of MSM by race must not be greater than 100%."
+      }
+    }
     return(warning.text)
   })
 
-  # Hispanic sum
+  # HET sum
   output$warningText6 <- renderText({
 
     warning.text <- ""
-    if (sum(c(input$blackhetdiagpct, input$whitehetdiagpct, input$hisphetdiagpct)) > 100.0) {
+    if (is.na(input$blackhetdiagpct) == FALSE & is.na(input$whitehetdiagpct) == FALSE & is.na(input$hisphetdiagpct) == FALSE) {
+
+      if (sum(c(input$blackhetdiagpct, input$whitehetdiagpct, input$hisphetdiagpct)) > 100.0) {
       warning.text <- "The sum of HET by race must not be greater than 100%."
+      }
     }
 
     return(warning.text)
   })
 
-  # White sum
+  # Diag sum
   output$warningText7 <- renderText({
     warning.text <- ""
 
-    if (sum(input$blackpwiddiagpct, input$whitepwiddiagpct, input$hisppwiddiagpct) > 100.0) {
+    if (is.na(input$blackpwiddiagpct) == FALSE & is.na(input$whitepwiddiagpct) == FALSE & is.na(input$hisppwiddiagpct) == FALSE) {
+
+      if (sum(input$blackpwiddiagpct, input$whitepwiddiagpct, input$hisppwiddiagpct) > 100.0) {
       warning.text <- "The sum of PWID by race  must not be greater than 100%."
+    }
     }
 
     return(warning.text)
