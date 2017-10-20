@@ -3,6 +3,7 @@ library(shinydashboard)
 library(knitr)
 library(rmarkdown)
 library(ggplot2)
+library(plyr)
 
 shinyUI(dashboardPage(
     dashboardHeader(title = "PrEP Indications"),

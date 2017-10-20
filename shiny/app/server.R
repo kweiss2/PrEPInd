@@ -3,6 +3,7 @@ library(shinydashboard)
 library(knitr)
 library(rmarkdown)
 library(ggplot2)
+library(plyr)
 
 options(shiny.trace = TRUE)
 ## Group names -----------------------------------------------------------------
@@ -159,40 +160,40 @@ shinyServer(function(input, output, session) {
   ## Calculate number indicated for PrEP -------------------------------------
   observe({
 
-    totmsm <- input$msmpopsize
+    totmsm <- as.numeric(input$msmpopsize)
     x <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
     y <- trans.diagnosis.percents[[as.numeric(input$jurisdiction)]]
 
     updateNumericInput(session, "totalmsm",
-                       value = round(totmsm, 0))
+                       value = round_any(totmsm, 10))
     updateNumericInput(session, "msmprep",
-                       value = round((totmsm * 0.247), 0))
+                       value = round_any((totmsm * 0.247), 10))
     updateNumericInput(session, "hetprep",
-                       value = round(((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct)), 0))
+                       value = round_any(((totmsm * 0.247) * (as.numeric(input$hetdiagpct) / as.numeric(input$msmdiagpct))), 10))
     updateNumericInput(session, "pwidprep",
-                       value = round(((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct)), 0))
+                       value = round_any(((totmsm * 0.247) * (as.numeric(input$pwiddiagpct) / as.numeric(input$msmdiagpct))), 10))
     updateNumericInput(session, "totalprep",
-                       value = round((totmsm * 0.247), 0) +
-                         round(((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct)), 0) +
-                         round(((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct)), 0))
+                       value = round_any((totmsm * 0.247) +
+                         ((totmsm * 0.247) * (as.numeric(input$hetdiagpct) / as.numeric(input$msmdiagpct))) +
+                         ((totmsm * 0.247) * (as.numeric(input$pwiddiagpct) / as.numeric(input$msmdiagpct))), 10))
     updateNumericInput(session, "blackmsmprep",
-                       value = round((totmsm * 0.247) * (input$blackmsmdiagpct / 100), 0))
+                       value = round_any((totmsm * 0.247) * (as.numeric(input$blackmsmdiagpct) / 100), 10))
     updateNumericInput(session, "blackhetprep",
-                       value = round((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct) * (input$blackhetdiagpct / 100), 0))
+                       value = round_any((totmsm * 0.247) * (as.numeric(input$hetdiagpct) / as.numeric(input$msmdiagpct)) * (as.numeric(input$blackhetdiagpct) / 100), 10))
     updateNumericInput(session, "blackpwidprep",
-                       value = round((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct) * (input$blackpwiddiagpct / 100), 0))
+                       value = round_any((totmsm * 0.247) * (as.numeric(input$pwiddiagpct) / as.numeric(input$msmdiagpct)) * (as.numeric(input$blackpwiddiagpct) / 100), 10))
     updateNumericInput(session, "hispmsmprep",
-                       value = round((totmsm * 0.247) * ((input$hispmsmdiagpct) / 100), 0))
+                       value = round_any((totmsm * 0.247) * ((as.numeric(input$hispmsmdiagpct)) / 100), 10))
     updateNumericInput(session, "hisphetprep",
-                       value = round((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct) * (input$hisphetdiagpct / 100), 0))
+                       value = round_any((totmsm * 0.247) * (as.numeric(input$hetdiagpct) / as.numeric(input$msmdiagpct)) * (as.numeric(input$hisphetdiagpct) / 100), 10))
     updateNumericInput(session, "hisppwidprep",
-                       value = round((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct) * (input$hisppwiddiagpct / 100), 0))
+                       value = round_any((totmsm * 0.247) * (as.numeric(input$pwiddiagpct) / as.numeric(input$msmdiagpct)) * (as.numeric(input$hisppwiddiagpct) / 100), 10))
     updateNumericInput(session, "whitemsmprep",
-                       value = round((totmsm * 0.247) * (input$whitemsmdiagpct / 100), 0))
+                       value = round_any((totmsm * 0.247) * (as.numeric(input$whitemsmdiagpct) / 100), 10))
     updateNumericInput(session, "whitehetprep",
-                       value = round((totmsm * 0.247) * (input$hetdiagpct / input$msmdiagpct) * (input$whitehetdiagpct / 100), 0))
+                       value = round_any((totmsm * 0.247) * (as.numeric(input$hetdiagpct) / as.numeric(input$msmdiagpct)) * as.numeric(input$whitehetdiagpct) / 100, 10))
     updateNumericInput(session, "whitepwidprep",
-                       value = round((totmsm * 0.247) * (input$pwiddiagpct / input$msmdiagpct) * (input$whitepwiddiagpct / 100), 0))
+                       value = round_any((totmsm * 0.247) * (as.numeric(input$pwiddiagpct) / as.numeric(input$msmdiagpct)) * as.numeric(input$whitepwiddiagpct) / 100, 10))
 
 
   # Vermont values
