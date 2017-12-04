@@ -5,7 +5,9 @@ library(rmarkdown)
 library(ggplot2)
 library(plyr)
 
-options(shiny.trace = TRUE)
+#options(shiny.trace = TRUE)
+#options(shiny.error = recover)
+#options(shiny.testmode = FALSE)
 ## Group names -----------------------------------------------------------------
 stagenames.transcat <- c("Total", "MSM", "HET", "PWID")
 stagenames.racetranscat <- c("Black MSM", "Black HET",
@@ -405,9 +407,9 @@ shinyServer(function(input, output, session) {
 
 
   ## Generate report -----------------------------------------------------------
-  output$downloadReport <- downloadHandler(
+  output$report <- downloadHandler(
     filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".docx"),
-    content = function(file){
+    content = function(file) {
       src <- normalizePath("report.Rmd")
 
       owd <- setwd(tempdir())

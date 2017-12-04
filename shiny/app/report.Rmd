@@ -7,38 +7,18 @@ output: word_document
 This report was generated using the PrEP Indications Estimation Tool. The tool was created as part of a partnership between the Centers for Disease Control and Prevention (CDC) and researchers at Emory University's Rollins School of Public Health.
 
 ##Methods
-```{r echo=FALSE}
-proportions <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
-
-    if (is.na(input$customblackmsmdiagpct) == FALSE &
-        is.na(input$customblackhetdiagpct) == FALSE &
-        is.na(input$customblackpwiddiagpct) == FALSE &
-        is.na(input$customhispmsmdiagpct) == FALSE &
-        is.na(input$customhisphetdiagpct) == FALSE &
-        is.na(input$customhisppwiddiagpct) == FALSE &
-        is.na(input$customwhitemsmdiagpct) == FALSE &
-        is.na(input$customwhitehetdiagpct) == FALSE &
-        is.na(input$customwhitepwiddiagpct) == FALSE) {
-      proportions <- c(input$customblackmsmdiagpct, input$customblackhetdiagpct,
-                 input$customblackpwiddiagpct, input$customhispmsmdiagpct,
-                 input$customhisphetdiagpct, input$customhisppwiddiagpct,
-                 input$customwhitemsmdiagpct, input$customwhitehetdiagpct,
-                 input$customwhitepwiddiagpct)
-    }
-```
-
-The following estimates were based on several model inputs and assumptions. First, the total number of MSM in the model population was set to `r paste(format(input$msmpopsize, big.mark=","), sep="")`. Second, `r paste(format(input$jurisdiction, big.mark=","), sep="")` was used as a base for assumptions about the proportion of new HIV diagnoses attributable to each of three transmission categories. Under the assumptions of this jurisdiction, that `r paste(round(input$msmdiagpct, 0))` of newly diagnosed cases were attributable to MSM, `r paste(round(input$hetdiagpct, 0))` of newly diagnosed cases were attributable to heterosexuals (HET), and `r paste(round(input$pwiddiagpct, 0))` of newly diagnosed cases were attributable to persons who inject drugs (PWID), the total number of individuals with indications for PrEP is `r paste(format(input$totalprep, big.mark=","), sep="")`. The estimated number of MSM  with indications for PrEP is `r paste(format(input$msmprep, big.mark=","), sep="")`, the estimated number of heterosexuals  with indications for PrEP is `r paste(format(input$hetprep, big.mark=","), sep="")`, and the estimated number of heterosexuals  with indications for PrEP is `r paste(format(input$pwidprep, big.mark=","), sep="")`.
+The following estimates were based on several model inputs and assumptions. First, the total number of MSM in the model population was set to `r paste(format(input$msmpopsize, big.mark=","), sep="")`. Second, `r paste(format(input$jurisdiction, big.mark=","), sep="")` was used as a base for assumptions about the proportion of new HIV diagnoses attributable to each of three transmission categories. Under the assumptions of this jurisdiction, that `r paste(round(as.numeric(input$msmdiagpct, 0)))` of newly diagnosed cases were attributable to MSM, `r paste(round(as.numeric(input$hetdiagpct, 0)))` of newly diagnosed cases were attributable to heterosexuals (HET), and `r paste(round(as.numeric(input$pwiddiagpct, 0)))` of newly diagnosed cases were attributable to persons who inject drugs (PWID), the total number of individuals with indications for PrEP is `r paste(format(input$totalprep, big.mark=","), sep="")`. The estimated number of MSM  with indications for PrEP is `r paste(format(input$msmprep, big.mark=","), sep="")`, the estimated number of heterosexuals  with indications for PrEP is `r paste(format(input$hetprep, big.mark=","), sep="")`, and the estimated number of heterosexuals  with indications for PrEP is `r paste(format(input$pwidprep, big.mark=","), sep="")`.
 
 To generate race-specific estimates of the number of individuals within each transmission category who have indications for PrEP, assumptions were drawn from `r paste(format(input$jurisdiction, big.mark=","), sep="")`.Under the assumptions of this jurisdiction, that 
-`r paste(round(format(input$blackmsmdiagpct, big.mark=","), 0))` of newly diagnosed cases among MSM occurred among African-American MSM,
-`r paste(round(format(input$hispmsmdiagpct, big.mark=","), 0))` of newly diagnosed cases among MSM occurred among Hispanic MSM,
-`r paste(round(format(input$whitemsmdiagpct, big.mark=","), 0))` of newly diagnosed cases among MSM occurred among White MSM,
-`r paste(round(format(input$blackhetdiagpct, big.mark=","), 0))` of newly diagnosed cases among heterosexuals occurred among African-American heterosexuals,
-`r paste(round(format(input$hisphetdiagpct, big.mark=","), 0))` of newly diagnosed cases among heterosexuals occurred among Hispanic heterosexuals,
-`r paste(round(format(input$whitehetdiagpct, big.mark=","), 0))` of newly diagnosed cases among heterosexuals occurred among White heterosexuals,
-`r paste(round(format(input$blackpwiddiagpct, big.mark=","), 0))` of newly diagnosed cases among PWID occurred among African-American PWID,
-`r paste(round(format(input$hisppwiddiagpct, big.mark=","), 0))` of newly diagnosed cases among PWID occurred among Hispanic PWID,
-`r paste(round(format(input$whitepwiddiagpct, big.mark=","), 0))` of newly diagnosed cases among PWID occurred among White PWID, the estimated number of African-American MSM with indications for PrEP is `r paste(format(input$blackmsmprep, big.mark=","), sep="")`, the estimated number of Hispanic MSM with indications for PrEP is `r paste(format(input$hispmsmprep, big.mark=","), sep="")`, the estimated number of White MSM  with indications for PrEP is `r paste(format(input$whitemsmprep, big.mark=","), sep="")`, the estimated number of African-American heterosexuals with indications for PrEP is `r paste(format(input$blackHetprep, big.mark=","), sep="")`, the estimated number of Hispanic heterosexuals with indications for PrEP is `r paste(format(input$hisphetprep, big.mark=","), sep="")`, the estimated number of White heterosexuals with indications for PrEP is `r paste(format(input$whitehetprep, big.mark=","), sep="")`, the estimated number of African-American PWID with indications for PrEP is `r paste(format(input$blackpwidprep, big.mark=","), sep="")`, the estimated number of Hispanic PWID with indications for PrEP is `r paste(format(input$hisppwidprep, big.mark=","), sep="")`, and the estimated number of White PWID with indications for PrEP is `r paste(format(input$whitepwidprep, big.mark=","), sep="")`.
+`r paste(format(round(as.numeric(input$blackmsmdiagpct), 0), big.mark=","))` of newly diagnosed cases among MSM occurred among African-American MSM,
+`r paste(format(round(as.numeric(input$hispmsmdiagpct), 0), big.mark=","))` of newly diagnosed cases among MSM occurred among Hispanic MSM,
+`r paste(format(round(as.numeric(input$whitemsmdiagpct), 0), big.mark=","))` of newly diagnosed cases among MSM occurred among White MSM,
+`r paste(format(round(as.numeric(input$blackhetdiagpct), 0), big.mark=","))` of newly diagnosed cases among heterosexuals occurred among African-American heterosexuals,
+`r paste(format(round(as.numeric(input$hisphetdiagpct), 0), big.mark=","))` of newly diagnosed cases among heterosexuals occurred among Hispanic heterosexuals,
+`r paste(format(round(as.numeric(input$whitehetdiagpct), 0), big.mark=","))` of newly diagnosed cases among heterosexuals occurred among White heterosexuals,
+`r paste(format(round(as.numeric(input$blackpwiddiagpct), 0), big.mark=","))` of newly diagnosed cases among PWID occurred among African-American PWID,
+`r paste(format(round(as.numeric(input$hisppwiddiagpct), 0), big.mark=","))` of newly diagnosed cases among PWID occurred among Hispanic PWID,
+`r paste(format(round(as.numeric(input$whitepwiddiagpct), 0), big.mark=","))` of newly diagnosed cases among PWID occurred among White PWID, the estimated number of African-American MSM with indications for PrEP is `r paste(format(input$blackmsmprep, big.mark=","), sep="")`, the estimated number of Hispanic MSM with indications for PrEP is `r paste(format(input$hispmsmprep, big.mark=","), sep="")`, the estimated number of White MSM  with indications for PrEP is `r paste(format(input$whitemsmprep, big.mark=","), sep="")`, the estimated number of African-American heterosexuals with indications for PrEP is `r paste(format(input$blackHetprep, big.mark=","), sep="")`, the estimated number of Hispanic heterosexuals with indications for PrEP is `r paste(format(input$hisphetprep, big.mark=","), sep="")`, the estimated number of White heterosexuals with indications for PrEP is `r paste(format(input$whitehetprep, big.mark=","), sep="")`, the estimated number of African-American PWID with indications for PrEP is `r paste(format(input$blackpwidprep, big.mark=","), sep="")`, the estimated number of Hispanic PWID with indications for PrEP is `r paste(format(input$hisppwidprep, big.mark=","), sep="")`, and the estimated number of White PWID with indications for PrEP is `r paste(format(input$whitepwidprep, big.mark=","), sep="")`.
 
 The remaining sections of this report display the outputs from this model. The first section shows the estimated HIV Care Continuum described above, while the second section shows the estimated number of HIV transmissions based on that continuum.
 
@@ -66,25 +46,24 @@ Hispanic PWID             | `r paste(format(input$hisppwidprep, big.mark=","), s
 White PWID             | `r paste(format(input$whitepwidprep, big.mark=","), sep="")` |`r paste(format(proportions[9], big.mark=","), sep="")`
 
 
-
 #####Figure 1. PrEP Indications by transmission category
 ```{r echo=FALSE, fig.width=5, fig.height=4}
-slices <- c(input$msmdiagpct, input$hetdiagpct, input$pwiddiagpct, (100 - input$msmdiagpct - input$hetdiagpct - input$pwiddiagpct))
+slices <- c(as.numeric(input$msmdiagpct), as.numeric(input$hetdiagpct), as.numeric(input$pwiddiagpct), (100 - as.numeric(input$msmdiagpct) - as.numeric(input$hetdiagpct) - as.numeric(input$pwiddiagpct)))
 lbls <- c("MSM", "Heterosexuals", "PWID", "Other")
-pie(slices, labels = lbls, main ="Pie Chart of Individuals Indicated for PrEP by Transmission Category")
+pie(slices, labels = lbls, main = "Pie Chart of Individuals Indicated for PrEP by Transmission Category")
 ```
 
 #####Figure 2. PrEP Indications by race/ethnicity
 ```{r echo=FALSE, fig.width=5, fig.height=4}
-slices <- c(input$blackmsmdiagpct, input$blackhetdiagpct, input$blackpwiddiagpct, (100 - input$blackmsmdiagpct - input$blackhetdiagpct - input$blackpwiddiagpct))
+slices <- c(as.numeric(input$blackmsmdiagpct), as.numeric(input$blackhetdiagpct), as.numeric(input$blackpwiddiagpct), (100 - as.numeric(input$blackmsmdiagpct) - as.numeric(input$blackhetdiagpct) - as.numeric(input$blackpwiddiagpct)))
 lbls <- c("African-American MSM", "African-American Heterosexuals", "African-American PWID", "Other Category")
-pie(slices, labels = lbls, main ="Pie Chart of African-American Individuals Indicated for PrEP by Transmission Category")
+pie(slices, labels = lbls, main = "Pie Chart of African-American Individuals Indicated for PrEP by Transmission Category")
 
-slices <- c(input$hispmsmdiagpct, input$hisphetdiagpct, input$hisppwiddiagpct, (100 - input$hispmsmdiagpct - input$hisphetdiagpct - input$hisppwiddiagpct))
+slices <- c(as.numeric(input$hispmsmdiagpct), as.numeric(input$hisphetdiagpct), as.numeric(input$hisppwiddiagpct), (100 - as.numeric(input$hispmsmdiagpct) - as.numeric(input$hisphetdiagpct) - as.numeric(input$hisppwiddiagpct)))
 lbls <- c("Hispanic MSM", "Hispanic Heterosexuals", "Hispanic PWID", "Other Category")
 pie(slices, labels = lbls, main = "Pie Chart of Hispanic Individuals Indicated for PrEP by Transmission Category")
 
-slices <- c(input$whitemsmdiagpct, input$whitehetdiagpct, input$whitepwiddiagpct, (100 - input$whitemsmdiagpct - input$whitehetdiagpct - input$whitepwiddiagpct))
+slices <- c(as.numeric(input$whitemsmdiagpct), as.numeric(input$whitehetdiagpct), as.numeric(input$whitepwiddiagpct), (100 - as.numeric(input$whitemsmdiagpct) - as.numeric(input$whitehetdiagpct) - as.numeric(input$whitepwiddiagpct)))
 lbls <- c("White MSM", "White Heterosexuals", "White PWID", "Other Category")
 pie(slices, labels = lbls, main = "Pie Chart of White Individuals Indicated for PrEP by Transmission Category")
 ```

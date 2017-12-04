@@ -132,29 +132,29 @@ shinyUI(dashboardPage(
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText5"), HTML("</font></b>"),
                     HTML("<h5 style=\"color:green\">MSM</u>:</h5>"),
-                    numericInput("blackmsmdiagpct", "% of new diagnoses attributed to Black MSM",
+                    numericInput("blackmsmdiagpct", "% of new MSM diagnoses attributed to Black MSM",
                                  min = 0, value = NA),
-                    numericInput("hispmsmdiagpct", "% of new diagnoses attributed to Hispanic MSM",
+                    numericInput("hispmsmdiagpct", "% of new MSM diagnoses attributed to Hispanic MSM",
                                  min = 0, value = NA),
-                    numericInput("whitemsmdiagpct", "% of new diagnoses attributed to White MSM",
+                    numericInput("whitemsmdiagpct", "% of new MSM diagnoses attributed to White MSM",
                                  min = 0, value = NA)),
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText6"), HTML("</font></b>"),
                     HTML("<h5 style=\"color:green\">HET</u>:</h5>"),
-                    numericInput("blackhetdiagpct", "% of new diagnoses attributed to Black HET",
+                    numericInput("blackhetdiagpct", "% of new HET diagnoses attributed to Black HET",
                                  min = 0, value = NA),
-                    numericInput("hisphetdiagpct", "% of new diagnoses attributed to Hispanic HET",
+                    numericInput("hisphetdiagpct", "% of new HET diagnoses attributed to Hispanic HET",
                                  min = 0, value = NA),
-                    numericInput("whitehetdiagpct", "% of new diagnoses attributed to White HET",
+                    numericInput("whitehetdiagpct", "% of new HET diagnoses attributed to White HET",
                                  min = 0, value = NA )),
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText7"), HTML("</font></b>"),
                     HTML("<h5 style=\"color:green\">PWID</u>:</h5>"),
-                    numericInput("blackpwiddiagpct", "% of new diagnoses attributed to Black PWID",
+                    numericInput("blackpwiddiagpct", "% of new PWID diagnoses attributed to Black PWID",
                                   min = 0, value = NA),
-                    numericInput("hisppwiddiagpct", "% of new diagnoses attributed to Hispanic PWID",
+                    numericInput("hisppwiddiagpct", "% of new PWID diagnoses attributed to Hispanic PWID",
                                   min = 0, value = NA),
-                    numericInput("whitepwiddiagpct", "% of new diagnoses attributed to White PWID",
+                    numericInput("whitepwiddiagpct", "% of new PWID diagnoses attributed to White PWID",
                                   min = 0, value = NA))
                 ) # End box
                 ), # End column
@@ -224,7 +224,7 @@ shinyUI(dashboardPage(
                          tabPanel("Report",
                                   mainPanel(
                                     textInput("reportTitle", label = "Report Title"),
-                                    downloadButton("downloadReport",
+                                    downloadButton("report",
                                                    label = "Generate Report")
                                           ) #End mainPanel
                                           ) #End tabPanel
