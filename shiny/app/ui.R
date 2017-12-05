@@ -160,7 +160,7 @@ shinyUI(dashboardPage(
                 ), # End column
                 column(width = 5,
                    box(width = NULL,
-                       title = "4. PrEP Indications by Transmission Category", status = "success", solidHeader = TRUE,
+                       title = "4. PrEP Indications by Transmission Risk Group", status = "success", solidHeader = TRUE,
                        #HTML("<font color=\"red\"><b>"), textOutput("warningText2"), HTML("</font></b>"),
                        numericInput("totalprep",
                                     "Estimated Total with indications for PrEP (#)",
@@ -178,7 +178,7 @@ shinyUI(dashboardPage(
                 ), # End column
                 column(width = 5,
                        box(width = NULL,
-                           title = "5. PrEP Indications by Race and Transmission Category", status = "success", solidHeader = TRUE,
+                           title = "5. PrEP Indications by Race and Transmission Risk Group", status = "success", solidHeader = TRUE,
                            HTML("<font color=\"red\"><b>"), textOutput("warningText1"), HTML("</font></b>"),
                            #HTML("<font color=\"red\"><b>"), textOutput("warningText3"), HTML("</font></b>"),
                            column(width = 4,

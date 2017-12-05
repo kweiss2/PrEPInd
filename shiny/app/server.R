@@ -5,9 +5,6 @@ library(rmarkdown)
 library(ggplot2)
 library(plyr)
 
-#options(shiny.trace = TRUE)
-#options(shiny.error = recover)
-#options(shiny.testmode = FALSE)
 ## Group names -----------------------------------------------------------------
 stagenames.transcat <- c("Total", "MSM", "HET", "PWID")
 stagenames.racetranscat <- c("Black MSM", "Black HET",
@@ -136,7 +133,7 @@ shinyServer(function(input, output, session) {
 
   ## Get diagnosis percents ----------------------------------------------------
   observe({
-    # Transmission category within race
+    # Transmission Risk Group within race
     # Black among MSM, Hisp among MSM, white among MSM
     # Black among HET, Hisp among HET, white among HET
     # Black among PWID,Hisp among PWID, white among PWID
@@ -152,7 +149,7 @@ shinyServer(function(input, output, session) {
     updateNumericInput(session, "whitepwiddiagpct", value = round(x[9], 2))
 
     # MSM, HET, PWID
-    # Transmission category only
+    # Transmission Risk Group only
     y <- trans.diagnosis.percents[[as.numeric(input$jurisdiction)]]
     updateNumericInput(session, "msmdiagpct", value = round(y[1], 2))
     updateNumericInput(session, "hetdiagpct", value = round(y[2], 2))
@@ -238,16 +235,16 @@ shinyServer(function(input, output, session) {
   output$warningText1 <- renderText({
     warning.text <- ""
     if (input$jurisdiction == 46) {
-      warning.text <- "African-American estimates by transmission category are not available for Vermont"
+      warning.text <- "African-American estimates by transmission risk group are not available for Vermont"
     }
     if (input$jurisdiction == 30) {
-      warning.text <- "Race-specific estimates by transmission category are not available for New Hampshire"
+      warning.text <- "Race-specific estimates by transmission risk group are not available for New Hampshire"
     }
 
     return(warning.text)
   })
 
-  # Changing transmission category assumptions
+  # Changing transmission risk group assumptions
   output$warningText2 <- renderText({
 
     warning.text <- ""
@@ -311,7 +308,7 @@ shinyServer(function(input, output, session) {
       return(warning.text)
     })
 
-  # Sum of transmission category
+  # Sum of transmission risk group
   output$warningText4 <- renderText({
 
     warning.text <- ""
