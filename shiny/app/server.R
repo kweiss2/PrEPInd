@@ -64,7 +64,7 @@ race.diagnosis.percents <- list(
   100 * c(0.572314049586777, 0.0661157024793388, 0.340909090909091, 0.684491978609626, 0.053475935828877, 0.245989304812834, 0.333333333333333, 0, 0.619047619047619),   #Tennessee
   100 * c(0.319524824855315, 0.409381663113006, 0.229667986597624, 0.536687631027254, 0.30293501048218, 0.120545073375262, 0.382978723404255, 0.285106382978723, 0.297872340425532),   #Texas
   100 * c(0.03125, 0.270833333333333, 0.625, 0.333333333333333, 0.266666666666667, 0.333333333333333, 0, 0.2, 0.6),   #Utah
-  100 * c(0, 0.2, 0.8, 0, 0, 0.75, 0, 0.333333333333333, 0.666666666666667),   #Vermont
+  100 * c(NA, 0.2, 0.8, NA, 0, 0.75, NA, 0.333333333333333, 0.666666666666667),   #Vermont
   100 * c(0.564759036144578, 0.128012048192771, 0.268072289156627, 0.761538461538461, 0.0692307692307692, 0.138461538461538, 0.53125, 0.09375, 0.3125),   #Virginia
   100 * c(0.148255813953488, 0.209302325581395, 0.523255813953488, 0.548387096774194, 0.0967741935483871, 0.241935483870968, 0.131578947368421, 0.131578947368421, 0.631578947368421),   #Washington
   100 * c(0.0566037735849057, 0.0377358490566038, 0.867924528301887, 0.533333333333333, 0, 0.466666666666667, 0.2, 0, 0.4),   #West Virginia
@@ -198,33 +198,33 @@ shinyServer(function(input, output, session) {
   # Vermont values
     if (input$jurisdiction == 46) {
       updateNumericInput(session, "blackmsmprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "blackhetprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "blackpwidprep",
-                         value = NA)
+                         value = 0)
     }
 
   # New Hampshire values
     if (input$jurisdiction == 30) {
       updateNumericInput(session, "blackmsmprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "blackhetprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "blackpwidprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "hispmsmprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "hisphetprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "hisppwidprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "whitemsmprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "whitehetprep",
-                         value = NA)
+                         value = 0)
       updateNumericInput(session, "whitepwidprep",
-                         value = NA)
+                         value = 0)
     }
 
   })
@@ -361,47 +361,6 @@ shinyServer(function(input, output, session) {
 
     return(warning.text)
     })
-
-
-  ## Calculate data for output table -------------------------------------------
-  # currentData <- reactive({
-  #
-  #   # Input custom data
-  #   if (is.na(input$blackmsmdiagpct) == FALSE &
-  #       is.na(input$blackhetdiagpct) == FALSE &
-  #       is.na(input$blackpwiddiagpct) == FALSE &
-  #       is.na(input$hispmsmdiagpct) == FALSE &
-  #       is.na(input$hisphetdiagpct) == FALSE &
-  #       is.na(input$hisppwiddiagpct) == FALSE &
-  #       is.na(input$whitemsmdiagpct) == FALSE &
-  #       is.na(input$whitehetdiagpct) == FALSE &
-  #       is.na(input$whitepwiddiagpct) == FALSE) {
-  #     proportions <- c(input$blackmsmdiagpct, input$blackhetdiagpct,
-  #                      input$blackpwiddiagpct, input$hispmsmdiagpct,
-  #                      input$hisphetdiagpct, input$hisppwiddiagpct,
-  #                      input$whitemsmdiagpct, input$whitehetdiagpct,
-  #                      input$whitepwiddiagpct)
-  #   }
-  #   else {
-  #     proportions <- race.diagnosis.percents
-  #   }
-  #   totalind <- 1000000
-  #   nind <- round((proportions / 100) * totalind)
-  #   txTableCnt <- cbind(stagenames.racetranscat,
-  #                       format(nind, digits = 12, decimal.mark = ",",
-  #                              big.mark = ",", small.mark = "."),
-  #                       paste(as.character(proportions),
-  #                             "%",
-  #                             sep = "")
-  #   )
-  #   colnames(txTableCnt) <- c("Group", "#", "Proportion of diagnosed (sums to 100% within race)")
-  #
-  #   return(txTableCnt)
-  #   # }
-  # })
-
-  #http://stackoverflow.com/questions/23236944/add-values-to-a-reactive-table-in-shiny/23243820#23243820
-
 
   ## Generate report -----------------------------------------------------------
   output$report <- downloadHandler(

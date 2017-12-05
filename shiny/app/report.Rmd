@@ -91,7 +91,7 @@ msmnums2 <- as.data.frame(msmnums)
 ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 3.5) +
-  theme_minimal() + labs(title = "MSM for PrEP by Transmission Risk Group", 
+  theme_minimal() + labs(title = "MSM Indicated for PrEP by Transmission Risk Group", 
          x = "Risk Group", y = "Number of MSM")
 
 # msmnums <- c(input$blackmsmprep, input$hispmsmprep, input$whitemsmprep)

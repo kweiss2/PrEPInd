@@ -128,7 +128,7 @@ shinyUI(dashboardPage(
                 column(width = 4,
                 box(width = NULL,
                 title = "3. Race-specific Assumptions about New Diagnoses" , status = "primary", solidHeader = TRUE,
-                HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</u>:</h5>"),
+                HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h5>"),
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText5"), HTML("</font></b>"),
                     HTML("<h5 style=\"color:green\">MSM</u>:</h5>"),

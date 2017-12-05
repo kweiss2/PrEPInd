@@ -1,0 +1,12 @@
+name: prepind2
+title: PrEPInd
+username:
+account: weiss
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 244672
+bundleId: 1117112
+url: https://weiss.shinyapps.io/prepind2/
+when: 1512497420.20321
+asMultiple: FALSE
+asStatic: FALSE
