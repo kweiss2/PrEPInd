@@ -5,13 +5,13 @@ library(rmarkdown)
 library(ggplot2)
 library(plyr)
 
-shinyUI(dashboardPage(
+shinyUI(dashboardPage(skin = "black",
     dashboardHeader(title = "PrEP Indications"),
     dashboardSidebar(
         width = 200,
         sidebarMenu(
             menuItem("Introduction", tabName = "Introduction", icon = icon("book")),
-            menuItem("Estimation Tool", tabName = "Model", icon = icon("line-chart"))
+            menuItem("Estimation Tool", tabName = "Estimation", icon = icon("line-chart"))
         )
 
 
@@ -26,40 +26,44 @@ shinyUI(dashboardPage(
                  zoom: 100%; /* Webkit browsers */
                  }
                  "),
+      # Background color
+      tags$style("body{background-color:white}"),
+
         tabItems(
 
             ## Introduction tab ##
             tabItem(tabName = "Introduction",
+                    tags$style("body{background-color:white}"),
                     column(10, offset = 1,
                            h3("Estimates of Persons with Indications for Preexposure Prophylaxis",
-                              style = "color: #193556;"),
-                           h4("A Web-Based Modeling Tool for Public Health Practice", style = "color: #2E619E;"),
+                              style = "color: black;"),
+                           h4("A Web-Based Modeling Tool for Public Health Practice", style = "color: black;"),
                            hr(),
                            p("This software tool provides additional opportunities to explore the
                              estimates from the paper:",
                              tags$blockquote("Smith DK, Van Handel M, Grey J",
                                              "Estimates of Persons with Indications for Preexposure Prophylaxis by Jurisdiction Transmission Risk Group, and Race/Ethnicity, United States, 2015.", em("In Clearance."), "2017."),
-                            "This webtool provides users the ability to estimate the number of individuals indicated for PrEP."),
-                           p("To get started, enter an estimate of the MSM population size in your jurisdiction of interest, and select a jurisdiction on which to base the model assumptions. By changing the jurisdiction, you can see how the assumptions about the model change."),
+                            "This webtool provides users the ability to estimate the number of individuals indicated for PrEP.", style = "color: black;"),
+                           p("To get started, enter an estimate of the MSM population size in your jurisdiction of interest, and select a jurisdiction on which to base the model assumptions. By changing the jurisdiction, you can see how the assumptions about the model change.", style = "color: black;"),
                            tags$ul(
-                               tags$li(strong("Estimates by transmission risk group:"), "this model will produce estimates of persons with indications for preexposure prophylaxis among men who have sex with men (MSM), heterosexuals (HET), and persons who inject drugs (PWID)."),
-                               tags$li(strong("Estimates by race and transmission risk group:"), "this model will also produce race-stratified estimates of persons with indications for preexposure prophylaxis among men who have sex with men (MSM), heterosexuals (HET), and persons who inject drugs (PWID).")
+                               tags$li(strong("Estimates by transmission risk group:"), "this model will produce estimates of persons with indications for preexposure prophylaxis among men who have sex with men (MSM), heterosexuals (HET), and persons who inject drugs (PWID).", style = "color: black;"),
+                               tags$li(strong("Estimates by race and transmission risk group:"), "this model will also produce race-stratified estimates of persons with indications for preexposure prophylaxis among men who have sex with men (MSM), heterosexuals (HET), and persons who inject drugs (PWID).", style = "color: black;")
                                ),
                            p("After selecting the parameters set in each model, the model will
-                             automatically update the values and summary data tables. These data should be interpreted with caution."),
+                             automatically update the values and summary data tables. These data should be interpreted with caution.", style = "color: black;"),
                            hr(),
                            p(em("We acknowledge support from the CDC/NCHHSTP Epidemiological and Economic Modeling Agreement (5U38PS004646).
                                 The findings and conclusions used to build this tool are solely the responsibility of the authors and do not
                                 necessarily represent the official views of the Centers for Disease Control and Prevention or the Department
-                                of Health and Human Services."))
+                                of Health and Human Services."), style = "color: black;")
                            )
 
                            ),
         tabItem(
-            ## Model Scenarios Tab ##
-            tabName = "Model",
+            ## Estimation Tab ##
+            tabName = "Estimation",
             tags$head(
-                tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
+                tags$link(rel = "stylesheet", type = "text/css", href = "style.css", color = "color: black;"),
                 tags$script(type = "text/javascript", src = "busy.js")
             ),
 
@@ -71,7 +75,7 @@ shinyUI(dashboardPage(
                 column(width = 3,
                 box(width = NULL,
                     title = "1. Population Size and Jurisdiction", status = "primary", solidHeader = TRUE,
-                    HTML("<h5 style=\"color:green\">Please enter a population size without using commas</u>:</h5>"),
+                    HTML("<h4 style=\"color:green\">Please enter a population size without using commas</u>:</h4>"),
                     numericInput("msmpopsize",
                                  "Jurisdiction MSM Population Size",
                                  min = 0,
@@ -108,17 +112,17 @@ shinyUI(dashboardPage(
                 box(width = NULL,
                     title = "2. Assumptions about New Diagnoses", status = "primary", solidHeader = TRUE,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText4"), HTML("</font></b>"),
-                    HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h5>"),
+                    HTML("<h4 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h4>"),
                     numericInput("msmdiagpct",
                                  "% of new diagnoses attributed to MSM",
                                  min = 0, value = NA),
 
-                    HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h5>"),
+                    HTML("<h4 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h4>"),
                     numericInput("hetdiagpct",
                                  "% of new diagnoses attributed to HET",
                                  min = 0, value = NA),
 
-                    HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h5>"),
+                    HTML("<h4 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h4>"),
                     numericInput("pwiddiagpct",
                                  "% of new diagnoses attributed to PWID",
                                  min = 0, value = NA)#,
@@ -128,10 +132,10 @@ shinyUI(dashboardPage(
                 column(width = 4,
                 box(width = NULL,
                 title = "3. Race-specific Assumptions about New Diagnoses" , status = "primary", solidHeader = TRUE,
-                HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h5>"),
+                HTML("<h4 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h4>"),
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText5"), HTML("</font></b>"),
-                    HTML("<h5 style=\"color:green\">MSM</u>:</h5>"),
+                    HTML("<h4 style=\"color:green\">MSM</u>:</h4>"),
                     numericInput("blackmsmdiagpct", "% of new MSM diagnoses attributed to Black MSM",
                                  min = 0, value = NA),
                     numericInput("hispmsmdiagpct", "% of new MSM diagnoses attributed to Hispanic MSM",
@@ -140,7 +144,7 @@ shinyUI(dashboardPage(
                                  min = 0, value = NA)),
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText6"), HTML("</font></b>"),
-                    HTML("<h5 style=\"color:green\">HET</u>:</h5>"),
+                    HTML("<h4 style=\"color:green\">HET</u>:</h4>"),
                     numericInput("blackhetdiagpct", "% of new HET diagnoses attributed to Black HET",
                                  min = 0, value = NA),
                     numericInput("hisphetdiagpct", "% of new HET diagnoses attributed to Hispanic HET",
@@ -149,7 +153,7 @@ shinyUI(dashboardPage(
                                  min = 0, value = NA )),
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText7"), HTML("</font></b>"),
-                    HTML("<h5 style=\"color:green\">PWID</u>:</h5>"),
+                    HTML("<h4 style=\"color:green\">PWID</u>:</h4>"),
                     numericInput("blackpwiddiagpct", "% of new PWID diagnoses attributed to Black PWID",
                                   min = 0, value = NA),
                     numericInput("hisppwiddiagpct", "% of new PWID diagnoses attributed to Hispanic PWID",
@@ -182,7 +186,7 @@ shinyUI(dashboardPage(
                            HTML("<font color=\"red\"><b>"), textOutput("warningText1"), HTML("</font></b>"),
                            #HTML("<font color=\"red\"><b>"), textOutput("warningText3"), HTML("</font></b>"),
                            column(width = 4,
-                             HTML("<h5 style=\"color:green\">MSM with indications for PrEP</u>:</h5>"),
+                             HTML("<h4 style=\"color:green\">MSM with indications for PrEP</u>:</h4>"),
                              numericInput("blackmsmprep",
                                           "African-American (#)",
                                           min = 0, value = NA),
@@ -193,7 +197,7 @@ shinyUI(dashboardPage(
                                           "White (#)",
                                           min = 0, value = NA)),
                            column(width = 4,
-                             HTML("<h5 style=\"color:green\">HET with indications for PrEP</u>:</h5>"),
+                             HTML("<h4 style=\"color:green\">HET with indications for PrEP</u>:</h4>"),
                              numericInput("blackhetprep",
                                           "African-American (#)",
                                           min = 0, value = NA),
@@ -204,7 +208,7 @@ shinyUI(dashboardPage(
                                           "White (#)",
                                           min = 0, value = NA)),
                            column(width = 4,
-                             HTML("<h5 style=\"color:green\">PWID with indications for PrEP</u>:</h5>"),
+                             HTML("<h4 style=\"color:green\">PWID with indications for PrEP</u>:</h4>"),
                              numericInput("blackpwidprep",
                                           "African-American (#)",
                                           min = 0, value = NA),
