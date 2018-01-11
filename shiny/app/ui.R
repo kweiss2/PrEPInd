@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+library(rsconnect)
 library(knitr)
 library(rmarkdown)
 library(ggplot2)
@@ -17,6 +18,31 @@ shinyUI(dashboardPage(skin = "black",
 
         ), # End dashboardSidebar
     dashboardBody(
+      tags$head(tags$style(HTML('
+                              /* logo */
+                      .skin-black .main-header .logo {
+                      background-color: #333333;
+                      color: #FFFFFF;
+                      }
+
+                      /* navbar (rest of the header) */
+                      .skin-black .main-header .navbar {
+                      background-color: #333333;
+                      color: #FFFFFF;
+                      }
+
+                      /* main sidebar */
+                      .skin-black .main-sidebar {
+                      background-color: #333333;
+                      color: #FFFFFF;
+                      }
+
+                      /* other links in the sidebarmenu */
+                      .skin-black .main-sidebar .sidebar .sidebar-menu a{
+                      background-color: #333333;
+                      color: #FFFFFF;
+                      }
+                      ')),
 
       # Default zoom
       tags$style("
@@ -25,24 +51,21 @@ shinyUI(dashboardPage(skin = "black",
                  zoom: 1.0; /* Other non-webkit browsers */
                  zoom: 100%; /* Webkit browsers */
                  }
-                 "),
-      # Background color
-      tags$style("body{background-color:white}"),
+                 ")),
 
         tabItems(
 
             ## Introduction tab ##
             tabItem(tabName = "Introduction",
-                    tags$style("body{background-color:white}"),
                     column(10, offset = 1,
-                           h3("Estimates of Persons with Indications for Preexposure Prophylaxis",
+                           h1("Estimates of Persons with Indications for Preexposure Prophylaxis",
                               style = "color: black;"),
-                           h4("A Web-Based Modeling Tool for Public Health Practice", style = "color: black;"),
+                           h2("A Web-Based Modeling Tool for Public Health Practice", style = "color: black;"),
                            hr(),
                            p("This software tool provides additional opportunities to explore the
                              estimates from the paper:",
                              tags$blockquote("Smith DK, Van Handel M, Grey J",
-                                             "Estimates of Persons with Indications for Preexposure Prophylaxis by Jurisdiction Transmission Risk Group, and Race/Ethnicity, United States, 2015.", em("In Clearance."), "2017."),
+                                             "Estimates of Persons with Indications for Preexposure Prophylaxis by Jurisdiction Transmission Risk Group, and Race/Ethnicity, United States, 2015.", em("In Clearance."), "2017.", style = "color:black;"),
                             "This webtool provides users the ability to estimate the number of individuals indicated for PrEP.", style = "color: black;"),
                            p("To get started, enter an estimate of the MSM population size in your jurisdiction of interest, and select a jurisdiction on which to base the model assumptions. By changing the jurisdiction, you can see how the assumptions about the model change.", style = "color: black;"),
                            tags$ul(
@@ -240,7 +263,3 @@ shinyUI(dashboardPage(skin = "black",
                            ) # End dashboardBody
                            ) # End dashboardPage
                            ) # End ShinyUI
-
-
-
-
