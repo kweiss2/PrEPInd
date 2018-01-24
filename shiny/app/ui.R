@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(rsconnect)
+library(shinythemes)
 library(knitr)
 library(rmarkdown)
 library(ggplot2)
@@ -19,10 +20,15 @@ shinyUI(dashboardPage(skin = "black",
         ), # End dashboardSidebar
     dashboardBody(
       tags$head(tags$style(HTML('
-                              /* logo */
+                      /* logo */
                       .skin-black .main-header .logo {
                       background-color: #333333;
                       color: #FFFFFF;
+                      }
+
+                      /* logo when hovered */
+                      .skin-black .main-header .logo:hover {
+                      background-color: #f4b943;
                       }
 
                       /* navbar (rest of the header) */
@@ -37,10 +43,25 @@ shinyUI(dashboardPage(skin = "black",
                       color: #FFFFFF;
                       }
 
+                      /* active selected tab in the sidebarmenu */
+                      .skin-black .main-sidebar .sidebar .sidebar-menu .active a{
+                      background-color: #ff0000;
+                      }
+
                       /* other links in the sidebarmenu */
                       .skin-black .main-sidebar .sidebar .sidebar-menu a{
                       background-color: #333333;
                       color: #FFFFFF;
+                      }
+
+                      /* other links in the sidebarmenu when hovered */
+                      .skin-black .main-sidebar .sidebar .sidebar-menu a:hover{
+                      background-color: #ff69b4;
+                      }
+
+                      /* toggle button when hovered  */
+                      .skin-black .main-header .navbar .sidebar-toggle:hover{
+                      background-color: #ff69b4;
                       }
                       ')),
 
