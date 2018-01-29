@@ -6,6 +6,8 @@ library(knitr)
 library(rmarkdown)
 library(ggplot2)
 library(plyr)
+library(dplyr)
+
 
 shinyUI(dashboardPage(skin = "blue",
     dashboardHeader(title = "PrEP Indications"),
@@ -98,6 +100,11 @@ shinyUI(dashboardPage(skin = "blue",
                                              style = "color:black;"),
                             "This webtool provides users the ability to estimate the number of individuals indicated for PrEP.",
                             style = "color: black;"),
+
+                           p("You can use the", em("Tab"), "key and the", em("Shift+Tab"), "keys on a keyboard to
+                             navigate between fields. You can also use the ", em("Enter"), "key to expand or
+                             collapse the sidebar.", style = "color: black;"),
+
                            p("To get started, enter an estimate of the MSM population size in your
                              jurisdiction of interest, and select a jurisdiction on which to base the
                              model assumptions. By changing the jurisdiction, you can see how the assumptions
@@ -125,7 +132,6 @@ shinyUI(dashboardPage(skin = "blue",
                                 of the authors and do not necessarily represent the official
                                 views of the Centers for Disease Control and Prevention or the Department
                                 of Health and Human Services."), style = "color: black;"),
-                           hr(),
                            p("You can change the page by navigating to the", em("Switch Tab"), "button below
                               or by using the links on the sidebar.",
                              style = "color: black;")
@@ -158,7 +164,7 @@ shinyUI(dashboardPage(skin = "blue",
                                  "Jurisdiction MSM Population Size",
                                  min = 0,
                                  value = NA),
-                    selectInput("jurisdiction", label = "1. Jurisdiction Assumptions",
+                    selectInput(inputId = "jurisdiction", label = "1. Jurisdiction Assumptions",
                                 c("Total" = 1, "Alabama" = 2,
                                   "Alaska" = 3, "Arizona" = 4,
                                   "Arkansas" = 5, "California" = 6,

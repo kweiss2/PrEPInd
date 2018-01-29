@@ -1,8 +1,9 @@
 ---
 output: word_document
 ---
-#`r paste(input$reportTitle, sep="")`  
-##`r paste(format(Sys.Date(), "%B %d, %Y"), sep="")`
+
+# `r paste(input$reportTitle, sep="")`  
+## `r paste(format(Sys.Date(), "%B %d, %Y"), sep="")`
 
 This report was generated using the PrEP Indications Estimation Tool. The tool was created as part of a partnership between the Centers for Disease Control and Prevention (CDC) and researchers at Emory University's Rollins School of Public Health.
 
@@ -10,7 +11,7 @@ This report was generated using the PrEP Indications Estimation Tool. The tool w
 The following estimates were based on several model inputs and assumptions. First, the total number of MSM in the model population was set to `r paste(format(input$msmpopsize, big.mark = ","), sep = "")`. Under the assumptions specified, that `r paste(round(as.numeric(input$msmdiagpct, 2)), "%", sep = "")` of newly diagnosed cases were attributable to MSM, `r paste(round(as.numeric(input$hetdiagpct, 2)), "%", sep = "")` of newly diagnosed cases were attributable to heterosexuals (HET), and `r paste(round(as.numeric(input$pwiddiagpct, 2)), "%", sep = "")` of newly diagnosed cases were attributable to persons who inject drugs (PWID), the total number of individuals with indications for PrEP is `r paste(format(input$totalprep, big.mark = ","), sep = "")`. The estimated number of MSM  with indications for PrEP is `r paste(format(input$msmprep, big.mark = ","), sep = "")`, the estimated number of heterosexuals  with indications for PrEP is `r paste(format(input$hetprep, big.mark = ","), sep = "")`, and the estimated number of heterosexuals  with indications for PrEP is `r paste(format(input$pwidprep, big.mark = ","), sep = "")`.
 
 ## Race-specific Assumptions and Results
-To generate race-specific estimates of the number of individuals within each transmission risk group who have indications for PrEP, assumptions were drawn from `r paste(format(input$jurisdiction, big.mark = ","), sep = "")`. The following assumptions were used:
+To generate race-specific estimates of the number of individuals within each transmission risk group who have indications for PrEP, the following assumptions were used:
 `r paste(format(round(as.numeric(input$blackmsmdiagpct), 2), big.mark = ","), "%", sep = "")` of newly diagnosed cases among MSM occurred among African-American MSM,
 `r paste(format(round(as.numeric(input$hispmsmdiagpct), 2), big.mark = ","), "%", sep = "")` of newly diagnosed cases among MSM occurred among Hispanic MSM,
 `r paste(format(round(as.numeric(input$whitemsmdiagpct), 2), big.mark = ","), "%", sep = "")` of newly diagnosed cases among MSM occurred among White MSM,
@@ -19,19 +20,24 @@ To generate race-specific estimates of the number of individuals within each tra
 `r paste(format(round(as.numeric(input$whitehetdiagpct), 2), big.mark = ","), "%", sep = "")` of newly diagnosed cases among heterosexuals occurred among White heterosexuals,
 `r paste(format(round(as.numeric(input$blackpwiddiagpct), 2), big.mark = ","), "%", sep = "")` of newly diagnosed cases among PWID occurred among African-American PWID,
 `r paste(format(round(as.numeric(input$hisppwiddiagpct), 2), big.mark = ","), "%", sep = "")` of newly diagnosed cases among PWID occurred among Hispanic PWID,
-`r paste(format(round(as.numeric(input$whitepwiddiagpct), 2), big.mark = ","), "%", sep = "")` of newly diagnosed cases among PWID occurred among White PWID. Under these assumptions, the estimated number of African-American MSM with indications for PrEP is `r paste(format(input$blackmsmprep, big.mark = ","), sep = "")`, the estimated number of Hispanic MSM with indications for PrEP is `r paste(format(input$hispmsmprep, big.mark = ","), sep = "")`, and the estimated number of White MSM  with indications for PrEP is `r paste(format(input$whitemsmprep, big.mark = ","), sep = "")`. The estimated number of African-American heterosexuals with indications for PrEP is `r paste(format(input$blackhetprep, big.mark = ","), sep = "")`, the estimated number of Hispanic heterosexuals with indications for PrEP is `r paste(format(input$hisphetprep, big.mark = ","), sep = "")`, and the estimated number of White heterosexuals with indications for PrEP is `r paste(format(input$whitehetprep, big.mark = ","), sep = "")`. The estimated number of African-American PWID with indications for PrEP is `r paste(format(input$blackpwidprep, big.mark = ","), sep = "")`, the estimated number of Hispanic PWID with indications for PrEP is `r paste(format(input$hisppwidprep, big.mark = ","), sep = "")`, and the estimated number of White PWID with indications for PrEP is `r paste(format(input$whitepwidprep, big.mark = ","), sep = "")`.
+`r paste(format(round(as.numeric(input$whitepwiddiagpct), 2), big.mark = ","), "%", sep = "")` of newly diagnosed cases among PWID occurred among White PWID. 
+
+Under these assumptions, the estimated number of African-American MSM with indications for PrEP is `r paste(format(input$blackmsmprep, big.mark = ","), sep = "")`, the estimated number of Hispanic MSM with indications for PrEP is `r paste(format(input$hispmsmprep, big.mark = ","), sep = "")`, and the estimated number of White MSM  with indications for PrEP is `r paste(format(input$whitemsmprep, big.mark = ","), sep = "")`. The estimated number of African-American heterosexuals with indications for PrEP is `r paste(format(input$blackhetprep, big.mark = ","), sep = "")`, the estimated number of Hispanic heterosexuals with indications for PrEP is `r paste(format(input$hisphetprep, big.mark = ","), sep = "")`, and the estimated number of White heterosexuals with indications for PrEP is `r paste(format(input$whitehetprep, big.mark = ","), sep = "")`. The estimated number of African-American PWID with indications for PrEP is `r paste(format(input$blackpwidprep, big.mark = ","), sep = "")`, the estimated number of Hispanic PWID with indications for PrEP is `r paste(format(input$hisppwidprep, big.mark = ","), sep = "")`, and the estimated number of White PWID with indications for PrEP is `r paste(format(input$whitepwidprep, big.mark = ","), sep = "")`.
 
 The remaining sections of this report display the outputs from this model. The first section shows the estimated HIV Care Continuum described above, while the second section shows the estimated number of HIV transmissions based on that continuum.
 
 
-##Results: PrEP Indications
+## Results: PrEP Indications
+
 
 ### Table 1: Individuals with Indications for PrEP by Transmission Risk Group
-Transmission Risk Group | Number with PrEP indications | %
+
+Transmission Risk Group | Number with PrEP indications | % of total
 ------------------------ | ------:| -----:
 MSM             | `r paste(format(input$msmprep, big.mark = ","), sep = "")` | `r paste(format(input$msmdiagpct, big.mark = ","), sep = "")`
 Heterosexuals                | `r paste(format(input$hetprep, big.mark = ","), sep = "")` | `r paste(format(input$hetdiagpct, big.mark = ","), sep = "")`
 Persons who inject drugs         | `r paste(format(input$pwidprep, big.mark = ","), sep = "")` | `r paste(format(input$pwiddiagpct, big.mark = ","), sep = "")`
+
 
 ### Table 2: Individuals with Indications for PrEP by Race
 
@@ -41,16 +47,29 @@ Black             | `r paste(format(as.numeric(input$blackmsmprep) + as.numeric(
 Hispanic              | `r paste(format(as.numeric(input$hispmsmprep) + as.numeric(input$hisphetprep) + as.numeric(input$hisppwidprep), big.mark = ","), sep = "")`
 White              | `r paste(format(as.numeric(input$whitemsmprep) + as.numeric(input$whitehetprep) + as.numeric(input$whitepwidprep), big.mark = ","), sep = "")`
 
-### Table 3: Individuals with Indications for PrEP by Race and Transmission Risk Group
+
+### Table 3a: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
 
 Race by Transmission Risk Group | Number with PrEP indications | % (within transmission risk group)
 ------------------------ | ------:| -----:
 Black MSM             | `r paste(format(input$blackmsmprep, big.mark = ","), sep = "")` | `r paste(format(round(as.numeric(input$blackmsmdiagpct), 2), big.mark = ","))`
 Hispanic MSM             | `r paste(format(input$hispmsmprep, big.mark = ","), sep = "")` |`r paste(format(round(as.numeric(input$hispmsmdiagpct), 2), big.mark = ","))`
 White MSM             | `r paste(format(input$whitemsmprep, big.mark = ","), sep = "")` |`r paste(format(round(as.numeric(input$whitemsmdiagpct), 2), big.mark = ","))`
+
+
+### Table 3b: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
+
+Race by Transmission Risk Group | Number with PrEP indications | % (within transmission risk group)
+------------------------ | ------:| -----:
 Black HET             | `r paste(format(input$blackhetprep, big.mark = ","), sep = "")` | `r paste(format(round(as.numeric(input$blackhetdiagpct), 2), big.mark = ","))`
 Hispanic HET             | `r paste(format(input$hisphetprep, big.mark = ","), sep = "")` | `r paste(format(round(as.numeric(input$hisphetdiagpct), 2), big.mark = ","))`
 White HET             | `r paste(format(input$whitehetprep, big.mark = ","), sep = "")` | `r paste(format(round(as.numeric(input$whitehetdiagpct), 2), big.mark = ","))`
+
+
+### Table 3c: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
+
+Race by Transmission Risk Group | Number with PrEP indications | % (within transmission risk group)
+------------------------ | ------:| -----:
 Black PWID             | `r paste(format(input$blackpwidprep, big.mark = ","), sep = "")` | `r paste(format(round(as.numeric(input$blackpwiddiagpct), 2), big.mark = ","))`
 Hispanic PWID             | `r paste(format(input$hisppwidprep, big.mark = ","), sep = "")` | `r paste(format(round(as.numeric(input$hisppwiddiagpct), 2), big.mark = ","))`
 White PWID             | `r paste(format(input$whitepwidprep, big.mark = ","), sep = "")` | `r paste(format(round(as.numeric(input$whitepwiddiagpct), 2), big.mark = ","))`
@@ -58,7 +77,7 @@ White PWID             | `r paste(format(input$whitepwidprep, big.mark = ","), s
 ## Figures
 
 ### Figure 1: Number by Transmission Risk Group
-```{r echo = FALSE, fig.width = 10, fig.height = 8}
+```{r echo = FALSE, fig.cap=paste("Figure 1: Individuals Indicated for PrEP by Transmission Risk Group"), fig.width = 10, fig.height = 8}
 transnums <- NULL
 transnums$Individuals <- rbind(input$totalprep, input$msmprep, input$hetprep, input$pwidprep)
 transnums$Group <- c("Total", "MSM", "HET", "PWID")
@@ -67,25 +86,16 @@ ggplot(data = transnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 3.5) +
   theme_minimal() + labs(title = "Individuals Indicated for PrEP by Transmission Risk Group", 
-         x = "Risk Group", y = "Number of Individuals",
-         alt)
-![alt text]("There are "))
+         x = "Risk Group", y = "Number of Individuals")
+# ![Alt text]("Figure 1: Individuals Indicated for PrEP by Transmission Risk Group") 
 # barplot(transnums, main = "Individuals Indicated for \n PrEP by Transmission Risk Group",
 #         xlab = "Number of Individuals", col = c("darkblue","red", "green", "purple"),
 #         legend = c("Total", "MSM", "HET", "PWID"), axes = TRUE,  beside = TRUE)
+
 ```
 
 ### Figure 2: Number by Race for MSM
-```{r echo=FALSE, fig.width=10, fig.height=8}
-# msmnums <- NULL
-# msmnums$Individuals <- rbind(input$blackmsmprep, input$hispmsmprep, input$whitemsmprep)
-# msmnums$Group <- c("Black", "Hispanic", "White")
-# msmnums2 <- as.data.frame(msmnums)
-# ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
-#   geom_bar(stat = "identity") +
-#   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 3.5) +
-#   theme_minimal() + labs(title = "MSM Indicated for PrEP by Race", 
-#          x = "Race", y = "Number of MSM")
+```{r echo=FALSE, fig.cap=paste("Figure 2: MSM Indicated for PrEP by Race"), fig.width=10, fig.height=8}
 msmnums <- NULL
 msmnums$Individuals <- rbind(input$blackmsmprep, input$hispmsmprep, input$whitemsmprep)
 msmnums$Group <- c("Black", "Hispanic", "White")
@@ -93,9 +103,9 @@ msmnums2 <- as.data.frame(msmnums)
 ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 3.5) +
-  theme_minimal() + labs(title = "MSM Indicated for PrEP by Transmission Risk Group", 
-         x = "Risk Group", y = "Number of MSM")
-
+  theme_minimal() + labs(title = "MSM Indicated for PrEP by Race", 
+         x = "Race", y = "Number of MSM")
+#![Alt text]("Figure 2: MSM Indicated for PrEP by Race") 
 # msmnums <- c(input$blackmsmprep, input$hispmsmprep, input$whitemsmprep)
 # barplot(msmnums, main = "MSM Indicated for PrEP by Race",
 #         xlab = "Number of MSM", col = c("darkblue","red", "green", "purple"),
@@ -104,41 +114,46 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
 ```
 
 ### Figure 3: Number by Race for HET
-```{r echo=FALSE, fig.width=10, fig.height=8}
+```{r echo=FALSE, fig.cap=paste("Figure 3: Heterosexuals Indicated for PrEP by Race"), fig.width=10, fig.height=8}
 hetnums <- c(input$blackhetprep, input$hisphetprep, input$whitehetprep)
 barplot(hetnums, main = "HET Indicated for PrEP by Race",
         xlab = "Number of HET", col = c("darkblue","red", "green", "purple"),
         legend = c("Black", "Hispanic", "White"), axes = TRUE, beside = TRUE)
+#![Alt text]("Figure 3: Heterosexuals Indicated for PrEP by Race") 
 ```
 
 ### Figure 4: Number by Race for PWID
-```{r echo=FALSE, fig.width=10, fig.height=8}
+```{r echo=FALSE, fig.cap=paste("Figure 4: Persons who Inject Drugs Indicated for PrEP by Race"), fig.width=10, fig.height=8}
 pwidnums <- c(input$blackpwidprep, input$hisppwidprep, input$whitepwidprep)
-barplot(pwidnums, main = "PWID Indicated for PrEP by Race",
+fig4 <- barplot(pwidnums, main = "PWID Indicated for PrEP by Race",
         xlab = "Number of PWID", col = c("darkblue","red", "green", "purple"),
         legend = c("Black", "Hispanic", "White"), axes = TRUE,  beside = TRUE)
+#![Alt text]("Figure 4: Persons who Inject Drugs Indicated for PrEP by Race") 
 ```
 
 ### Figure 5: Number by Transmission Risk Group for Black Individuals
-```{r echo=FALSE, fig.width=10, fig.height=8}
+```{r echo=FALSE, fig.cap=paste("Figure 5: Black Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=10, fig.height=8}
 blacknums <- c(input$blackmsmprep, input$blackhetprep, input$blackpwidprep)
-barplot(blacknums, main = "Black Individuals Indicated for \n PrEP by Transmission Risk Group",
+fig5 <- barplot(blacknums, main = "Black Individuals Indicated for PrEP by Transmission Risk Group",
         xlab = "Number of Black Individuals", col = c("darkblue","red", "green", "purple"),
         legend = c("MSM", "HET", "PWID"), axes = TRUE, beside = TRUE)
+#![Alt text]("Figure 5: Black Individuals Indicated for PrEP by Transmission Risk Group") 
 ```
 
-##### Figure 6: Number by Transmission Risk Group for Hispanic Individuals
-```{r echo=FALSE, fig.width=10, fig.height=8}
+### Figure 6: Number by Transmission Risk Group for Hispanic Individuals
+```{r echo=FALSE, fig.cap=paste("Figure 6: Hispanic Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=10, fig.height=8}
 hispnums <- c(input$hispmsmprep, input$hisphetprep, input$hisppwidprep)
-barplot(hispnums, main = "Hispanic Individuals Indicated for \n PrEP by Transmission Risk Group",
+fig6 <- barplot(hispnums, main = "Hispanic Individuals Indicated for PrEP by Transmission Risk Group",
         xlab = "Number of Hispanic Individuals", col = c("darkblue","red", "green", "purple"),
         legend = c("MSM", "HET", "PWID"), axes = TRUE, beside = TRUE)
+#![Alt text]("Figure 6: Hispanic Individuals Indicated for PrEP by Transmission Risk Group") 
 ```
 
 ### Figure 7: Number by Transmission Risk Group for White Individuals
-```{r echo=FALSE, fig.width=10, fig.height=8}
+```{r echo=FALSE, fig.cap=paste("Figure 6: White Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=10, fig.height=8}
 whitenums <- c(input$whitemsmprep, input$whitehetprep, input$whitepwidprep)
-barplot(whitenums, main = "White Individuals Indicated for \n PrEP by Transmission Risk Group",
+fig7 <- barplot(whitenums, main = "White Individuals Indicated for PrEP by Transmission Risk Group",
         xlab = "Number of White Individuals", col = c("darkblue","red", "green", "purple"),
         legend = c("MSM", "HET", "PWID"), axes = TRUE, beside = TRUE)
+#![Alt text]("Figure 7: White Individuals Indicated for PrEP by Transmission Risk Group") 
 ```
