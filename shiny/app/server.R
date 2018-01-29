@@ -128,7 +128,6 @@ trans.diagnosis.percents <- list(
   100 * c(8850/13820, 4210/13820, 760/13820)  # Washington D.C
 )
 
-
 shinyServer(function(input, output, session) {
 
   ## Get diagnosis percents ----------------------------------------------------
@@ -195,6 +194,8 @@ shinyServer(function(input, output, session) {
                        value = round_any((totmsm * 0.247) * (as.numeric(input$pwiddiagpct) / as.numeric(input$msmdiagpct)) * as.numeric(input$whitepwiddiagpct) / 100, 10))
 
 
+  ## NH and VT values for race--------------------------------------------------
+
   # Vermont values
     if (input$jurisdiction == 46) {
       updateNumericInput(session, "blackmsmprep",
@@ -229,9 +230,24 @@ shinyServer(function(input, output, session) {
 
   })
 
+  ## Switch tabs ---------------------------------------------------------------
+  #if (is.null(input$tabs)) return()
+
+  observeEvent(input$switchtab, {
+    newtab <- switch(input$tabs,
+                     "Introduction" = "Estimation")
+    updateTabItems(session, "tabs", newtab)
+    })
+
+  observeEvent(input$switchtab2, {
+    newtab <- switch(input$tabs,
+                     "Estimation" = "Introduction")
+    updateTabItems(session, "tabs", newtab)
+  })
+
   ## Warning text --------------------------------------------------------------
 
-  # State warnings
+    # State warnings
   output$warningText1 <- renderText({
     warning.text <- ""
     if (input$jurisdiction == 46) {

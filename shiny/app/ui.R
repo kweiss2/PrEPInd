@@ -7,11 +7,11 @@ library(rmarkdown)
 library(ggplot2)
 library(plyr)
 
-shinyUI(dashboardPage(skin = "black",
+shinyUI(dashboardPage(skin = "blue",
     dashboardHeader(title = "PrEP Indications"),
     dashboardSidebar(
         width = 200,
-        sidebarMenu(
+        sidebarMenu(id = "tabs",
             menuItem("Introduction", tabName = "Introduction", icon = icon("book")),
             menuItem("Estimation Tool", tabName = "Estimation", icon = icon("line-chart"))
         )
@@ -21,46 +21,52 @@ shinyUI(dashboardPage(skin = "black",
     dashboardBody(
       tags$head(tags$style(HTML('
                       /* logo */
-                      .skin-black .main-header .logo {
+                      .skin-blue .main-header .logo {
                       background-color: #333333;
                       color: #FFFFFF;
                       }
 
                       /* logo when hovered */
-                      .skin-black .main-header .logo:hover {
+                      .skin-blue .main-header .logo:hover {
                       background-color: #f4b943;
                       }
 
                       /* navbar (rest of the header) */
-                      .skin-black .main-header .navbar {
+                      .skin-blue .main-header .navbar {
                       background-color: #333333;
                       color: #FFFFFF;
                       }
 
                       /* main sidebar */
-                      .skin-black .main-sidebar {
+                      .skin-blue .main-sidebar {
                       background-color: #333333;
                       color: #FFFFFF;
                       }
 
+                      /* sidebar collapse */
+                      .skin-blue .main-sidebar .sidebar-collapse{
+                      background-color: #333333;
+                                color: #FFFFFF;
+                      }
+
                       /* active selected tab in the sidebarmenu */
-                      .skin-black .main-sidebar .sidebar .sidebar-menu .active a{
+                      .skin-blue .main-sidebar .sidebar .sidebar-menu .active a{
                       background-color: #ff0000;
                       }
 
                       /* other links in the sidebarmenu */
-                      .skin-black .main-sidebar .sidebar .sidebar-menu a{
+                      .skin-blue .main-sidebar .sidebar .sidebar-menu a{
                       background-color: #333333;
                       color: #FFFFFF;
                       }
 
                       /* other links in the sidebarmenu when hovered */
-                      .skin-black .main-sidebar .sidebar .sidebar-menu a:hover{
+                      .skin-blue .main-sidebar .sidebar .sidebar-menu a:hover{
                       background-color: #ff69b4;
                       }
 
                       /* toggle button when hovered  */
-                      .skin-black .main-header .navbar .sidebar-toggle:hover{
+                      .skin-blue .main-header .navbar .sidebar-toggle:hover{
                       background-color: #ff69b4;
                       }
                       ')),
@@ -86,23 +92,51 @@ shinyUI(dashboardPage(skin = "black",
                            p("This software tool provides additional opportunities to explore the
                              estimates from the paper:",
                              tags$blockquote("Smith DK, Van Handel M, Grey J",
-                                             "Estimates of Persons with Indications for Preexposure Prophylaxis by Jurisdiction Transmission Risk Group, and Race/Ethnicity, United States, 2015.", em("In Clearance."), "2017.", style = "color:black;"),
-                            "This webtool provides users the ability to estimate the number of individuals indicated for PrEP.", style = "color: black;"),
-                           p("To get started, enter an estimate of the MSM population size in your jurisdiction of interest, and select a jurisdiction on which to base the model assumptions. By changing the jurisdiction, you can see how the assumptions about the model change.", style = "color: black;"),
+                                             "Estimates of Persons with Indications for Preexposure
+                                              Prophylaxis by Jurisdiction Transmission Risk Group,
+                                             and Race/Ethnicity, United States, 2015.", em("In Clearance."), "2017.",
+                                             style = "color:black;"),
+                            "This webtool provides users the ability to estimate the number of individuals indicated for PrEP.",
+                            style = "color: black;"),
+                           p("To get started, enter an estimate of the MSM population size in your
+                             jurisdiction of interest, and select a jurisdiction on which to base the
+                             model assumptions. By changing the jurisdiction, you can see how the assumptions
+                             about the model change.", style = "color: black;"),
                            tags$ul(
-                               tags$li(strong("Estimates by transmission risk group:"), "this model will produce estimates of persons with indications for preexposure prophylaxis among men who have sex with men (MSM), heterosexuals (HET), and persons who inject drugs (PWID).", style = "color: black;"),
-                               tags$li(strong("Estimates by race and transmission risk group:"), "this model will also produce race-stratified estimates of persons with indications for preexposure prophylaxis among men who have sex with men (MSM), heterosexuals (HET), and persons who inject drugs (PWID).", style = "color: black;")
+                               tags$li(strong("Estimates by transmission risk group:"),
+                                       "this model will produce estimates of persons with
+                                       indications for preexposure prophylaxis among men
+                                       who have sex with men (MSM), heterosexuals (HET),
+                                       and persons who inject drugs (PWID).",
+                                       style = "color: black;"),
+                               tags$li(strong("Estimates by race and transmission risk group:"),
+                                       "this model will also produce race-stratified estimates of
+                                       persons with indications for preexposure prophylaxis among
+                                       men who have sex with men (MSM), heterosexuals (HET), and
+                                       persons who inject drugs (PWID).",
+                                       style = "color: black;")
                                ),
                            p("After selecting the parameters set in each model, the model will
-                             automatically update the values and summary data tables. These data should be interpreted with caution.", style = "color: black;"),
+                             automatically update the values and summary data tables.
+                             These data should be interpreted with caution.", style = "color: black;"),
+                           p(em("We acknowledge support from the CDC/NCHHSTP Epidemiological
+                                and Economic Modeling Agreement (5U38PS004646). The findings
+                                conclusions used to build this tool are solely the responsibility
+                                of the authors and do not necessarily represent the official
+                                views of the Centers for Disease Control and Prevention or the Department
+                                of Health and Human Services."), style = "color: black;"),
                            hr(),
-                           p(em("We acknowledge support from the CDC/NCHHSTP Epidemiological and Economic Modeling Agreement (5U38PS004646).
-                                The findings and conclusions used to build this tool are solely the responsibility of the authors and do not
-                                necessarily represent the official views of the Centers for Disease Control and Prevention or the Department
-                                of Health and Human Services."), style = "color: black;")
-                           )
-
+                           p("You can change the page by navigating to the", em("Switch Tab"), "button below
+                              or by using the links on the sidebar.",
+                             style = "color: black;")
                            ),
+
+                    fluidRow(
+                      column(6, align = "center", offset = 3,
+                             actionButton('switchtab', 'Switch Tab', icon = icon("line-chart"))
+                           )
+                      )
+                    ),
         tabItem(
             ## Estimation Tab ##
             tabName = "Estimation",
@@ -204,7 +238,11 @@ shinyUI(dashboardPage(skin = "black",
                                   min = 0, value = NA),
                     numericInput("whitepwiddiagpct", "% of new PWID diagnoses attributed to White PWID",
                                   min = 0, value = NA))
-                ) # End box
+                ), # End box
+                fluidRow(
+                  column(6, align = "center", offset = 3,
+                         actionButton('switchtab2', 'Switch Tab', icon = icon("line-chart"))
+                  ))
                 ), # End column
                 column(width = 5,
                    box(width = NULL,
@@ -268,7 +306,7 @@ shinyUI(dashboardPage(skin = "black",
 
             fluidRow(
                 box(width = 12, height = 180, status = "info", solidHeader = TRUE,
-                       tabsetPanel(
+                       tabsetPanel(type = "pills",
                          tabPanel("Report",
                                   mainPanel(
                                     textInput("reportTitle", label = "Report Title"),
