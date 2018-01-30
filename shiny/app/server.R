@@ -7,6 +7,8 @@ library(rmarkdown)
 library(ggplot2)
 library(plyr)
 library(dplyr)
+library(kableExtra)
+library(magrittr)
 
 ## Group names -----------------------------------------------------------------
 stagenames.transcat <- c("Total", "MSM", "HET", "PWID")
