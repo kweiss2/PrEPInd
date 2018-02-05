@@ -16,7 +16,7 @@ shinyUI(
     dashboardPage(skin = "blue",
 
   ## Dashboard header ----------------------------------------------------------
-    dashboardHeader(title = "PrEP Indications"),
+    dashboardHeader(title = "PrEP Populations"),
 
   ## Dashboard sidebar ---------------------------------------------------------
     dashboardSidebar(
@@ -196,13 +196,69 @@ shinyUI(
                 box(width = NULL,
                     title = "1. Population Size and Jurisdiction",
                     status = "primary", solidHeader = TRUE,
-                    HTML("<h5 style=\"color:green\">Please enter a population size without using commas</u>:</h5>"),
+                    p("Please enter a population size without using commas:",  style = "color: green;"),
                     numericInput(inputId = "msmpopsize",
                                  label = "Jurisdiction MSM Population Size",
                                  min = 0,
                                  value = NA),
-                    HTML("<h5 style=\"color:green\">Select a jurisdiction by using the
-                         up, down, and enter keys or the dropdown menu</u>:</h5>"),
+                    p("Select a jurisdiction by using the up, down, and Enter keys
+                      or the dropdown menu:",  style = "color: green;"),
+                    # HTML('
+                    #       Jurisdiction:
+                    #       Total
+                    #       Alabama
+                    #       Alaska
+                    #       Arizona
+                    #       Arkansas
+                    #       California
+                    #       Colorado
+                    #       Connecticut
+                    #       Delaware
+                    #       Florida
+                    #       Georgia
+                    #       Hawaii
+                    #       Idaho
+                    #       Illinois
+                    #       Indiana
+                    #       Iowa
+                    #       Kansas
+                    #       Kentucky
+                    #       Louisiana
+                    #       Maine
+                    #       Maryland
+                    #       Massachusetts
+                    #       Michigan
+                    #       Minnesota
+                    #       Mississippi
+                    #       Missouri
+                    #       Montana
+                    #       Nebraska
+                    #       Nevada
+                    #       New Hampshire
+                    #       New Jersey
+                    #       New Mexico
+                    #       New York
+                    #       North Carolina
+                    #       North Dakota
+                    #       Ohio
+                    #       Oklahoma
+                    #       Oregon
+                    #       Pennsylvania
+                    #       Rhode Island
+                    #       South Carolina
+                    #       South Dakota
+                    #       Tennessee
+                    #       Texas
+                    #       Utah
+                    #       Vermont
+                    #       Virginia
+                    #       Washington
+                    #       West Virginia
+                    #       Wisconsin
+                    #       Wyoming
+                    #       D.C.
+                    #
+                    #      ')
                     selectInput(inputId = "jurisdiction", label = "Jurisdiction Assumptions",
                                 c("Total" = 1, "Alabama" = 2,
                                   "Alaska" = 3, "Arizona" = 4,
@@ -221,7 +277,7 @@ shinyUI(
                                   "Nevada" = 29, "New Hampshire" = 30,
                                   "New Jersey" = 31, "New Mexico" = 32,
                                   "New York" = 33, "North Carolina" = 34,
-                                  'North Dakota' = 35, "Ohio" = 36,
+                                  "North Dakota" = 35, "Ohio" = 36,
                                   "Oklahoma" = 37, "Oregon" = 38,
                                   "Pennsylvania" = 39, "Rhode Island" = 40,
                                   "South Carolina" = 41, "South Dakota" = 42,
@@ -238,17 +294,17 @@ shinyUI(
                     title = "2. Assumptions about New Diagnoses",
                     status = "primary", solidHeader = TRUE,
                     HTML("<style=\"color=:red\"><strong>"), textOutput("warningText4"), HTML("</strong>"),
-                    HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h5>"),
+                    p("Of all those", em(strong("newly diagnosed")), "with HIV:",  style = "color: green;"),
                     numericInput(inputId = "msmdiagpct",
                                  label = "% of new diagnoses attributed to MSM",
                                  min = 0, value = NA),
 
-                    HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h5>"),
+                    p("Of all those", em(strong("newly diagnosed")), "with HIV:",  style = "color: green;"),
                     numericInput(inputId = "hetdiagpct",
                                  label = "% of new diagnoses attributed to HET",
                                  min = 0, value = NA),
 
-                    HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h5>"),
+                    p("Of all those", em(strong("newly diagnosed")), "with HIV:",  style = "color: green;"),
                     numericInput(inputId = "pwiddiagpct",
                                  label = "% of new diagnoses attributed to PWID",
                                  min = 0, value = NA)#,
@@ -261,10 +317,10 @@ shinyUI(
                 box(width = NULL,
                 title = "3. Race-specific Assumptions about New Diagnoses" ,
                 status = "primary", solidHeader = TRUE,
-                HTML("<h5 style=\"color:green\">Of all those <u>newly diagnosed with HIV</u>:</h5>"),
+                p("Of all those", em(strong("newly diagnosed")), "with HIV:",  style = "color: green;"),
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText5"), HTML("</font></b>"),
-                    HTML("<h5 style=\"color:green\">MSM</u>:</h5>"),
+                    p(em(strong("MSM:")),  style = "color: green;"),
                     numericInput(inputId = "blackmsmdiagpct",
                                  label = "% of new MSM diagnoses attributed to Black MSM",
                                  min = 0, value = NA),
@@ -276,7 +332,7 @@ shinyUI(
                                  min = 0, value = NA)), # End column
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText6"), HTML("</font></b>"),
-                    HTML("<h5 style=\"color:green\">HET</u>:</h5>"),
+                    p(em(strong("HET:")),  style = "color: green;"),
                     numericInput(inputId = "blackhetdiagpct",
                                  label = "% of new HET diagnoses attributed to Black HET",
                                  min = 0, value = NA),
@@ -288,7 +344,7 @@ shinyUI(
                                  min = 0, value = NA )), # End column
                   column(width = 4,
                     HTML("<font color=\"red\"><b>"), textOutput("warningText7"), HTML("</font></b>"),
-                    HTML("<h5 style=\"color:green\">PWID</u>:</h5>"),
+                    p(em(strong("PWID:")),  style = "color: green;"),
                     numericInput(inputId = "blackpwiddiagpct",
                                  label = "% of new PWID diagnoses attributed to Black PWID",
                                   min = 0, value = NA),
@@ -316,7 +372,7 @@ shinyUI(
 
                    #### Box 4 - PrEP Indications by Transmission Risk Group ----
                    box(width = NULL,
-                       title = "4. PrEP Indications by Transmission Risk Group",
+                       title = "4. Persons with PrEP Indications by Transmission Risk Group",
                        status = "success", solidHeader = TRUE,
                        #HTML("<font color=\"red\"><b>"), textOutput("warningText2"), HTML("</font></b>"),
                        numericInput(inputId = "totalprep",
@@ -338,42 +394,42 @@ shinyUI(
                        #### Box 5 - PrEP Indications by Race and Transmission Risk Group ----
 
                        box(width = NULL,
-                           title = "5. PrEP Indications by Race and Transmission Risk Group",
+                           title = "5. Persons with PrEP Indications by Race and Transmission Risk Group",
                            status = "success", solidHeader = TRUE,
                            HTML("<font color=\"red\"><b>"), textOutput("warningText1"), HTML("</font></b>"),
                            #HTML("<font color=\"red\"><b>"), textOutput("warningText3"), HTML("</font></b>"),
                            column(width = 4,
-                             HTML("<h5 style=\"color:green\">MSM with indications for PrEP</u>:</h5>"),
+                             p(em(strong("MSM with indications for PrEP:")),  style = "color: green;"),
                              numericInput(inputId = "blackmsmprep",
                                           label = "African-American MSM with indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "hispmsmprep",
-                                          label = "Hispanic MSM with indications for PrEP(#)",
+                                          label = "Hispanic MSM with indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "whitemsmprep",
-                                          label = "White MSM with indications for PrEP(#)",
+                                          label = "White MSM with indications for PrEP (#)",
                                           min = 0, value = NA)),
                            column(width = 4,
-                             HTML("<h5 style=\"color:green\">HET with indications for PrEP</u>:</h5>"),
+                             p(em(strong("HET with indications for PrEP:")),  style = "color: green;"),
                              numericInput(inputId = "blackhetprep",
-                                          label = "African-American HET with indications for PrEP(#)",
+                                          label = "African-American HET with indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "hisphetprep",
-                                          label = "Hispanic HET with indications for PrEP(#)",
+                                          label = "Hispanic HET with indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "whitehetprep",
-                                          label = "White HET with indications for PrEP(#)",
+                                          label = "White HET with indications for PrEP (#)",
                                           min = 0, value = NA)),
                            column(width = 4,
-                             HTML("<h5 style=\"color:green\">PWID with indications for PrEP</u>:</h5>"),
+                             p(em(strong("PWID with indications for PrEP:")),  style = "color: green;"),
                              numericInput(inputId = "blackpwidprep",
-                                          label = "African-American PWID with indications for PrEP(#)",
+                                          label = "African-American PWID with indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "hisppwidprep",
-                                          label = "Hispanic  PWID with indications for PrEP(#)",
+                                          label = "Hispanic PWID with indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "whitepwidprep",
-                                          label = "White  PWID with indications for PrEP(#)",
+                                          label = "White  PWID with indications for PrEP (#)",
                                           min = 0, value = NA))
                        ) # End box
                 ) # End column

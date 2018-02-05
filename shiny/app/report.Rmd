@@ -42,7 +42,6 @@ library(kableExtra)
 library(magrittr)
 ```
 
-
 ## Tables and Figures
 
 ### Table 1: Individuals with Indications for PrEP by Transmission Risk Group
@@ -82,8 +81,6 @@ Persons who inject drugs         | `r paste(format(input$pwidprep, big.mark = ",
 ```
 
 
-
-
 ### Table 2: Individuals with Indications for PrEP by Race
 
 Race | Number with PrEP Indications     
@@ -120,8 +117,6 @@ White              | `r paste(format(as.numeric(input$whitemsmprep) + as.numeric
 ```
 
 
-
-
 ### Table 3a: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
 
 Race by Transmission Risk Group | Number with PrEP Indications | % (Total MSM)
@@ -155,8 +150,6 @@ White MSM             | `r paste(format(input$whitemsmprep, big.mark = ","), sep
 # footnote(alphabet = "Footnote for PWID; ",
 #            footnote_as_chunk = T)
 ```
-
-
 
 
 ### Table 3b: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
@@ -272,7 +265,7 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
 hetnums <- c(input$blackhetprep, input$hisphetprep, input$whitehetprep)
 barplot(hetnums, main = "HET Indicated for PrEP by Race",
         xlab = "Number of HET", col = c("darkblue","red", "green", "purple"),
-        legend = c("Black", "Hispanic", "White"), axes = TRUE, beside = TRUE)
+        legend = c("Black", "Hispanic", "White"), axes = TRUE, beside = TRUE, ylim = c(0, max(hetnums) + 100))
 #![Alt text]("Figure 3: Heterosexuals Indicated for PrEP by Race") 
 ```
 
