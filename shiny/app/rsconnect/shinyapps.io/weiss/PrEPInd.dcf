@@ -5,8 +5,8 @@ account: weiss
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 223246
-bundleId: 1199783
+bundleId: 1210748
 url: https://weiss.shinyapps.io/PrEPInd/
-when: 1517341964.24892
+when: 1517950783.98435
 asMultiple: FALSE
 asStatic: FALSE

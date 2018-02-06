@@ -9,6 +9,7 @@ library(plyr)
 library(dplyr)
 library(kableExtra)
 library(magrittr)
+library(tinytex)
 
 shinyUI(
 
@@ -22,8 +23,10 @@ shinyUI(
     dashboardSidebar(
         width = 200,
         sidebarMenu(id = "tabs",
-            menuItem("Introduction", tabName = "Introduction", icon = icon("book")),
-            menuItem("Estimation Tool", tabName = "Estimation", icon = icon("line-chart"))
+            menuItem("Introduction", tabName = "Introduction",
+                     icon = icon("book")),
+            menuItem("Estimation Tool", tabName = "Estimation",
+                     icon = icon("line-chart"))
         ) # End sidebarMenu
         ), # End dashboardSidebar
 
@@ -108,66 +111,91 @@ shinyUI(
                     column(10, offset = 1,
 
                            #### Text -------------------------------------------
-                           h1("Estimates of Persons with Indications for Preexposure Prophylaxis",
+                           h1("Estimates of Persons with Indications for
+                              Preexposure Prophylaxis",
                               style = "color: black;"),
-                           h2("A Web-Based Modeling Tool for Public Health Practice",
+                           h2("A Web-Based Modeling Tool for Public Health
+                              Practice",
                               style = "color: black;"),
                            hr(),
-                           p("This software tool provides additional opportunities to explore the
-                             estimates from the paper:",
+                           p("This software tool provides additional
+                              opportunities to explore the estimates from
+                             the paper:",
                              tags$blockquote("Smith DK, Van Handel M, Grey J",
-                                             "Estimates of Persons with Indications for Preexposure
-                                              Prophylaxis by Jurisdiction Transmission Risk Group,
-                                             and Race/Ethnicity, United States, 2015.", em("In Clearance."), "2017.",
+                                             "Estimates of Persons with
+                                              Indications for Preexposure
+                                              Prophylaxis by Jurisdiction
+                                              Transmission Risk Group, and
+                                             Race/Ethnicity, United States,
+                                             2015.",
+                                             em("In Clearance."), "2017.",
                                              style = "color:black;"),
-                            "This webtool provides users the ability to estimate the number of individuals indicated for PrEP.",
-                            style = "color: black;"),
+                            "This webtool provides users the ability to estimate
+                            the number of individuals indicated for PrEP.
+                            You can use the", em("Tab"), "key and the",
+                              em("Shift+Tab"), "keys on a keyboard to
+                             navigate between fields. You can also use the ",
+                              em("Enter"), "key to expand or collapse the
+                             sidebar.", style = "color: black;"),
 
-                           p("You can use the", em("Tab"), "key and the", em("Shift+Tab"), "keys on a keyboard to
-                             navigate between fields. You can also use the ", em("Enter"), "key to expand or
-                             collapse the sidebar.", style = "color: black;"),
-
-                           p("To get started, enter an estimate of the MSM population size in your
-                             jurisdiction of interest, and select a jurisdiction on which to base the
-                             model assumptions. By changing the jurisdiction, you can see how the assumptions
-                             about the model change.", style = "color: black;"),
+                           p("To get started, enter an estimate of the MSM
+                              population size in your jurisdiction of interest,
+                              and select a jurisdiction on which to base the
+                               model assumptions. By changing the jurisdiction,
+                                you can see how the assumptions about the
+                                 model change.",
+                             style = "color: black;"),
                            tags$ul(
-                               tags$li(strong("Estimates by transmission risk group:"),
-                                       "this model will produce estimates of persons with
-                                       indications for preexposure prophylaxis among men
-                                       who have sex with men (MSM), heterosexuals (HET),
-                                       and persons who inject drugs (PWID).",
+                               tags$li(strong("Estimates by transmission risk
+                                              group:"), "this model will produce
+                                        estimates of persons with indications
+                                        for preexposure prophylaxis among men
+                                         who have sex with men (MSM),
+                                        heterosexuals (HET), and persons who
+                                         inject drugs (PWID).",
                                        style = "color: black;"),
-                               tags$li(strong("Estimates by race and transmission risk group:"),
-                                       "this model will also produce race-stratified estimates of
-                                       persons with indications for preexposure prophylaxis among
-                                       men who have sex with men (MSM), heterosexuals (HET), and
-                                       persons who inject drugs (PWID).",
+                               tags$li(strong("Estimates by race and
+                                              transmission risk group:"),
+                                       "this model will also produce
+                                        race-stratified estimates of persons
+                                        with indications for preexposure
+                                        prophylaxis among men who have sex
+                                        with men (MSM), heterosexuals (HET),
+                                        and persons who inject drugs (PWID).",
                                        style = "color: black;")
                                ),
-                           p("After selecting the parameters set in each model, the model will
-                             automatically update the values and summary data tables.
-                             These data should be interpreted with caution.", style = "color: black;"),
-                           p("After generating the values, you can navigate to the bottom
-                              of the page, where you download a report with figures and
-                              summary data tables.", style = "color: black;"),
-                           p(em("We acknowledge support from the CDC/NCHHSTP Epidemiological
-                                and Economic Modeling Agreement (5U38PS004646). The findings
-                                conclusions used to build this tool are solely the responsibility
-                                of the authors and do not necessarily represent the official
-                                views of the Centers for Disease Control and Prevention or the Department
-                                of Health and Human Services."), style = "color: black;"),
-                           p("You can change the page by navigating to the", em("Switch Tab"), "button below
-                              or by using the links on the sidebar.",
+                           p("After selecting the parameters set in each model,
+                              the model will automatically update the values
+                              and summary data tables. These data should be
+                              interpreted with caution. After generating the
+                              values, you can navigate to the bottom of the
+                              page, where you download a report with figures
+                              and summary data tables. You can change the page
+                              by navigating to the", em("Switch Tab"), "button
+                              below or by using the links on the sidebar.",
                              style = "color: black;"),
                            hr(),
-                           hr()
+                           p(em("We acknowledge support from the CDC/NCHHSTP
+                                  Epidemiological and Economic Modeling
+                                  Agreement (5U38PS004646). The findings and
+                                  conclusions used to build this tool are
+                                  solely the responsibility of the authors and
+                                  do not necessarily represent the official
+                                  views of the Centers for Disease Control and
+                                  Prevention or the Department of Health and
+                                  Human Services."),
+                             style = "color: black;"),
+                           hr(),
+                           hr(),
+                           p(em("508 Statement goes here....."),
+                             style = "color: black;")
                            ), # End column
 
                     #### Action button------------------------------------------
                     fluidRow(
                       column(6, align = "center", offset = 3,
-                             actionButton('switchtab', 'Switch Tab', icon = icon("line-chart"),
+                             actionButton('switchtab', 'Switch Tab',
+                                          icon = icon("line-chart"),
                                           style = 'padding:12px; font-size:120%')
                            ) # End column
                       ) # End fluidRow
@@ -180,7 +208,8 @@ shinyUI(
 
             #### CSS styling for estimation tab --------------------------------
             tags$head(
-                tags$link(rel = "stylesheet", type = "text/css", href = "style.css",
+                tags$link(rel = "stylesheet", type = "text/css",
+                          href = "style.css",
                           color = "color: black;"),
                 tags$script(type = "text/javascript", src = "busy.js")
             ),
@@ -196,13 +225,15 @@ shinyUI(
                 box(width = NULL,
                     title = "1. Population Size and Jurisdiction",
                     status = "primary", solidHeader = TRUE,
-                    p("Please enter a population size without using commas:",  style = "color: green;"),
+                    p("Please enter a population size without using commas:",
+                      style = "color: green;"),
                     numericInput(inputId = "msmpopsize",
                                  label = "Jurisdiction MSM Population Size",
                                  min = 0,
                                  value = NA),
-                    p("Select a jurisdiction by using the up, down, and Enter keys
-                      or the dropdown menu:",  style = "color: green;"),
+                    p("Select a jurisdiction by using the up, down, and
+                      Enter keys or the dropdown menu:",
+                      style = "color: green;"),
                     # HTML('
                     #       Jurisdiction:
                     #       Total
@@ -259,7 +290,8 @@ shinyUI(
                     #       D.C.
                     #
                     #      ')
-                    selectInput(inputId = "jurisdiction", label = "Jurisdiction Assumptions",
+                    selectInput(inputId = "jurisdiction",
+                                label = "Jurisdiction Assumptions",
                                 c("Total" = 1, "Alabama" = 2,
                                   "Alaska" = 3, "Arizona" = 4,
                                   "Arkansas" = 5, "California" = 6,
@@ -293,18 +325,26 @@ shinyUI(
                 box(width = NULL,
                     title = "2. Assumptions about New Diagnoses",
                     status = "primary", solidHeader = TRUE,
-                    HTML("<style=\"color=:red\"><strong>"), textOutput("warningText4"), HTML("</strong>"),
-                    p("Of all those", em(strong("newly diagnosed")), "with HIV:",  style = "color: green;"),
+                    HTML("<style=\"color=:red\"><strong>"),
+                        textOutput("warningText4"),
+                        HTML("</strong>"),
+                    p("Of all those", em(strong("newly diagnosed")),
+                      "with HIV:",
+                      style = "color: green;"),
                     numericInput(inputId = "msmdiagpct",
                                  label = "% of new diagnoses attributed to MSM",
                                  min = 0, value = NA),
 
-                    p("Of all those", em(strong("newly diagnosed")), "with HIV:",  style = "color: green;"),
+                    p("Of all those", em(strong("newly diagnosed")),
+                      "with HIV:",
+                      style = "color: green;"),
                     numericInput(inputId = "hetdiagpct",
                                  label = "% of new diagnoses attributed to HET",
                                  min = 0, value = NA),
 
-                    p("Of all those", em(strong("newly diagnosed")), "with HIV:",  style = "color: green;"),
+                    p("Of all those", em(strong("newly diagnosed")),
+                      "with HIV:",
+                      style = "color: green;"),
                     numericInput(inputId = "pwiddiagpct",
                                  label = "% of new diagnoses attributed to PWID",
                                  min = 0, value = NA)#,
@@ -317,42 +357,58 @@ shinyUI(
                 box(width = NULL,
                 title = "3. Race-specific Assumptions about New Diagnoses" ,
                 status = "primary", solidHeader = TRUE,
-                p("Of all those", em(strong("newly diagnosed")), "with HIV:",  style = "color: green;"),
+                p("Of all those", em(strong("newly diagnosed")), "with HIV:",
+                  style = "color: green;"),
                   column(width = 4,
-                    HTML("<font color=\"red\"><b>"), textOutput("warningText5"), HTML("</font></b>"),
+                    HTML("<font color=\"red\"><b>"),
+                      textOutput("warningText5"),
+                      HTML("</font></b>"),
                     p(em(strong("MSM:")),  style = "color: green;"),
                     numericInput(inputId = "blackmsmdiagpct",
-                                 label = "% of new MSM diagnoses attributed to Black MSM",
+                                 label = "% of new MSM diagnoses
+                                 attributed to Black MSM",
                                  min = 0, value = NA),
                     numericInput(inputId = "hispmsmdiagpct",
-                                 label = "% of new MSM diagnoses attributed to Hispanic MSM",
+                                 label = "% of new MSM diagnoses
+                                 attributed to Hispanic MSM",
                                  min = 0, value = NA),
                     numericInput(inputId = "whitemsmdiagpct",
-                                 label = "% of new MSM diagnoses attributed to White MSM",
+                                 label = "% of new MSM diagnoses
+                                 attributed to White MSM",
                                  min = 0, value = NA)), # End column
                   column(width = 4,
-                    HTML("<font color=\"red\"><b>"), textOutput("warningText6"), HTML("</font></b>"),
+                    HTML("<font color=\"red\"><b>"),
+                      textOutput("warningText6"),
+                      HTML("</font></b>"),
                     p(em(strong("HET:")),  style = "color: green;"),
                     numericInput(inputId = "blackhetdiagpct",
-                                 label = "% of new HET diagnoses attributed to Black HET",
+                                 label = "% of new HET diagnoses
+                                 attributed to Black HET",
                                  min = 0, value = NA),
                     numericInput(inputId = "hisphetdiagpct",
-                                 label = "% of new HET diagnoses attributed to Hispanic HET",
+                                 label = "% of new HET diagnoses
+                                 attributed to Hispanic HET",
                                  min = 0, value = NA),
                     numericInput(inputId = "whitehetdiagpct",
-                                 label = "% of new HET diagnoses attributed to White HET",
+                                 label = "% of new HET diagnoses
+                                 attributed to White HET",
                                  min = 0, value = NA )), # End column
                   column(width = 4,
-                    HTML("<font color=\"red\"><b>"), textOutput("warningText7"), HTML("</font></b>"),
+                    HTML("<font color=\"red\"><b>"),
+                      textOutput("warningText7"),
+                      HTML("</font></b>"),
                     p(em(strong("PWID:")),  style = "color: green;"),
                     numericInput(inputId = "blackpwiddiagpct",
-                                 label = "% of new PWID diagnoses attributed to Black PWID",
+                                 label = "% of new PWID diagnoses
+                                 attributed to Black PWID",
                                   min = 0, value = NA),
                     numericInput(inputId = "hisppwiddiagpct",
-                                 label = "% of new PWID diagnoses attributed to Hispanic PWID",
+                                 label = "% of new PWID diagnoses
+                                 attributed to Hispanic PWID",
                                   min = 0, value = NA),
                     numericInput(inputId = "whitepwiddiagpct",
-                                 label = "% of new PWID diagnoses attributed to White PWID",
+                                 label = "% of new PWID diagnoses
+                                 attributed to White PWID",
                                   min = 0, value = NA)) # End column
                 ), # End box
 
@@ -363,7 +419,8 @@ shinyUI(
                   hr(),
                   hr(),
                   column(6, align = "center", offset = 3,
-                         actionButton('switchtab2', 'Switch Tab', icon = icon("book"),
+                         actionButton('switchtab2', 'Switch Tab',
+                                      icon = icon("book"),
                                       style = 'padding:12px; font-size:120%')
                   )) # End fluidRow
                 ), # End column
@@ -372,64 +429,88 @@ shinyUI(
 
                    #### Box 4 - PrEP Indications by Transmission Risk Group ----
                    box(width = NULL,
-                       title = "4. Persons with PrEP Indications by Transmission Risk Group",
+                       title = "4. Persons with PrEP Indications by
+                       Transmission Risk Group",
                        status = "success", solidHeader = TRUE,
-                       #HTML("<font color=\"red\"><b>"), textOutput("warningText2"), HTML("</font></b>"),
+                       #HTML("<font color=\"red\"><b>"),
+                         #textOutput("warningText2"),
+                         #HTML("</font></b>"),
                        numericInput(inputId = "totalprep",
-                                    label = "Estimated Total with indications for PrEP (#)",
+                                    label = "Estimated Total with
+                                    indications for PrEP (#)",
                                     min = 0, value = NA),
                        numericInput(inputId = "msmprep",
-                                    label = "Estimated MSM with indications for PrEP (#)",
+                                    label = "Estimated MSM with
+                                    indications for PrEP (#)",
                                     min = 0, value = NA),
                        numericInput(inputId = "hetprep",
-                                    label = "Estimated HET with indications for PrEP (#)",
+                                    label = "Estimated HET with
+                                    indications for PrEP (#)",
                                     min = 0, value = NA),
                        numericInput(inputId = "pwidprep",
-                                    label = "Estimated PWID with indications for PrEP (#)",
+                                    label = "Estimated PWID with
+                                    indications for PrEP (#)",
                                     min = 0, value = NA)
                    ) # End box
                 ), # End column
 
                 column(width = 5,
-                       #### Box 5 - PrEP Indications by Race and Transmission Risk Group ----
+                       #### Box 5 - PrEP Indications by Race and Risk Group ----
 
                        box(width = NULL,
-                           title = "5. Persons with PrEP Indications by Race and Transmission Risk Group",
+                           title = "5. Persons with PrEP Indications by
+                           Race and Transmission Risk Group",
                            status = "success", solidHeader = TRUE,
-                           HTML("<font color=\"red\"><b>"), textOutput("warningText1"), HTML("</font></b>"),
-                           #HTML("<font color=\"red\"><b>"), textOutput("warningText3"), HTML("</font></b>"),
+                           HTML("<font color=\"red\"><b>"),
+                             textOutput("warningText1"),
+                             HTML("</font></b>"),
+                           # HTML("<font color=\"red\"><b>"),
+                             # textOutput("warningText3"),
+                             # HTML("</font></b>"),
                            column(width = 4,
-                             p(em(strong("MSM with indications for PrEP:")),  style = "color: green;"),
+                             p(em(strong("MSM with indications for PrEP:")),
+                               style = "color: green;"),
                              numericInput(inputId = "blackmsmprep",
-                                          label = "African-American MSM with indications for PrEP (#)",
+                                          label = "African-American MSM with
+                                          indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "hispmsmprep",
-                                          label = "Hispanic MSM with indications for PrEP (#)",
+                                          label = "Hispanic MSM with
+                                          indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "whitemsmprep",
-                                          label = "White MSM with indications for PrEP (#)",
+                                          label = "White MSM with
+                                          indications for PrEP (#)",
                                           min = 0, value = NA)),
                            column(width = 4,
-                             p(em(strong("HET with indications for PrEP:")),  style = "color: green;"),
+                             p(em(strong("HET with indications for PrEP:")),
+                               style = "color: green;"),
                              numericInput(inputId = "blackhetprep",
-                                          label = "African-American HET with indications for PrEP (#)",
+                                          label = "African-American HET with
+                                          indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "hisphetprep",
-                                          label = "Hispanic HET with indications for PrEP (#)",
+                                          label = "Hispanic HET with indications
+                                          for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "whitehetprep",
-                                          label = "White HET with indications for PrEP (#)",
+                                          label = "White HET with indications
+                                          for PrEP (#)",
                                           min = 0, value = NA)),
                            column(width = 4,
-                             p(em(strong("PWID with indications for PrEP:")),  style = "color: green;"),
+                             p(em(strong("PWID with indications for PrEP:")),
+                               style = "color: green;"),
                              numericInput(inputId = "blackpwidprep",
-                                          label = "African-American PWID with indications for PrEP (#)",
+                                          label = "African-American PWID with
+                                          indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "hisppwidprep",
-                                          label = "Hispanic PWID with indications for PrEP (#)",
+                                          label = "Hispanic PWID with
+                                          indications for PrEP (#)",
                                           min = 0, value = NA),
                              numericInput(inputId = "whitepwidprep",
-                                          label = "White  PWID with indications for PrEP (#)",
+                                          label = "White  PWID with
+                                          indications for PrEP (#)",
                                           min = 0, value = NA))
                        ) # End box
                 ) # End column
@@ -437,22 +518,40 @@ shinyUI(
 
             #### Report tab ----------------------------------------------------
             fluidRow(
-                box(width = 12, height = 220, status = "info", solidHeader = TRUE,
+                box(width = 12,
+                    height = 220,
+                    status = "info",
+                    solidHeader = TRUE,
                        tabsetPanel(type = "pills",
                          tabPanel("Report",
                                   mainPanel(
-                                    HTML("<h5 style=\"color:green\">Enter a title and
-                                         press the enter key or click with your mouse
-                                         to download</u>:</h5>"),
+                                    p("Type a title and press the enter key or
+                                      click with your mouse to download a report
+                                      in the format of your choosing, HTML,
+                                      or RTF (compatible with Word). This may
+                                      take a few seconds to download.",
+                                      style = "color: green;"),
                                     textInput(inputId = "reportTitle",
                                               label = "Report Title"),
-                                    downloadButton(outputId = "report",
-                                                   label = "Generate Report")
+                                    downloadButton(outputId = "report_html",
+                                                   label = "Generate HTML
+                                                   Report"),
+                                    # downloadButton(outputId = "report_pdf",
+                                    #                label = "Generate PDF
+                                    #                Report"),
+                                    downloadButton(outputId = "report_rtf",
+                                                   label = "Generate RTF
+                                                   Report")
                                           ) #End mainPanel
                                           ) #End tabPanel
                                  ) # End tabsetPanel
                         ) # End box
-                ) #End fluidRow
+                ), #End fluidRow
+            fluidRow(column(6, align = "center", offset = 3,
+                            p(em("508 Statement goes here....."),
+                              style = "color: black;")
+                            ) # End column
+                            ) # End fluidRow
             ) # End tabItem
             ) # End tabItems
                            ) # End dashboardBody

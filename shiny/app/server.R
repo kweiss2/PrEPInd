@@ -9,12 +9,14 @@ library(plyr)
 library(dplyr)
 library(kableExtra)
 library(magrittr)
+library(tinytex)
 
 ## Group names -----------------------------------------------------------------
 stagenames.transcat <- c("Total", "MSM", "HET", "PWID")
 stagenames.racetranscat <- c("Black MSM", "Black HET",
                              "Black PWID", "Hispanic MSM", "Hispanic HET",
-                             "Hispanic PWID", "White MSM", "White HET", "White PWID")
+                             "Hispanic PWID", "White MSM", "White HET",
+                             "White PWID")
 colors <- c("#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0")
 
 ## Diagnosed percentages by jurisdiction ---------------------------------------
@@ -285,10 +287,12 @@ shinyServer(function(input, output, session) {
   output$warningText1 <- renderText({
     warning.text <- ""
     if (input$jurisdiction == 46) {
-      warning.text <- "African-American estimates by transmission risk group are not available for Vermont"
+      warning.text <- "African-American estimates by transmission risk group
+      are not available for Vermont"
     }
     if (input$jurisdiction == 30) {
-      warning.text <- "Race-specific estimates by transmission risk group are not available for New Hampshire"
+      warning.text <- "Race-specific estimates by transmission risk group
+      are not available for New Hampshire"
     }
 
     return(warning.text)
@@ -299,7 +303,9 @@ shinyServer(function(input, output, session) {
 
     warning.text <- ""
     y <- trans.diagnosis.percents[[as.numeric(input$jurisdiction)]]
-    if (is.na(input$msmdiagpct) == FALSE & is.na(input$hetdiagpct) == FALSE & is.na(input$pwiddiagpct) == FALSE) {
+    if (is.na(input$msmdiagpct) == FALSE &
+        is.na(input$hetdiagpct) == FALSE &
+        is.na(input$pwiddiagpct) == FALSE) {
 
       if (input$msmdiagpct != y[1]) {
         warning.text <- "You are changing the jurisdiction assumptions."
@@ -321,9 +327,15 @@ shinyServer(function(input, output, session) {
       warning.text <- ""
       x <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
 
-      if (is.na(input$blackmsmdiagpct) == FALSE & is.na(input$blackhetdiagpct) == FALSE & is.na(input$blackpwiddiagpct) == FALSE &
-          is.na(input$hispmsmdiagpct) == FALSE & is.na(input$hisphetdiagpct) == FALSE & is.na(input$hisppwiddiagpct) == FALSE &
-          is.na(input$whitemsmdiagpct) == FALSE & is.na(input$whitehetdiagpct) == FALSE & is.na(input$whitepwiddiagpct) == FALSE) {
+      if (is.na(input$blackmsmdiagpct) == FALSE &
+          is.na(input$blackhetdiagpct) == FALSE &
+          is.na(input$blackpwiddiagpct) == FALSE &
+          is.na(input$hispmsmdiagpct) == FALSE &
+          is.na(input$hisphetdiagpct) == FALSE &
+          is.na(input$hisppwiddiagpct) == FALSE &
+          is.na(input$whitemsmdiagpct) == FALSE &
+          is.na(input$whitehetdiagpct) == FALSE &
+          is.na(input$whitepwiddiagpct) == FALSE) {
 
 
           if (input$blackmsmdiagpct != x[1]) {
@@ -362,9 +374,13 @@ shinyServer(function(input, output, session) {
   output$warningText4 <- renderText({
 
     warning.text <- ""
-    if (is.na(input$msmdiagpct) == FALSE & is.na(input$hetdiagpct) == FALSE & is.na(input$pwiddiagpct) == FALSE) {
+    if (is.na(input$msmdiagpct) == FALSE &
+        is.na(input$hetdiagpct) == FALSE &
+        is.na(input$pwiddiagpct) == FALSE) {
 
-      if (sum(round(input$msmdiagpct, 4), round(input$hetdiagpct, 4), round(input$pwiddiagpct, 4)) > 100.0) {
+      if (sum(round(input$msmdiagpct, 4),
+              round(input$hetdiagpct, 4),
+              round(input$pwiddiagpct, 4)) > 100.0) {
         warning.text <- "The sum of categories must not be greater than 100%."
       }
     }
@@ -375,9 +391,13 @@ shinyServer(function(input, output, session) {
   output$warningText5 <- renderText({
 
     warning.text <- ""
-    if (is.na(input$blackmsmdiagpct) == FALSE & is.na(input$whitemsmdiagpct) == FALSE & is.na(input$whitemsmdiagpct) == FALSE) {
+    if (is.na(input$blackmsmdiagpct) == FALSE &
+        is.na(input$whitemsmdiagpct) == FALSE &
+        is.na(input$whitemsmdiagpct) == FALSE) {
 
-      if (sum(c(round(input$blackmsmdiagpct, 4), round(input$hispmsmdiagpct, 4), round(input$whitemsmdiagpct, 4))) > 100.0) {
+      if (sum(c(round(input$blackmsmdiagpct, 4),
+                round(input$hispmsmdiagpct, 4),
+                round(input$whitemsmdiagpct, 4))) > 100.0) {
         warning.text <- "The sum of MSM by race must not be greater than 100%."
       }
     }
@@ -388,9 +408,13 @@ shinyServer(function(input, output, session) {
   output$warningText6 <- renderText({
 
     warning.text <- ""
-    if (is.na(input$blackhetdiagpct) == FALSE & is.na(input$whitehetdiagpct) == FALSE & is.na(input$hisphetdiagpct) == FALSE) {
+    if (is.na(input$blackhetdiagpct) == FALSE &
+        is.na(input$whitehetdiagpct) == FALSE &
+        is.na(input$hisphetdiagpct) == FALSE) {
 
-      if (sum(c(round(input$blackhetdiagpct, 4), round(input$whitehetdiagpct, 4), round(input$hisphetdiagpct, 4))) > 100.0) {
+      if (sum(c(round(input$blackhetdiagpct, 4),
+                round(input$whitehetdiagpct, 4),
+                round(input$hisphetdiagpct, 4))) > 100.0) {
       warning.text <- "The sum of HET by race must not be greater than 100%."
       }
     }
@@ -413,16 +437,59 @@ shinyServer(function(input, output, session) {
     })
 
   ## Generate report -----------------------------------------------------------
-  output$report <- downloadHandler(
-    filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".docx"),
+  ## RTF
+  # output$report <- downloadHandler(
+  #   filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".docx"),
+  #   content = function(file) {
+  #     src <- normalizePath("report.Rmd")
+  #
+  #     owd <- setwd(tempdir())
+  #     on.exit(setwd(owd))
+  #     file.copy(src, "report.Rmd")
+  #
+  #     out <- render("report.Rmd", word_document())
+  #     file.rename(out, file)
+  #   })
+  output$report_rtf <- downloadHandler(
+  filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".rtf"),
+  content = function(file) {
+    src <- normalizePath("report_rtf.Rmd")
+
+    owd <- setwd(tempdir())
+    on.exit(setwd(owd))
+    file.copy(src, "report_rtf.Rmd")
+
+    out <- render("report_rtf.Rmd", rtf_document())
+    file.rename(out, file)
+  })
+
+
+  ## PDF
+  output$report_pdf <- downloadHandler(
+    filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".pdf"),
     content = function(file) {
-      src <- normalizePath("report.Rmd")
+      src <- normalizePath("report_pdf.Rmd")
 
       owd <- setwd(tempdir())
       on.exit(setwd(owd))
-      file.copy(src, "report.Rmd")
+      file.copy(src, "report_pdf.Rmd")
 
-      out <- render("report.Rmd", word_document())
+      out <- render("report_pdf.Rmd", pdf_document())
       file.rename(out, file)
     })
+
+  ## HTML
+  output$report_html <- downloadHandler(
+  filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".html"),
+  content = function(file) {
+    src <- normalizePath("report_html.Rmd")
+
+    owd <- setwd(tempdir())
+    on.exit(setwd(owd))
+    file.copy(src, "report_html.Rmd")
+
+    out <- render("report_html.Rmd", html_document())
+    file.rename(out, file)
+  })
+
 })
