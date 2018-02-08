@@ -1,11 +1,13 @@
 ---
 output:
-  pdf_document: 
+  pdf_document:
+  fig_caption: yes
   latex_engine: xelatex
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+(knitr.table.format = "latex")
 ```
 
 # `r paste(input$reportTitle, sep="")`  
@@ -49,17 +51,9 @@ library(magrittr)
 library(tinytex)
 ```
 
-## Tables and Figures
+<br>
 
 ### Table 1: Individuals with Indications for PrEP by Transmission Risk Group
-
-Transmission Risk Group | Number with PrEP Indications | % of Total
------------------------- | ------:| -----:
-MSM             | `r paste(format(input$msmprep, big.mark = ","), sep = "")` | `r paste(format(input$msmdiagpct, big.mark = ","), sep = "")`
-Heterosexuals                | `r paste(format(input$hetprep, big.mark = ","), sep = "")` | `r paste(format(input$hetdiagpct, big.mark = ","), sep = "")`
-Persons who inject drugs         | `r paste(format(input$pwidprep, big.mark = ","), sep = "")` | `r paste(format(input$pwiddiagpct, big.mark = ","), sep = "")`
-
-`r paste("* Total may not sum to 100%")`
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -74,11 +68,13 @@ df[ , 1:3] <- c(class, num, perc)
 df_footnote <- df
 df_footnote[3, 1] <- paste0(df_footnote[3, 1],
                                    footnote_marker_alphabet(1))
-kable(df_footnote, "latex", escape = FALSE) %>%
+kable(df_footnote, "latex", escape = FALSE, caption = "Table 1: Individuals with Indications for PrEP by Transmission Risk Group") %>%
 kable_styling(latex_options = c("striped", "hover", "bordered"), full_width = F) %>%
-footnote(alphabet = "Footnote for PWID; ",
+footnote(alphabet = "Footnote; ",
            footnote_as_chunk = T)
 ```
+
+<br>
 
 ### Figure 1: Number by Transmission Risk Group
 
@@ -89,10 +85,10 @@ transnums$Group <- c("MSM", "HET", "PWID")
 transnums2 <- as.data.frame(transnums)
 ggplot(data = transnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
-  scale_fill_manual("Transmission Risk Group", values = c("darkblue","red", "green")) +
+  scale_fill_manual("Transmission \n Risk Group", values = c("darkblue","red", "green")) +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 7) +
-  theme_bw() + labs(title = "Individuals Indicated for PrEP by Transmission Risk Group", 
-         x = "Risk Group", y = "Number of Individuals") +
+  theme_bw() + labs(title = "Individuals Indicated for PrEP \n by Transmission Risk Group", 
+         x = "Transmission Risk Group", y = "Number of Individuals") +
   theme(title = element_text(size = 15),
         axis.title = element_text(size = 15),
         axis.text = element_text(size = 11),
@@ -102,6 +98,7 @@ ggplot(data = transnums2, aes(x = Group, y = Individuals, fill = Group)) +
         axis.line = element_line(colour = "black"))
 ```
 
+<br>
 
 ### Table 2: Individuals with Indications for PrEP by Race
 
@@ -119,16 +116,18 @@ df[ , 1:2] <- c(class, num)
 df_footnote <- df
 df_footnote[3, 1] <- paste0(df_footnote[3, 1],
                                    footnote_marker_alphabet(1))
-kable(df_footnote, "latex", escape = FALSE) %>%
+kable(df_footnote, "latex", escape = FALSE, caption = "Table 2: Individuals with Indications for PrEP by Race") %>%
 kable_styling(latex_options = c("striped", "hover", "bordered"), full_width = F) %>%
-footnote(alphabet = "Footnote for PWID; ",
+footnote(alphabet = "Footnote; ",
            footnote_as_chunk = T)
 
 ```
 
+<br>
+
 ### Figure 2: Individuals with Indications for PrEP by Race
 
-```{r echo=FALSE, message = FALSE, fig.cap=paste("Figure 2: MSM Indicated for PrEP by Race"), fig.width=8, fig.height=8}
+```{r echo=FALSE, message = FALSE, fig.cap=paste("Figure 2: Individuals Indicated for PrEP by Race"), fig.width=8, fig.height=8}
 msmnums <- NULL
 msmnums$Individuals <- rbind(sum(input$blackmsmprep, input$blackhetprep, input$blackpwidprep),
        sum(input$hispmsmprep, input$hisphetprep, input$hisppwidprep),
@@ -139,7 +138,7 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   scale_fill_manual("Race", values = c("darkblue","red", "green")) +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 7) +
-  theme_minimal() + labs(title = "Individuals Indicated for PrEP by Race", 
+  theme_minimal() + labs(title = "Individuals Indicated for PrEP \n by Race", 
          x = "Race", y = "Number of Individuals") +
     theme(title = element_text(size = 15),
         axis.title = element_text(size = 15),
@@ -150,6 +149,8 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
         axis.line = element_line(colour = "black"))
 ```
 
+<br>
+
 ### Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE}
@@ -157,7 +158,7 @@ df <- matrix(nrow = 3, ncol = 3)
 class <- c("Black MSM", "Hispanic MSM", "White MSM")
 num <- c(input$blackmsmprep, input$hispmsmprep, input$whitemsmprep)
 perc <- c(input$blackmsmdiagpct, input$hispmsmdiagpct, input$whitemsmdiagpct)
-colnames(df) <- c("Race", "Number with PrEP Indications", "Percent (%) of Total MSM diagnoses")
+colnames(df) <- c("Race", "Number with PrEP Indications", "Percent (%) of Total MSM")
 df[ , 1:3] <- c(class, num, perc)
 
 # kable(df)
@@ -165,11 +166,13 @@ df[ , 1:3] <- c(class, num, perc)
 df_footnote <- df
 df_footnote[3, 1] <- paste0(df_footnote[3, 1],
                                    footnote_marker_alphabet(1))
-kable(df_footnote, "latex", escape = FALSE) %>%
+kable(df_footnote, "latex", escape = FALSE, caption = "Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group") %>%
 kable_styling(latex_options = c("striped", "hover", "bordered"), full_width = F) %>%
-footnote(alphabet = "Footnote for PWID; ",
+footnote(alphabet = "Footnote; ",
            footnote_as_chunk = T)
 ```
+
+<br>
 
 ### Figure 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
 
@@ -182,7 +185,7 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 7) +
   scale_fill_manual("Race", values = c("darkblue","red", "green")) +
-  theme_minimal() + labs(title = "MSM Indicated for PrEP by Race", 
+  theme_minimal() + labs(title = "MSM Indicated for PrEP \n by Race", 
          x = "Race", y = "Number of MSM") +
   theme(title = element_text(size = 15),
         axis.title = element_text(size = 15),
@@ -193,6 +196,8 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
         axis.line = element_line(colour = "black"))
 ```
 
+<br>
+
 ### Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE} 
@@ -200,7 +205,7 @@ df <- matrix(nrow = 3, ncol = 3)
 class <- c("Black HET", "Hispanic HET", "White HET")
 num <- c(input$blackhetprep, input$hisphetprep, input$whitehetprep)
 perc <- c(input$blackhetdiagpct, input$hisphetdiagpct, input$whitehetdiagpct)
-colnames(df) <- c("Race", "Number with PrEP Indications", "Percent (%) of Total HET diagnoses")
+colnames(df) <- c("Race", "Number with PrEP Indications", "Percent (%) of Total HET")
 df[ , 1:3] <- c(class, num, perc)
 
 # kable(df)
@@ -208,11 +213,13 @@ df[ , 1:3] <- c(class, num, perc)
 df_footnote <- df
 df_footnote[3, 1] <- paste0(df_footnote[3, 1],
                                    footnote_marker_alphabet(1))
-kable(df_footnote, "latex", escape = FALSE) %>%
+kable(df_footnote, "latex", escape = FALSE, caption = "Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group") %>%
 kable_styling(latex_options = c("striped", "hover", "bordered"), full_width = F) %>%
-footnote(alphabet = "Footnote for PWID; ",
+footnote(alphabet = "Footnote; ",
            footnote_as_chunk = T)
 ```
+
+<br>
 
 ### Figure 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
 
@@ -225,7 +232,7 @@ ggplot(data = hetnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 7) +
   scale_fill_manual("Race", values = c("darkblue","red", "green")) +
-  theme_minimal() + labs(title = "HET Indicated for PrEP by Race", 
+  theme_minimal() + labs(title = "HET Indicated for PrEP \n by Race", 
          x = "Race", y = "Number of HET") +
   theme(title = element_text(size = 15),
         axis.title = element_text(size = 15),
@@ -236,6 +243,8 @@ ggplot(data = hetnums2, aes(x = Group, y = Individuals, fill = Group)) +
         axis.line = element_line(colour = "black"))
 ```
 
+<br>
+
 ### Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE} 
@@ -243,7 +252,7 @@ df <- matrix(nrow = 3, ncol = 3)
 class <- c("Black PWID", "Hispanic PWID", "White PWID")
 num <- c(input$blackpwidprep, input$hisppwidprep, input$whitepwidprep)
 perc <- c(input$blackpwiddiagpct, input$hisppwiddiagpct, input$whitepwiddiagpct)
-colnames(df) <- c("Race", "Number with PrEP Indications", "Percent (%) of Total PWID diagnoses")
+colnames(df) <- c("Race", "Number with PrEP Indications", "Percent (%) of Total PWID")
 df[ , 1:3] <- c(class, num, perc)
 
 # kable(df)
@@ -251,11 +260,13 @@ df[ , 1:3] <- c(class, num, perc)
 df_footnote <- df
 df_footnote[3, 1] <- paste0(df_footnote[3, 1],
                                    footnote_marker_alphabet(1))
-kable(df_footnote, "latex", escape = FALSE) %>%
+kable(df_footnote, "latex", escape = FALSE, caption = "Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group") %>%
 kable_styling(latex_options = c("striped", "hover", "bordered"), full_width = F) %>%
-footnote(alphabet = "Footnote for PWID; ",
+footnote(alphabet = "Footnote; ",
            footnote_as_chunk = T)
 ```
+
+<br>
 
 ### Figure 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
 
@@ -268,7 +279,7 @@ ggplot(data = pwidnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 7) +
   scale_fill_manual("Race", values = c("darkblue","red", "green")) +
-  theme_minimal() + labs(title = "PWID Indicated for PrEP by Race", 
+  theme_minimal() + labs(title = "PWID Indicated for PrEP \n by Race", 
          x = "Race", y = "Number of PWID") +
   theme(title = element_text(size = 15),
         axis.title = element_text(size = 15),
@@ -279,16 +290,17 @@ ggplot(data = pwidnums2, aes(x = Group, y = Individuals, fill = Group)) +
         axis.line = element_line(colour = "black"))
 ```
 
+<br>
 
 ### Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
 class <- c("Black MSM", "Black HET", "Black PWID")
-num <- c(input$blackmsmprep, input$blackhetprep, input$blackhetprep)
+num <- c(input$blackmsmprep, input$blackhetprep, input$blackpwidprep)
 sums <- sum(input$blackmsmprep, input$blackhetprep, input$blackpwidprep)
-perc <- c(100 * input$blackmsmprep / sums, 100 * input$blackhetprep / sums, 100 * input$blackpwidprep / sums)
-colnames(df) <- c("Risk Group", "Number with PrEP Indications", "Percent (%) of Total Black diagnoses")
+perc <- c(round(100 * input$blackmsmprep / sums, 2), round(100 * input$blackhetprep / sums, 2), round(100 * input$blackpwidprep / sums, 2))
+colnames(df) <- c("Risk Group", "Number with PrEP Indications", "Percent (%) of Total Black")
 df[ , 1:3] <- c(class, num, perc)
 
 # kable(df)
@@ -296,11 +308,13 @@ df[ , 1:3] <- c(class, num, perc)
 df_footnote <- df
 df_footnote[3, 1] <- paste0(df_footnote[3, 1],
                                    footnote_marker_alphabet(1))
-kable(df_footnote, "latex", escape = FALSE) %>%
+kable(df_footnote, "latex", escape = FALSE, caption = "Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals") %>%
 kable_styling(latex_options = c("striped", "hover", "bordered"), full_width = F) %>%
-footnote(alphabet = "Footnote for PWID; ",
+footnote(alphabet = "Footnote; ",
            footnote_as_chunk = T)
 ```
+
+<br>
 
 ### Figure 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
 
@@ -312,8 +326,8 @@ blacknums2 <- as.data.frame(blacknums)
 ggplot(data = blacknums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 7) +
-  scale_fill_manual("Transmission Risk Group", values = c("darkblue","red", "green")) +
-  theme_minimal() + labs(title = "Black Individuals Indicated for PrEP by Transmission Risk Group", 
+  scale_fill_manual("Transmission \n Risk Group", values = c("darkblue","red", "green")) +
+  theme_minimal() + labs(title = "Black Individuals Indicated for PrEP \n by Transmission Risk Group", 
          x = "Transmission Risk Group", y = "Number of Black Individuals") +
   theme(title = element_text(size = 15),
         axis.title = element_text(size = 15),
@@ -324,15 +338,17 @@ ggplot(data = blacknums2, aes(x = Group, y = Individuals, fill = Group)) +
         axis.line = element_line(colour = "black"))
 ```
 
+<br>
+
 ### Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
 class <- c("Hispanic MSM", "Hispanic HET", "Hispanic PWID")
-num <- c(input$hispmsmprep, input$hisphetprep, input$hisphetprep)
+num <- c(input$hispmsmprep, input$hisphetprep, input$hisppwidprep)
 sums <- sum(input$hispmsmprep, input$hisphetprep, input$hisppwidprep)
-perc <- c(100 * input$hispmsmprep / sums, 100 * input$hisphetprep / sums, 100 * input$hisppwidprep / sums)
-colnames(df) <- c("Risk Group", "Number with PrEP Indications", "Percent (%) of Total Hispanic diagnoses")
+perc <- c(round(100 * input$hispmsmprep / sums, 2), round(100 * input$hisphetprep / sums, 2), round(100 * input$hisppwidprep / sums, 2))
+colnames(df) <- c("Risk Group", "Number with PrEP Indications", "Percent (%) of Total Hispanic")
 df[ , 1:3] <- c(class, num, perc)
 
 # kable(df)
@@ -340,11 +356,13 @@ df[ , 1:3] <- c(class, num, perc)
 df_footnote <- df
 df_footnote[3, 1] <- paste0(df_footnote[3, 1],
                                    footnote_marker_alphabet(1))
-kable(df_footnote, "latex", escape = FALSE) %>%
+kable(df_footnote, "latex", escape = FALSE, caption = "Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals") %>%
 kable_styling(latex_options = c("striped", "hover", "bordered"), full_width = F) %>%
-footnote(alphabet = "Footnote for PWID; ",
+footnote(alphabet = "Footnote; ",
            footnote_as_chunk = T)
 ```
+
+<br>
 
 ### Figure 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
 
@@ -356,8 +374,8 @@ hispnums2 <- as.data.frame(hispnums)
 ggplot(data = hispnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 7) +
-  scale_fill_manual("Transmission Risk Group", values = c("darkblue","red", "green")) +
-  theme_minimal() + labs(title = "Hispanic Individuals Indicated for PrEP by Transmission Risk Group", 
+  scale_fill_manual("Transmission \n Risk Group", values = c("darkblue","red", "green")) +
+  theme_minimal() + labs(title = "Hispanic Individuals Indicated for PrEP \n by Transmission Risk Group", 
          x = "Transmission Risk Group", y = "Number of Hispanic Individuals") +
   theme(title = element_text(size = 15),
         axis.title = element_text(size = 15),
@@ -368,15 +386,17 @@ ggplot(data = hispnums2, aes(x = Group, y = Individuals, fill = Group)) +
         axis.line = element_line(colour = "black"))
 ```
 
+<br>
+
 ### Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
 class <- c("White MSM", "White HET", "White PWID")
-num <- c(input$whitemsmprep, input$whitehetprep, input$whitehetprep)
+num <- c(input$whitemsmprep, input$whitehetprep, input$whitepwidprep)
 sums <- sum(input$whitemsmprep, input$whitehetprep, input$whitepwidprep)
-perc <- c(100 * input$whitemsmprep / sums, 100 * input$whitehetprep / sums, 100 * input$whitepwidprep / sums)
-colnames(df) <- c("Risk Group", "Number with PrEP Indications", "Percent (%) of Total White diagnoses")
+perc <- c(round(100 * input$whitemsmprep / sums, 2), round(100 * input$whitehetprep / sums, 2), round(100 * input$whitepwidprep / sums, 2))
+colnames(df) <- c("Risk Group", "Number with PrEP Indications", "Percent (%) of Total White")
 df[ , 1:3] <- c(class, num, perc)
 
 # kable(df)
@@ -384,11 +404,13 @@ df[ , 1:3] <- c(class, num, perc)
 df_footnote <- df
 df_footnote[3, 1] <- paste0(df_footnote[3, 1],
                                    footnote_marker_alphabet(1))
-kable(df_footnote, "latex", escape = FALSE) %>%
+kable(df_footnote, "latex", escape = FALSE, caption = "Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals") %>%
 kable_styling(latex_options = c("striped", "hover", "bordered"), full_width = F) %>%
-footnote(alphabet = "Footnote for PWID; ",
+footnote(alphabet = "Footnote; ",
            footnote_as_chunk = T)
 ```
+
+<br>
 
 ### Figure 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
 
@@ -400,8 +422,8 @@ whitenums2 <- as.data.frame(whitenums)
 ggplot(data = whitenums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = Individuals), vjust = 1.6, color = "white", size = 7) +
-  scale_fill_manual("Transmission Risk Group", values = c("darkblue","red", "green")) +
-  theme_minimal() + labs(title = "Hispanic Individuals Indicated for PrEP by Transmission Risk Group", 
+  scale_fill_manual("Transmission \n Risk Group", values = c("darkblue","red", "green")) +
+  theme_minimal() + labs(title = "Hispanic Individuals Indicated for PrEP \n by Transmission Risk Group", 
          x = "Transmission Risk Group", y = "Number of Hispanic Individuals") +
   theme(title = element_text(size = 15),
         axis.title = element_text(size = 15),

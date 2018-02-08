@@ -186,8 +186,20 @@ shinyUI(
                                   Human Services."),
                              style = "color: black;"),
                            hr(),
-                           hr(),
-                           p(em("508 Statement goes here....."),
+                           p(em("*508 ACCESSIBILITY of this product:")),
+                           p("Section 508 requires Federal agencies and grantees
+                              receiving Federal funds to ensure that individuals
+                              with disabilities who are members of the public or
+                              Federal employees have access to and use of
+                              electronic and information technology (EIT) that
+                              is comparable to that provided to individuals
+                              without disabilities, unless an undue burden
+                              would be imposed on the agency.",
+                             style = "color: black;"),
+                           p("If you need assistance with this webtool, please
+                             contact", a("Kevin Weiss",
+                                         href = "mailto:kevin.weiss@emory.edu"),
+                             ".",
                              style = "color: black;")
                            ), # End column
 
@@ -292,7 +304,7 @@ shinyUI(
                     #      ')
                     selectInput(inputId = "jurisdiction",
                                 label = "Jurisdiction Assumptions",
-                                c("Total" = 1, "Alabama" = 2,
+                                choices = c("Total" = 1, "Alabama" = 2,
                                   "Alaska" = 3, "Arizona" = 4,
                                   "Arkansas" = 5, "California" = 6,
                                   "Colorado" = 7, "Connecticut" = 8,
@@ -528,8 +540,7 @@ shinyUI(
                                     p("Type a title and press the enter key or
                                       click with your mouse to download a report
                                       in the format of your choosing, HTML,
-                                      or RTF (compatible with Word). This may
-                                      take a few seconds to download.",
+                                      or RTF (compatible with Word).",
                                       style = "color: green;"),
                                     textInput(inputId = "reportTitle",
                                               label = "Report Title"),
@@ -547,9 +558,22 @@ shinyUI(
                                  ) # End tabsetPanel
                         ) # End box
                 ), #End fluidRow
-            fluidRow(column(6, align = "center", offset = 3,
-                            p(em("508 Statement goes here....."),
-                              style = "color: black;")
+            fluidRow(column(12, align = "left", offset = 0,
+                            p(em("*508 ACCESSIBILITY of this product:")),
+                            p("Section 508 requires Federal agencies and grantees
+                              receiving Federal funds to ensure that individuals
+                              with disabilities who are members of the public or
+                              Federal employees have access to and use of
+                              electronic and information technology (EIT) that
+                              is comparable to that provided to individuals
+                              without disabilities, unless an undue burden
+                              would be imposed on the agency.",
+                              style = "color: black;"),
+                             p("If you need assistance with this webtool, please
+                                     contact", a("Kevin Weiss",
+                                                 href = "mailto:kevin.weiss@emory.edu"),
+                               ".",
+                               style = "color: black;")
                             ) # End column
                             ) # End fluidRow
             ) # End tabItem
