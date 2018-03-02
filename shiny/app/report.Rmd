@@ -1,10 +1,8 @@
 ---
 output: 
-rtf_document:
-  fig_caption: true
-  reference_rtf: report.docx
+  word_document:
+    reference_docx: report.docx
 ---
-
 
 # PrEP Populations Estimation Tool
 ## User Title: `r paste(input$reportTitle, sep="")`  
@@ -95,8 +93,7 @@ ggplot(data = transnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none") + 
-   labs(caption = "Figure 1: Number Indicated for PrEP \n by Transmission Risk Group")
+  theme(legend.position = "none")
 ```
 
 ### Table 2: Individuals with Indications for PrEP by Race
@@ -138,8 +135,7 @@ ggplot(data = racenums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none") +
-  labs(caption = "Figure 2: MSM Indicated for PrEP \n by Race")
+  theme(legend.position = "none")
 ```
 
 ### Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
@@ -177,9 +173,9 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none") +
-  labs(caption = "Figure 3: MSM Indicated for PrEP \n by Race")
+  theme(legend.position = "none")
 ```
+
 
 ### Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
 
@@ -216,8 +212,7 @@ ggplot(data = hetnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none") +
-  labs(caption = "Figure 4: HET Indicated for PrEP \n by Race") 
+  theme(legend.position = "none")
 ```
 
 ### Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
@@ -255,8 +250,7 @@ ggplot(data = pwidnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none") +
-  labs(caption = "Figure 5: PWID Indicated for PrEP \n by Race") 
+  theme(legend.position = "none")
 ```
 
 ### Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
@@ -272,7 +266,6 @@ df[ , 1:3] <- c(class, num, perc)
 
 kable(df, escape = FALSE, caption = "Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals")
 ```
-
 
 ### Figure 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
 
@@ -296,10 +289,8 @@ ggplot(data = blacknums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none") +
-  labs(caption = "Figure 6: Black Individuals Indicated for PrEP \n by Transmission Risk Group")
+  theme(legend.position = "none")
 ```
-
 
 ### Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
 
@@ -337,9 +328,9 @@ ggplot(data = hispnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none") +
-  labs(caption = "Figure 7: Hispanic Individuals Indicated for PrEP \n by Transmission Risk Group")
+  theme(legend.position = "none")
 ```
+
 
 ### Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
 
@@ -377,8 +368,5 @@ ggplot(data = whitenums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none") +
-  labs(caption = "Figure 8: White Individuals Indicated for PrEP \n by Transmission Risk Group")
+  theme(legend.position = "none")
 ```
-
-

@@ -10,14 +10,8 @@ library(dplyr)
 library(kableExtra)
 library(magrittr)
 library(tinytex)
-
-## Group names -----------------------------------------------------------------
-stagenames.transcat <- c("Total", "MSM", "HET", "PWID")
-stagenames.racetranscat <- c("Black MSM", "Black HET",
-                             "Black PWID", "Hispanic MSM", "Hispanic HET",
-                             "Hispanic PWID", "White MSM", "White HET",
-                             "White PWID")
-colors <- c("#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0")
+library(RColorBrewer)
+library(grDevices)
 
 ## Diagnosed percentages by jurisdiction ---------------------------------------
 #Diagnoses split by percent of total by jurisdiction:
@@ -437,19 +431,21 @@ shinyServer(function(input, output, session) {
     })
 
   ## Generate report -----------------------------------------------------------
+  ## Word
+  output$report <- downloadHandler(
+    filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".docx"),
+    content = function(file) {
+      src <- normalizePath("report.Rmd")
+
+      owd <- setwd(tempdir())
+      on.exit(setwd(owd))
+      file.copy(src, "report.Rmd")
+
+      out <- render("report.Rmd", word_document())
+      file.rename(out, file)
+    })
+
   ## RTF
-  # output$report <- downloadHandler(
-  #   filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".docx"),
-  #   content = function(file) {
-  #     src <- normalizePath("report.Rmd")
-  #
-  #     owd <- setwd(tempdir())
-  #     on.exit(setwd(owd))
-  #     file.copy(src, "report.Rmd")
-  #
-  #     out <- render("report.Rmd", word_document())
-  #     file.rename(out, file)
-  #   })
   output$report_rtf <- downloadHandler(
   filename = paste0("Custom PrEP Indications Report ", Sys.Date(), ".rtf"),
   content = function(file) {

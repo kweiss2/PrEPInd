@@ -10,6 +10,8 @@ library(dplyr)
 library(kableExtra)
 library(magrittr)
 library(tinytex)
+library(RColorBrewer)
+library(grDevices)
 
 shinyUI(
 
@@ -552,6 +554,9 @@ shinyUI(
                                     #                Report"),
                                     downloadButton(outputId = "report_rtf",
                                                    label = "Generate RTF
+                                                   Report"),
+                                    downloadButton(outputId = "report",
+                                                   label = "Generate Word
                                                    Report")
                                           ) #End mainPanel
                                           ) #End tabPanel
