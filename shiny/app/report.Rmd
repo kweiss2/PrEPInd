@@ -55,6 +55,9 @@ colors <- c("lightskyblue2", "dodgerblue3", "darkseagreen3")
 options(scipen = 100000)
 ```
 
+###
+
+
 # Table 1: Individuals with Indications for PrEP by Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE} 
