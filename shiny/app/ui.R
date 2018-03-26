@@ -120,6 +120,11 @@ shinyUI(
                               Practice",
                               style = "color: black;"),
                            hr(),
+                           h4("This website is under construction. Please contact",
+                              a("Kevin Weiss",
+                                href = "mailto:kevin.weiss@emory.edu"), "if you are experiencing issues.",
+                              style = "color: red;"),
+                           hr(),
                            p("This software tool provides additional
                               opportunities to explore the estimates from
                              the paper:",
