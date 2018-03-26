@@ -554,6 +554,8 @@ shinyUI(
                                     downloadButton(outputId = "report_html",
                                                    label = "Generate HTML
                                                    Report"),
+                                    # downloadButton(outputId = "report_slidy",
+                                    #                label = "Generate Presentation"),
                                     # downloadButton(outputId = "report_pdf",
                                     #                label = "Generate PDF
                                     #                Report"),

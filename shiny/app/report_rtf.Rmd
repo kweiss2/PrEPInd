@@ -57,7 +57,7 @@ colors <- c("lightskyblue2", "dodgerblue3", "darkseagreen3")
 options(scipen = 100000)
 ```
 
-### Table 1: Individuals with Indications for PrEP by Transmission Risk Group
+# Table 1: Individuals with Indications for PrEP by Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -73,7 +73,7 @@ cat("* Total may not sum to 100%")
 
 ```
 
-### Figure 1: Number by Transmission Risk Group
+## Figure 1: Number by Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE, fig.cap=paste("Figure 1: Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=5, fig.height=4}
 transnums <- NULL
@@ -99,7 +99,9 @@ ggplot(data = transnums2, aes(x = Group, y = Individuals, fill = Group)) +
    labs(caption = "Figure 1: Number Indicated for PrEP \n by Transmission Risk Group")
 ```
 
-### Table 2: Individuals with Indications for PrEP by Race
+***
+
+# Table 2: Individuals with Indications for PrEP by Race
 
 ```{r echo = FALSE, message = FALSE}
 df <- matrix(nrow = 3, ncol = 2)
@@ -114,7 +116,7 @@ kable(df, escape = FALSE, caption = "Table 2: Individuals with Indications for P
 
 ```
 
-### Figure 2: Individuals with Indications for PrEP by Race
+## Figure 2: Individuals with Indications for PrEP by Race
 
 ```{r echo=FALSE, fig.cap=paste("Figure 2: Individuals Indicated for PrEP by Race"), fig.width=5, fig.height=4}
 racenums <- NULL
@@ -142,7 +144,9 @@ ggplot(data = racenums2, aes(x = Group, y = Individuals, fill = Group)) +
   labs(caption = "Figure 2: MSM Indicated for PrEP \n by Race")
 ```
 
-### Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
+***
+
+# Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE}
 df <- matrix(nrow = 3, ncol = 3)
@@ -155,7 +159,7 @@ df[ , 1:3] <- c(class, num, perc)
 kable(df, escape = FALSE, caption = "Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group")
 ```
 
-### Figure 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
+## Figure 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
 
 ```{r echo=FALSE, fig.cap=paste("Figure 3: MSM Indicated for PrEP by Race"), fig.width=5, fig.height=4}
 msmnums <- NULL
@@ -181,7 +185,9 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
   labs(caption = "Figure 3: MSM Indicated for PrEP \n by Race")
 ```
 
-### Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
+***
+
+# Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -194,7 +200,7 @@ df[ , 1:3] <- c(class, num, perc)
 kable(df, escape = FALSE, caption = "Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group")
 ```
 
-### Figure 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
+## Figure 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
 
 ```{r echo=FALSE, fig.cap=paste("Figure 4: HET Indicated for PrEP by Race"), fig.width=5, fig.height=4}
 hetnums <- NULL
@@ -220,7 +226,9 @@ ggplot(data = hetnums2, aes(x = Group, y = Individuals, fill = Group)) +
   labs(caption = "Figure 4: HET Indicated for PrEP \n by Race") 
 ```
 
-### Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
+***
+
+# Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -233,7 +241,7 @@ df[ , 1:3] <- c(class, num, perc)
 kable(df, escape = FALSE, caption = "Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group")
 ```
 
-### Figure 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
+## Figure 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
 
 ```{r echo=FALSE, fig.cap=paste("Figure 5: PWID Indicated for PrEP by Race"), fig.width=5, fig.height=4}
 pwidnums <- NULL
@@ -259,7 +267,9 @@ ggplot(data = pwidnums2, aes(x = Group, y = Individuals, fill = Group)) +
   labs(caption = "Figure 5: PWID Indicated for PrEP \n by Race") 
 ```
 
-### Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
+***
+
+# Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -273,8 +283,7 @@ df[ , 1:3] <- c(class, num, perc)
 kable(df, escape = FALSE, caption = "Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals")
 ```
 
-
-### Figure 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
+## Figure 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
 
 ```{r echo=FALSE, fig.cap=paste("Figure 6: Black Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=5, fig.height=4}
 blacknums <- NULL
@@ -300,8 +309,9 @@ ggplot(data = blacknums2, aes(x = Group, y = Individuals, fill = Group)) +
   labs(caption = "Figure 6: Black Individuals Indicated for PrEP \n by Transmission Risk Group")
 ```
 
+***
 
-### Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
+# Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -315,7 +325,7 @@ df[ , 1:3] <- c(class, num, perc)
 kable(df, escape = FALSE, caption = "Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals")
 ```
 
-### Figure 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
+## Figure 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
 
 ```{r echo=FALSE, fig.cap=paste("Figure 7: Hispanic Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=5, fig.height=4}
 hispnums <- NULL
@@ -341,7 +351,9 @@ ggplot(data = hispnums2, aes(x = Group, y = Individuals, fill = Group)) +
   labs(caption = "Figure 7: Hispanic Individuals Indicated for PrEP \n by Transmission Risk Group")
 ```
 
-### Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
+***
+
+# Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -355,7 +367,7 @@ df[ , 1:3] <- c(class, num, perc)
 kable(df, escape = FALSE, caption = "Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals")
 ```
 
-### Figure 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
+## Figure 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
 
 ```{r echo=FALSE, fig.cap=paste("Figure 8: White Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=5, fig.height=4}
 whitenums <- NULL
