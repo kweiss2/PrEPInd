@@ -129,6 +129,62 @@ trans.diagnosis.percents <- list(
   100 * c(8850/13820, 4210/13820, 760/13820)# DC
 
 )
+### Pop Size ---------------------------------------------------------------
+pops <- list(
+        3295427, #Total
+        31096, #Alabama
+        5961, #Alaska
+        76604, #Arizona
+        13572, #Arkansas
+        525574, #California
+        81429, #Colorado
+        23607, #Connecticut
+        9691, #Delaware
+        297849, #Florida
+        102531, #Georgia
+        14985, #Hawaii
+        11095, #Idaho
+        160329, #Illinois
+        49872, #Indiana
+        11499, #Iowa
+        13802, #Kansas
+        36831, #Kentucky
+        33932, #Louisiana
+        8973, #Maine
+        63567, #Maryland
+        51295, #Massachusetts
+        83802, #Michigan
+        61465, #Minnesota
+        14100, #Mississippi
+        53539, #Missouri
+        7602, #Montana
+        7811, #Nebraska
+        31461, #Nevada
+        7668, #New Hampshire
+        62270, #New Jersey
+        18478, #New Mexico
+        197336, #New York
+        85658, #North Carolina
+        2548, #North Dakota
+        112472, #Ohio
+        29013, #Oklahoma
+        54088, #Oregon
+        86563, #Pennsylvania
+        12034, #Rhode Island
+        24471, #South Carolina
+        2858, #South Dakota
+        62876, #Tennessee
+        348274, #Texas
+        22872, #Utah
+        4542, #Vermont
+        91060, #Virginia
+        97703, #Washington
+        8987, #West Virginia
+        39838, #Wisconsin
+        4101, #Wyoming
+        35843 #District of Columbia
+        )
+
 
 ### Jurisdiction ---------------------------------------------------------------
 # input$jurisdiction <- c("Total" = 1, "Alabama" = 2,
@@ -188,11 +244,11 @@ shinyServer(function(input, output, session) {
   ## Calculate number indicated for PrEP -------------------------------------
   observe({
 
-    totmsm <- as.numeric(input$msmpopsize)
+    totmsm <- pops[[as.numeric(input$jurisdiction)]]
     x <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
     y <- trans.diagnosis.percents[[as.numeric(input$jurisdiction)]]
 
-    updateNumericInput(session, "totalmsm",
+    updateNumericInput(session, "msmpopsize",
                        value = round_any(totmsm, 10))
     updateNumericInput(session, "msmprep",
                        value = round_any((totmsm * 0.247), 10))
@@ -265,13 +321,34 @@ shinyServer(function(input, output, session) {
 
   observeEvent(input$switchtab, {
     newtab <- switch(input$tabs,
-                     "Introduction" = "Estimation")
+                     "Introduction" = "Instructions")
     updateTabItems(session, "tabs", newtab)
     })
-
   observeEvent(input$switchtab2, {
     newtab <- switch(input$tabs,
+                     "Introduction" = "Estimation")
+    updateTabItems(session, "tabs", newtab)
+  })
+
+  observeEvent(input$switchtab3, {
+    newtab <- switch(input$tabs,
+                     "Instructions" = "Introduction")
+    updateTabItems(session, "tabs", newtab)
+  })
+  observeEvent(input$switchtab4, {
+    newtab <- switch(input$tabs,
+                     "Instructions" = "Estimation")
+    updateTabItems(session, "tabs", newtab)
+  })
+
+  observeEvent(input$switchtab5, {
+    newtab <- switch(input$tabs,
                      "Estimation" = "Introduction")
+    updateTabItems(session, "tabs", newtab)
+  })
+  observeEvent(input$switchtab6, {
+    newtab <- switch(input$tabs,
+                     "Estimation" = "Instructions")
     updateTabItems(session, "tabs", newtab)
   })
 

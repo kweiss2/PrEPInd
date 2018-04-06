@@ -27,6 +27,8 @@ shinyUI(
         sidebarMenu(id = "tabs",
             menuItem("Introduction", tabName = "Introduction",
                      icon = icon("book")),
+            menuItem("Instructions", tabName = "Instructions",
+                     icon = icon("book")),
             menuItem("Estimation Tool", tabName = "Estimation",
                      icon = icon("line-chart"))
         ) # End sidebarMenu
@@ -135,7 +137,7 @@ shinyUI(
                                               Transmission Risk Group, and
                                              Race/Ethnicity, United States,
                                              2015.",
-                                             em("In Clearance."), "2017.",
+                                             em("In Clearance."), "2018.",
                                              style = "color:black;"),
                             "This webtool provides users the ability to estimate
                             the number of individuals indicated for PrEP.
@@ -213,12 +215,37 @@ shinyUI(
                     #### Action button------------------------------------------
                     fluidRow(
                       column(6, align = "center", offset = 3,
-                             actionButton('switchtab', 'Switch Tab',
-                                          icon = icon("line-chart"),
+                             actionButton('switchtab', 'Switch to Instructions',
+                                          icon = icon("book"),
+                                          style = 'padding:12px; font-size:120%'),
+                             actionButton('switchtab2', 'Switch to Estimation',
+                                          icon = icon("book"),
                                           style = 'padding:12px; font-size:120%')
                            ) # End column
                       ) # End fluidRow
                     ), # End tabItem
+
+        ## Instructions ----------------------------------------------------
+        tabItem(tabName = "Instructions",
+                column(10, offset = 1,
+
+                       #### Text -------------------------------------------
+                       h1("Testy Tester",
+                          style = "color: black;")),
+
+
+                #### Action button------------------------------------------
+                fluidRow(
+                  column(6, align = "center", offset = 3,
+                         actionButton('switchtab3', 'Switch to Introduction',
+                                      icon = icon("book"),
+                                      style = 'padding:12px; font-size:120%'),
+                         actionButton('switchtab4', 'Switch to Estimation',
+                                      icon = icon("book"),
+                                      style = 'padding:12px; font-size:120%')
+                  ) # End column
+                ) # End fluidRow
+                         ), # End tabItem
 
         tabItem(
 
@@ -244,15 +271,44 @@ shinyUI(
                 box(width = NULL,
                     title = "1. Population Size and Jurisdiction",
                     status = "primary", solidHeader = TRUE,
+                    p("Select a jurisdiction by using the up, down, and
+                      Enter keys or the dropdown menu:",
+                      style = "color: green;"),
+                    selectInput(inputId = "jurisdiction",
+                                label = "Jurisdiction Assumptions",
+                                choices = c("Total" = 1, "Alabama" = 2,
+                                            "Alaska" = 3, "Arizona" = 4,
+                                            "Arkansas" = 5, "California" = 6,
+                                            "Colorado" = 7, "Connecticut" = 8,
+                                            "Delaware" = 9, "Florida" = 10,
+                                            "Georgia" = 11, "Hawaii" = 12,
+                                            "Idaho" = 13, "Illinois" = 14,
+                                            "Indiana" = 15, "Iowa" = 16,
+                                            "Kansas" = 17, "Kentucky" = 18,
+                                            "Louisiana" = 19, "Maine" = 20,
+                                            "Maryland" = 21, "Massachusetts" = 22,
+                                            "Michigan" = 23, "Minnesota" = 24,
+                                            "Mississippi" = 25, "Missouri" = 26,
+                                            "Montana" = 27, "Nebraska" = 28,
+                                            "Nevada" = 29, "New Hampshire" = 30,
+                                            "New Jersey" = 31, "New Mexico" = 32,
+                                            "New York" = 33, "North Carolina" = 34,
+                                            "North Dakota" = 35, "Ohio" = 36,
+                                            "Oklahoma" = 37, "Oregon" = 38,
+                                            "Pennsylvania" = 39, "Rhode Island" = 40,
+                                            "South Carolina" = 41, "South Dakota" = 42,
+                                            "Tennessee" = 43, "Texas" = 44,
+                                            "Utah" = 45, "Vermont" = 46,
+                                            "Virginia" = 47, "Washington" = 48,
+                                            "West Virginia" = 49, "Wisconsin" = 50,
+                                            "Wyoming" = 51, "Washington, D.C." = 52),
+                                selected = 1),
                     p("Please enter a population size without using commas:",
                       style = "color: green;"),
                     numericInput(inputId = "msmpopsize",
                                  label = "Jurisdiction MSM Population Size",
                                  min = 0,
-                                 value = NA),
-                    p("Select a jurisdiction by using the up, down, and
-                      Enter keys or the dropdown menu:",
-                      style = "color: green;"),
+                                 value = NA)
                     # HTML('
                     #       Jurisdiction:
                     #       Total
@@ -309,35 +365,6 @@ shinyUI(
                     #       D.C.
                     #
                     #      ')
-                    selectInput(inputId = "jurisdiction",
-                                label = "Jurisdiction Assumptions",
-                                choices = c("Total" = 1, "Alabama" = 2,
-                                  "Alaska" = 3, "Arizona" = 4,
-                                  "Arkansas" = 5, "California" = 6,
-                                  "Colorado" = 7, "Connecticut" = 8,
-                                  "Delaware" = 9, "Florida" = 10,
-                                  "Georgia" = 11, "Hawaii" = 12,
-                                  "Idaho" = 13, "Illinois" = 14,
-                                  "Indiana" = 15, "Iowa" = 16,
-                                  "Kansas" = 17, "Kentucky" = 18,
-                                  "Louisiana" = 19, "Maine" = 20,
-                                  "Maryland" = 21, "Massachusetts" = 22,
-                                  "Michigan" = 23, "Minnesota" = 24,
-                                  "Mississippi" = 25, "Missouri" = 26,
-                                  "Montana" = 27, "Nebraska" = 28,
-                                  "Nevada" = 29, "New Hampshire" = 30,
-                                  "New Jersey" = 31, "New Mexico" = 32,
-                                  "New York" = 33, "North Carolina" = 34,
-                                  "North Dakota" = 35, "Ohio" = 36,
-                                  "Oklahoma" = 37, "Oregon" = 38,
-                                  "Pennsylvania" = 39, "Rhode Island" = 40,
-                                  "South Carolina" = 41, "South Dakota" = 42,
-                                  "Tennessee" = 43, "Texas" = 44,
-                                  "Utah" = 45, "Vermont" = 46,
-                                  "Virginia" = 47, "Washington" = 48,
-                                  "West Virginia" = 49, "Wisconsin" = 50,
-                                  "Wyoming" = 51, "Washington, D.C." = 52),
-                                selected = 1)
                 ), # End box
 
                 #### Box 2 - Assumptions about new diagnoses -------------------
@@ -438,7 +465,10 @@ shinyUI(
                   hr(),
                   hr(),
                   column(6, align = "center", offset = 3,
-                         actionButton('switchtab2', 'Switch Tab',
+                         actionButton('switchtab5', 'Switch to Introduction',
+                                      icon = icon("book"),
+                                      style = 'padding:12px; font-size:120%'),
+                         actionButton('switchtab6', 'Switch to Instructions',
                                       icon = icon("book"),
                                       style = 'padding:12px; font-size:120%')
                   )) # End fluidRow
