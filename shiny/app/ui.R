@@ -225,27 +225,50 @@ shinyUI(
                       ) # End fluidRow
                     ), # End tabItem
 
-        ## Instructions ----------------------------------------------------
+        ## Instructions Tab ----------------------------------------------------
         tabItem(tabName = "Instructions",
-                column(10, offset = 1,
-
-                       #### Text -------------------------------------------
-                       h1("Testy Tester",
-                          style = "color: black;")),
-
 
                 #### Action button------------------------------------------
+
                 fluidRow(
-                  column(6, align = "center", offset = 3,
+                  column(10 , align = "left", offset = 4,
                          actionButton('switchtab3', 'Switch to Introduction',
                                       icon = icon("book"),
                                       style = 'padding:12px; font-size:120%'),
                          actionButton('switchtab4', 'Switch to Estimation',
                                       icon = icon("book"),
-                                      style = 'padding:12px; font-size:120%')
+                                      style = 'padding:12px; font-size:120%'),
+                         hr()
                   ) # End column
-                ) # End fluidRow
-                         ), # End tabItem
+                ), # End fluidRow
+                fluidRow(
+                  column(12 , align = "left", offset = 1,
+                         p("This webtool provides users the ability to estimate
+                           the number of persons with indications for PrEP among
+                           men who have sex with men (MSM), heterosexuals (HET),
+                           and persons who injection drugs, as well as
+                           race/ethnicity-stratified estimates."),
+                         p("To navigate: You can use your mouse or the Tab key
+                           and the Shift+Tab keys on a keyboard to navigate
+                           between fields. You can also use the Enter key to
+                           expand or collapse the sidebar."),
+                         p("This brief guide will walk you through each step to
+                           produce your own tailored report:")
+                  ) # End column
+                ), # End fluidRow
+
+                #### Images -------------------------------------------
+                fluidRow(
+                  column(10, offset = 3,
+
+
+
+                       img(src = 'instructions.png', align = "left",
+                           width = "600", height = "600",
+                           alt = "Instructions for using the Webtool")
+                       ) # End column
+                  ) # End fluidRow
+                ), # End tabItem
 
         tabItem(
 
@@ -272,8 +295,12 @@ shinyUI(
                     title = "1. Population Size and Jurisdiction",
                     status = "primary", solidHeader = TRUE,
                     p("Select a jurisdiction by using the up, down, and
-                      Enter keys or the dropdown menu:",
+                      Enter keys or the dropdown menu.",
                       style = "color: green;"),
+                    p("You can also use the backspace key and begin to type the
+                      name of the jurisdiction:",
+                      style = "color: green;"),
+
                     selectInput(inputId = "jurisdiction",
                                 label = "Jurisdiction Assumptions",
                                 choices = c("Total" = 1, "Alabama" = 2,
