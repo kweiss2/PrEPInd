@@ -12,6 +12,7 @@ library(magrittr)
 library(tinytex)
 library(RColorBrewer)
 library(grDevices)
+library(scales)
 
 shinyUI(
 

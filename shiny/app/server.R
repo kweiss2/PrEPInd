@@ -12,6 +12,7 @@ library(magrittr)
 library(tinytex)
 library(RColorBrewer)
 library(grDevices)
+library(scales)
 
 ## Diagnosed percentages by jurisdiction ---------------------------------------
 #Diagnoses split by percent of total by jurisdiction:
@@ -187,6 +188,13 @@ pops <- list(
 
 shinyServer(function(input, output, session) {
 
+  ##
+  observe({
+  totmsm <- pops[[as.numeric(input$jurisdiction)]]
+  updateNumericInput(session, "msmpopsize",
+                     value = round_any(totmsm, 10))
+  })
+
   ## Get diagnosis percents ----------------------------------------------------
   observe({
     # Transmission Risk Group within race
@@ -215,11 +223,8 @@ shinyServer(function(input, output, session) {
   ## Calculate number indicated for PrEP -------------------------------------
   observe({
 
-    totmsm <- pops[[as.numeric(input$jurisdiction)]]
     x <- race.diagnosis.percents[[as.numeric(input$jurisdiction)]]
     y <- trans.diagnosis.percents[[as.numeric(input$jurisdiction)]]
-    updateNumericInput(session, "msmpopsize",
-                       value = round_any(totmsm, 10))
     updateNumericInput(session, "msmprep",
                        value = round_any((input$msmpopsize * 0.247), 10))
     updateNumericInput(session, "hetprep",

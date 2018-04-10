@@ -94,7 +94,7 @@ ggplot(data = transnums2, aes(x = Group, y = Individuals, fill = Group)) +
   scale_fill_manual("Transmission \n Risk Group", values = colors) +
   scale_y_continuous(expand = c(0, 0),
                      limits = c(0, max(transnums2$Individuals) + 0.1 * max(transnums2$Individuals))) + 
-  geom_text(aes(label = Individuals), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
+  geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   theme_bw() + labs(title = "Individuals Indicated for PrEP by Transmission Risk Group", 
          x = "Transmission Risk Group", y = "Number of Individuals") +
   theme(title = element_text(size = 13),
@@ -143,7 +143,7 @@ ggplot(data = racenums2, aes(x = Group, y = Individuals, fill = Group)) +
   scale_fill_manual("Race", values = colors) +
   scale_y_continuous(expand = c(0, 0),
                      limits = c(0, max(racenums2$Individuals) + 0.1 * max(racenums2$Individuals))) + 
-  geom_text(aes(label = Individuals), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
+  geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   theme_bw() + labs(title = "Individuals Indicated for PrEP by Race", 
          x = "Race", y = "Number of Individuals") +
   theme(title = element_text(size = 13),
@@ -188,7 +188,7 @@ msmnums$Group <- c("Black", "Hispanic", "White")
 msmnums2 <- as.data.frame(msmnums)
 ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity", position = 'dodge') +
-  geom_text(aes(label = Individuals), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
+  geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Race", values = colors) +
   scale_y_continuous(expand = c(0, 0),
                      limits = c(0, max(msmnums2$Individuals) + 0.1 * max(msmnums2$Individuals))) + 
@@ -236,7 +236,7 @@ hetnums$Group <- c("Black", "Hispanic", "White")
 hetnums2 <- as.data.frame(hetnums)
 ggplot(data = hetnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity", position = 'dodge') +
-  geom_text(aes(label = Individuals), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
+  geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Race", values = colors) +
   scale_y_continuous(expand = c(0, 0),
                      limits = c(0, max(hetnums2$Individuals) + 0.1 * max(hetnums2$Individuals))) + 
@@ -284,7 +284,7 @@ pwidnums$Group <- c("Black", "Hispanic", "White")
 pwidnums2 <- as.data.frame(pwidnums)
 ggplot(data = pwidnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity", position = 'dodge') +
-  geom_text(aes(label = Individuals), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
+  geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Race", values = colors) +
   scale_y_continuous(expand = c(0, 0),
                      limits = c(0, max(pwidnums2$Individuals) + 0.1 * max(pwidnums2$Individuals))) + 
@@ -333,7 +333,7 @@ blacknums$Group <- c("MSM", "HET", "PWID")
 blacknums2 <- as.data.frame(blacknums)
 ggplot(data = blacknums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity", position = 'dodge') +
-  geom_text(aes(label = Individuals), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
+  geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Transmission \n Risk Group", values = colors) +
   scale_y_continuous(expand = c(0, 0),
                      limits = c(0, max(blacknums2$Individuals) + 0.1 * max(blacknums2$Individuals))) +
@@ -382,7 +382,7 @@ hispnums$Group <- c("MSM", "HET", "PWID")
 hispnums2 <- as.data.frame(hispnums)
 ggplot(data = hispnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity", position = 'dodge') +
-  geom_text(aes(label = Individuals), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
+  geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Transmission \n Risk Group", values = colors) +
   scale_y_continuous(expand = c(0, 0),
                      limits = c(0, max(hispnums2$Individuals) + 0.1 * max(hispnums2$Individuals))) +
@@ -431,7 +431,7 @@ whitenums$Group <- c("MSM", "HET", "PWID")
 whitenums2 <- as.data.frame(whitenums)
 ggplot(data = whitenums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity", position = 'dodge') +
-  geom_text(aes(label = Individuals), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
+  geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Transmission \n Risk Group", values = colors) +
   scale_y_continuous(expand = c(0, 0),
                      limits = c(0, max(whitenums2$Individuals) + 0.1 * max(whitenums2$Individuals))) +
