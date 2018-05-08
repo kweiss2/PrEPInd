@@ -124,14 +124,14 @@ shinyUI(
                               style = "color: black;"),
                            hr(),
                            h4("This website is under construction. Please contact",
-                              a("Kevin Weiss",
-                                href = "mailto:kevin.weiss@emory.edu"), "if you are experiencing issues.",
+                              a("Dawn Smith",
+                                href = "mailto:dks0@cdc.gov"), "if you are experiencing issues.",
                               style = "color: red;"),
                            hr(),
                            p("This software tool provides additional
                               opportunities to explore the estimates from
                              the paper:",
-                             tags$blockquote("Smith DK, Van Handel M, Grey J",
+                             tags$blockquote("Smith DK, Van Handel M, Grey J.",
                                              "Estimates of Persons with
                                               Indications for Preexposure
                                               Prophylaxis by Jurisdiction
@@ -207,8 +207,8 @@ shinyUI(
                               would be imposed on the agency.",
                              style = "color: black;"),
                            p("If you need assistance with this webtool, please
-                             contact", a("Kevin Weiss",
-                                         href = "mailto:kevin.weiss@emory.edu"),
+                             contact", a("Dawn Smith",
+                                         href = "mailto:dks0@cdc.gov"),
                              ".",
                              style = "color: black;")
                            ), # End column
@@ -247,7 +247,7 @@ shinyUI(
                          p("This webtool provides users the ability to estimate
                            the number of persons with indications for PrEP among
                            men who have sex with men (MSM), heterosexuals (HET),
-                           and persons who injection drugs, as well as
+                           and persons who use injection drugs (PWID), as well as
                            race/ethnicity-stratified estimates."),
                          p("To navigate: You can use your mouse or the Tab key
                            and the Shift+Tab keys on a keyboard to navigate
@@ -261,8 +261,6 @@ shinyUI(
                 #### Images -------------------------------------------
                 fluidRow(
                   column(10, offset = 3,
-
-
 
                        img(src = 'instructions.png', align = "left",
                            width = "600", height = "600",
@@ -640,8 +638,8 @@ shinyUI(
                               would be imposed on the agency.",
                               style = "color: black;"),
                              p("If you need assistance with this webtool, please
-                                     contact", a("Kevin Weiss",
-                                                 href = "mailto:kevin.weiss@emory.edu"),
+                                     contact", a("Dawn Smith",
+                                                 href = "mailto:dks0@cdc.gov"),
                                ".",
                                style = "color: black;")
                             ) # End column
