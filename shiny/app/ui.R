@@ -138,8 +138,10 @@ shinyUI(
                                               Transmission Risk Group, and
                                              Race/Ethnicity, United States,
                                              2015.",
-                                             em("In Clearance."), "2018.",
-                                             style = "color:black;"),
+                                             "Annals of Epidemiology, 2018.",
+                             tags$a("Paper Link", target = "_blank",
+                                    href = "https://doi.org/10.1016/j.annepidem.2018.05.003"),
+                             style = "color:black;"),
                             "This webtool provides users the ability to estimate
                             the number of individuals indicated for PrEP.
                             You can use the", em("Tab"), "key and the",
@@ -249,9 +251,11 @@ shinyUI(
                            men who have sex with men (MSM), heterosexuals (HET),
                            and persons who use injection drugs (PWID), as well as
                            race/ethnicity-stratified estimates."),
-                         p("To navigate: You can use your mouse or the Tab key
-                           and the Shift+Tab keys on a keyboard to navigate
-                           between fields. You can also use the Enter key to
+                         p("To navigate: You can use your mouse or the",
+                            strong("Tab"), "key and the", strong("Shift"), "and",
+                            strong("Tab"), "keys together on a keyboard to
+                            navigate forwards and backwards between fields.
+                            You can also use the", strong("Enter"), "key to
                            expand or collapse the sidebar."),
                          p("This brief guide will walk you through each step to
                            produce your own tailored report:")
