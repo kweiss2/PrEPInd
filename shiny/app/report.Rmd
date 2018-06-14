@@ -12,9 +12,9 @@ This report was generated using the PrEP Populations Estimation Tool. The tool w
 
 
 ## Approach and Assumptions
-Smith et al applied a multiplier method based on model inputs, including 2015 HIV case surveillance data, with specified assumptions. First, the number of men who have sex with men (MSM) was estimated by [Grey et al](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4873305/) and updated to population estimates for 2015. The estimated number of MSM in a state was then multiplied by the national estimate of the proportion of MSM who were HIV-negative with indications for PrEP (0.247). Second, the relative proportions of new HIV diagnoses in each jurisdiction among heterosexuals (HET) compared to MSM, and among persons who inject drugs (PWID) compared to MSM were assumed to approximate the relative risk of HIV exposure for uninfected persons in each transmission risk group in a given jurisdiction. These ratios were multiplied by the number of MSM with PrEP indications to calculate the number of HET and PWID with PrEP indications in that jurisdiction. 
+Smith et al. applied a multiplier method based on model inputs, including 2015 HIV case surveillance data, with specified assumptions. First, the number of men who have sex with men (MSM) was estimated by [Grey et al](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4873305/) and updated to population estimates for 2015. The estimated number of MSM in a state was then multiplied by the national estimate of the proportion of MSM who were HIV-negative with indications for PrEP (0.247). This resulted in an estimate of the number of MSM in each state with indications for PrEP. Second, the relative proportions of new HIV diagnoses in each jurisdiction among heterosexuals (HET) compared to MSM, and among persons who inject drugs (PWID) compared to MSM were assumed to approximate the relative risk of HIV exposure for uninfected persons in each transmission risk group in a given jurisdiction. These ratios were multiplied by the number of MSM with PrEP indications to calculate the number of HET and PWID with PrEP indications in that jurisdiction. 
 
-Lastly, to produce estimate by race/ethnicity, we used the proportion of new HIV diagnoses in each jurisdiction by race/ethnicity for each transmission risk group to approximate the relative risk of HIV exposure for uninfected persons in each transmission risk and race/ethnicity group. Within each transmission risk group, we multiplied the proportion of HIV diagnoses in 2015 among each race/ethnicity group by the number of persons with PrEP indications in that transmission risk group to calculate estimates for each transmission risk and race/ethnicity group. 
+Lastly, to produce estimates by race/ethnicity, we used the proportion of new HIV diagnoses in each jurisdiction by race/ethnicity for each transmission risk group to approximate the relative risk of HIV exposure for uninfected persons in each transmission risk and race/ethnicity group. Within each transmission risk group, we multiplied the proportion of HIV diagnoses in 2015 among each race/ethnicity group by the number of persons with PrEP indications in that transmission risk group to calculate estimates for each transmission risk and race/ethnicity group.
 
 
 ## Model Inputs
@@ -30,9 +30,32 @@ The results presented in this report are based on the following model inputs:
 
 
 ## Results
-Based on these inputs, the total number of individuals with indications for PrEP is `r paste(format(input$totalprep, big.mark = ","), sep = "")`. The estimated number of MSM  with indications for PrEP is `r paste(format(input$msmprep, big.mark = ","), sep = "")`, the estimated number of HET  with indications for PrEP is `r paste(format(input$hetprep, big.mark = ","), sep = "")`, and the estimated number of PWID  with indications for PrEP is `r paste(format(input$pwidprep, big.mark = ","), sep = "")`.
+Based on these inputs, the total number of individuals with indications for PrEP is `r paste(format(input$totalprep, big.mark = ","), sep = "")`. The following breaks down this number by race/ethnicity within each of these groups: MSM, HET, and PWID. 
 
-The estimated number of African-American MSM with indications for PrEP is `r paste(format(input$blackmsmprep, big.mark = ","), sep = "")`, the estimated number of Hispanic MSM with indications for PrEP is `r paste(format(input$hispmsmprep, big.mark = ","), sep = "")`, and the estimated number of White MSM  with indications for PrEP is `r paste(format(input$whitemsmprep, big.mark = ","), sep = "")`. The estimated number of African-American HET with indications for PrEP is `r paste(format(input$blackhetprep, big.mark = ","), sep = "")`, the estimated number of Hispanic HET with indications for PrEP is `r paste(format(input$hisphetprep, big.mark = ","), sep = "")`, and the estimated number of White HET with indications for PrEP is `r paste(format(input$whitehetprep, big.mark = ","), sep = "")`. The estimated number of African-American PWID with indications for PrEP is `r paste(format(input$blackpwidprep, big.mark = ","), sep = "")`, the estimated number of Hispanic PWID with indications for PrEP is `r paste(format(input$hisppwidprep, big.mark = ","), sep = "")`, and the estimated number of White PWID with indications for PrEP is `r paste(format(input$whitepwidprep, big.mark = ","), sep = "")`.
+The estimated number of MSM  with indications for PrEP is `r paste(format(input$msmprep, big.mark = ","), sep = "")`. Within this group, the estimated number by race/ethnicity includes: 
+
+* African-American MSM: `r paste(format(input$blackmsmprep, big.mark = ","), sep = "")`
+
+* Hispanic MSM: `r paste(format(input$hispmsmprep, big.mark = ","), sep = "")`
+
+* White MSM: `r paste(format(input$whitemsmprep, big.mark = ","), sep = "")`. 
+
+The estimated number of HET  with indications for PrEP is `r paste(format(input$hetprep, big.mark = ","), sep = "")`. Within this group, the estimated number by race/ethnicity includes: 
+
+* African-American HET: `r paste(format(input$blackhetprep, big.mark = ","), sep = "")`
+
+* Hispanic HET: `r paste(format(input$hisphetprep, big.mark = ","), sep = "")`
+
+* White HET: `r paste(format(input$whitehetprep, big.mark = ","), sep = "")`. 
+
+
+The estimated number of PWID  with indications for PrEP is `r paste(format(input$pwidprep, big.mark = ","), sep = "")`. Within this group, the estimated number by race/ethnicity includes:
+
+* African-American PWID: `r paste(format(input$blackpwidprep, big.mark = ","), sep = "")`
+
+* Hispanic PWID: `r paste(format(input$hisppwidprep, big.mark = ","), sep = "")`
+
+* White PWID: `r paste(format(input$whitepwidprep, big.mark = ","), sep = "")`. 
 
 The remaining sections of this report display present the outputs from this model in tables and figures.
 
@@ -85,7 +108,7 @@ ggplot(data = transnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity", position = 'dodge') +
   scale_fill_manual("Transmission \n Risk Group", values = colors) +
   scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, max(transnums2$Individuals) + 0.1 * max(transnums2$Individuals))) + 
+                     limits = c(0, max(transnums2$Individuals) + 0.3 * max(transnums2$Individuals))) + 
   geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   theme_bw() + labs(title = "Individuals Indicated for PrEP \n by Transmission Risk Group", 
          x = "Transmission Risk Group", y = "Number of Individuals") +
@@ -127,7 +150,7 @@ ggplot(data = racenums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_bar(stat = "identity", position = 'dodge') +
   scale_fill_manual("Race", values = colors) +
   scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, max(racenums2$Individuals) + 0.1 * max(racenums2$Individuals))) + 
+                     limits = c(0, max(racenums2$Individuals) + 0.3 * max(racenums2$Individuals))) + 
   geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   theme_bw() + labs(title = "Individuals Indicated for PrEP \n by Race", 
          x = "Race", y = "Number of Individuals") +
@@ -166,7 +189,7 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Race", values = colors) +
   scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, max(msmnums2$Individuals) + 0.1 * max(msmnums2$Individuals))) + 
+                     limits = c(0, max(msmnums2$Individuals) + 0.3 * max(msmnums2$Individuals))) + 
   theme_minimal() + labs(title = "MSM Indicated for PrEP \n by Race", 
          x = "Race", y = "Number of MSM") +
   theme(title = element_text(size = 13),
@@ -205,7 +228,7 @@ ggplot(data = hetnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Race", values = colors) +
   scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, max(hetnums2$Individuals) + 0.1 * max(hetnums2$Individuals))) + 
+                     limits = c(0, max(hetnums2$Individuals) + 0.3 * max(hetnums2$Individuals))) + 
   theme_minimal() + labs(title = "HET Indicated for PrEP \n by Race", 
          x = "Race", y = "Number of HET") +
   theme(title = element_text(size = 13),
@@ -243,7 +266,7 @@ ggplot(data = pwidnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Race", values = colors) +
   scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, max(pwidnums2$Individuals) + 0.1 * max(pwidnums2$Individuals))) + 
+                     limits = c(0, max(pwidnums2$Individuals) + 0.3 * max(pwidnums2$Individuals))) + 
   theme_minimal() + labs(title = "PWID Indicated for PrEP \n by Race", 
          x = "Race", y = "Number of PWID") +
   theme(title = element_text(size = 13),
@@ -282,7 +305,7 @@ ggplot(data = blacknums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Transmission \n Risk Group", values = colors) +
   scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, max(blacknums2$Individuals) + 0.1 * max(blacknums2$Individuals))) +
+                     limits = c(0, max(blacknums2$Individuals) + 0.3 * max(blacknums2$Individuals))) +
   theme_minimal() + labs(title = "Black Individuals Indicated for PrEP \n by Transmission Risk Group", 
          x = "Transmission Risk Group", y = "Number of Black Individuals") +
   theme(title = element_text(size = 13),
@@ -321,7 +344,7 @@ ggplot(data = hispnums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Transmission \n Risk Group", values = colors) +
   scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, max(hispnums2$Individuals) + 0.1 * max(hispnums2$Individuals))) +
+                     limits = c(0, max(hispnums2$Individuals) + 0.3 * max(hispnums2$Individuals))) +
   theme_minimal() + labs(title = "Hispanic Individuals Indicated for PrEP \n by Transmission Risk Group", 
          x = "Transmission Risk Group", y = "Number of Hispanic Individuals") +
   theme(title = element_text(size = 13),
@@ -361,7 +384,7 @@ ggplot(data = whitenums2, aes(x = Group, y = Individuals, fill = Group)) +
   geom_text(aes(label = comma(Individuals)), position = position_dodge(width = 0.9), vjust = -0.75, color = "Black", size = 5) +
   scale_fill_manual("Transmission \n Risk Group", values = colors) +
   scale_y_continuous(expand = c(0, 0),
-                     limits = c(0, max(whitenums2$Individuals) + 0.1 * max(whitenums2$Individuals))) +
+                     limits = c(0, max(whitenums2$Individuals) + 0.3 * max(whitenums2$Individuals))) +
   theme_minimal() + labs(title = "White Individuals Indicated for PrEP \n by Transmission Risk Group", 
          x = "Transmission Risk Group", y = "Number of White Individuals") +
   theme(title = element_text(size = 13),
