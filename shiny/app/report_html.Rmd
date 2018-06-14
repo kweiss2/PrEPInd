@@ -85,8 +85,6 @@ options(scipen = 100000)
 
 ***
 
-# Table 1: Individuals with Indications for PrEP by Transmission Risk Group
-
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
 class <- c("MSM", "HET", "PWID")
@@ -104,8 +102,6 @@ footnote(symbol = "Total may not sum to 100%",
            footnote_as_chunk = T)
 ```
 
-
-## Figure 1: Number by Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE, fig.cap=paste("Figure 1: Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=8, fig.height=8}
 transnums <- NULL
@@ -127,12 +123,11 @@ ggplot(data = transnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(plot.caption = element_text(hjust = -0.45))
 ```
 
 ***
-
-# Table 2: Individuals with Indications for PrEP by Race
 
 ```{r echo = FALSE, message = FALSE}
 df <- matrix(nrow = 3, ncol = 2)
@@ -151,8 +146,6 @@ kable_styling(bootstrap_options = c("striped", "hover", "bordered"), full_width 
 ```
 
 <br>
-
-## Figure 2: Individuals with Indications for PrEP by Race
 
 ```{r echo=FALSE, message = FALSE, fig.cap=paste("Figure 2: Individuals Indicated for PrEP by Race"), fig.width=8, fig.height=8}
 racenums <- NULL
@@ -176,12 +169,11 @@ ggplot(data = racenums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(plot.caption = element_text(hjust = -0.45))
 ```
 
 ***
-
-# Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE}
 df <- matrix(nrow = 3, ncol = 3)
@@ -201,8 +193,6 @@ footnote(symbol = "Total may not sum to 100%",
 ```
 
 <br>
-
-## Figure 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
 
 ```{r echo=FALSE, message = FALSE, fig.cap=paste("Figure 3: MSM Indicated for PrEP by Race"), fig.width=8, fig.height=8}
 msmnums <- NULL
@@ -224,12 +214,11 @@ ggplot(data = msmnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(plot.caption = element_text(hjust = -0.45))
 ```
 
 ***
-
-# Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -249,8 +238,6 @@ footnote(symbol = "Total may not sum to 100%",
 ```
 
 <br>
-
-## Figure 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
 
 ```{r echo=FALSE, message = FALSE, fig.cap=paste("Figure 4: HET Indicated for PrEP by Race"), fig.width=8, fig.height=8}
 hetnums <- NULL
@@ -272,12 +259,11 @@ ggplot(data = hetnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(plot.caption = element_text(hjust = -0.45))
 ```
 
 ***
-
-# Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -297,8 +283,6 @@ footnote(symbol = "Total may not sum to 100%",
 ```
 
 <br>
-
-## Figure 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
 
 ```{r echo=FALSE, message = FALSE, fig.cap=paste("Figure 5: Persons who Inject Drugs Indicated for PrEP by Race"), fig.width=8, fig.height=8}
 pwidnums <- NULL
@@ -320,12 +304,11 @@ ggplot(data = pwidnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(plot.caption = element_text(hjust = -0.45))
 ```
 
 ***
-
-# Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -347,8 +330,6 @@ footnote(symbol = "Total may not sum to 100%",
 
 <br>
 
-## Figure 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
-
 ```{r echo=FALSE, message = FALSE, fig.cap=paste("Figure 6: Black Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=8, fig.height=8}
 blacknums <- NULL
 blacknums$Individuals <- rbind(input$blackmsmprep, input$blackhetprep, input$blackpwidprep)
@@ -369,12 +350,11 @@ ggplot(data = blacknums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(plot.caption = element_text(hjust = -0.45))
 ```
 
 ***
-
-# Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -396,8 +376,6 @@ footnote(symbol = "Total may not sum to 100%",
 
 <br>
 
-## Figure 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
-
 ```{r echo=FALSE, message = FALSE, fig.cap=paste("Figure 7: Hispanic Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=8, fig.height=8}
 hispnums <- NULL
 hispnums$Individuals <- rbind(input$hispmsmprep, input$hisphetprep, input$hisppwidprep)
@@ -418,12 +396,11 @@ ggplot(data = hispnums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(plot.caption = element_text(hjust = -0.45))
 ```
 
 ***
-
-# Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
 
 ```{r echo = FALSE, message = FALSE} 
 df <- matrix(nrow = 3, ncol = 3)
@@ -445,8 +422,6 @@ footnote(symbol = "Total may not sum to 100%",
 
 <br>
 
-## Figure 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
-
 ```{r echo=FALSE, message = FALSE, fig.cap=paste("Figure 8: White Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=8, fig.height=8}
 whitenums <- NULL
 whitenums$Individuals <- rbind(input$whitemsmprep, input$whitehetprep, input$whitepwidprep)
@@ -467,5 +442,6 @@ ggplot(data = whitenums2, aes(x = Group, y = Individuals, fill = Group)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(plot.caption = element_text(hjust = -0.45))
 ```
