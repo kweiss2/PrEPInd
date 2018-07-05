@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## User Title: `r paste(input$reportTitle, sep="")`  
 ## `r paste(format(Sys.Date(), "%B %d, %Y"), sep="")`
 
-This report was generated using the PrEP Populations Estimation Tool. The tool was created as part of a partnership between the Centers for Disease Control and Prevention (CDC) and researchers at Emory University's Rollins School of Public Health. The tool applies the approach and assumptions from Smith et al (2018) [REF Forthcoming]. Users can estimate the number of individuals with PrEP indications for a specific jurisdiction by selecting that jurisdiction and using preset values for the inputs or adjusting those inputs if desired. These data are intended to be estimates and should be interpreted with caution.
+This report was generated using the PrEP Populations Estimation Tool. The tool was created as part of a partnership between the Centers for Disease Control and Prevention (CDC) and researchers at Emory University's Rollins School of Public Health. The tool applies the approach and assumptions from [Smith et al. 2018] (https://doi.org/10.1016/j.annepidem.2018.05.003). Users can estimate the number of individuals with PrEP indications for a specific jurisdiction by selecting that jurisdiction and using preset values for the inputs or adjusting those inputs if desired. These data are intended to be estimates and should be interpreted with caution.
 
 
 ## Approach and Assumptions
@@ -37,7 +37,7 @@ The results presented in this report are based on the following model inputs:
 ## Results
 Based on these inputs, the total number of individuals with indications for PrEP is `r paste(format(input$totalprep, big.mark = ","), sep = "")`. The following breaks down this number by race/ethnicity within each of these groups: MSM, HET, and PWID. 
 
-The estimated number of MSM  with indications for PrEP is `r paste(format(input$msmprep, big.mark = ","), sep = "")`. Within this group, the estimated number by race/ethnicity includes: 
+The estimated number of MSM with indications for PrEP is `r paste(format(input$msmprep, big.mark = ","), sep = "")`. Within this group, the estimated number by race/ethnicity includes: 
 
 * African-American MSM: `r paste(format(input$blackmsmprep, big.mark = ","), sep = "")`
 
@@ -45,7 +45,7 @@ The estimated number of MSM  with indications for PrEP is `r paste(format(input$
 
 * White MSM: `r paste(format(input$whitemsmprep, big.mark = ","), sep = "")`. 
 
-The estimated number of HET  with indications for PrEP is `r paste(format(input$hetprep, big.mark = ","), sep = "")`. Within this group, the estimated number by race/ethnicity includes: 
+The estimated number of HET with indications for PrEP is `r paste(format(input$hetprep, big.mark = ","), sep = "")`. Within this group, the estimated number by race/ethnicity includes: 
 
 * African-American HET: `r paste(format(input$blackhetprep, big.mark = ","), sep = "")`
 
@@ -54,7 +54,7 @@ The estimated number of HET  with indications for PrEP is `r paste(format(input$
 * White HET: `r paste(format(input$whitehetprep, big.mark = ","), sep = "")`. 
 
 
-The estimated number of PWID  with indications for PrEP is `r paste(format(input$pwidprep, big.mark = ","), sep = "")`. Within this group, the estimated number by race/ethnicity includes:
+The estimated number of PWID with indications for PrEP is `r paste(format(input$pwidprep, big.mark = ","), sep = "")`. Within this group, the estimated number by race/ethnicity includes:
 
 * African-American PWID: `r paste(format(input$blackpwidprep, big.mark = ","), sep = "")`
 

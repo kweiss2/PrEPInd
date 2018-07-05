@@ -5,8 +5,8 @@ account: prepind
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 309535
-bundleId: 1429504
+bundleId: 1466844
 url: https://prepind.shinyapps.io/prepind2/
-when: 1528984863.41454
+when: 1530820578.31012
 asMultiple: FALSE
 asStatic: FALSE
