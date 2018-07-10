@@ -150,12 +150,12 @@ shinyUI(
                               em("Enter"), "key to expand or collapse the
                              sidebar.", style = "color: black;"),
 
-                           p("To get started, enter an estimate of the MSM
-                              population size in your jurisdiction of interest,
-                              and select a jurisdiction on which to base the
-                               model assumptions. By changing the jurisdiction,
-                                you can see how the assumptions about the
-                                 model change.",
+                           p("To get started, select a jurisdiction of interest
+                              on which to base the model assumptions. By changing
+                              the jurisdiction, you can see how assumptions about
+                              the model change. You can also edit the assumptions
+                              manually. Then, enter an estimate of the MSM
+                              population size in that jurisdiction.",
                              style = "color: black;"),
                            tags$ul(
                                tags$li(strong("Estimates by transmission risk
