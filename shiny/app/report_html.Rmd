@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## User Title: `r paste(input$reportTitle, sep="")`  
 ## `r paste(format(Sys.Date(), "%B %d, %Y"), sep="")`
 
-This report was generated using the PrEP Populations Estimation Tool. The tool was created as part of a partnership between the Centers for Disease Control and Prevention (CDC) and researchers at Emory University's Rollins School of Public Health. The tool applies the approach and assumptions from [Smith et al. 2018] (https://doi.org/10.1016/j.annepidem.2018.05.003). Users can estimate the number of individuals with PrEP indications for a specific jurisdiction by selecting that jurisdiction and using preset values for the inputs or adjusting those inputs if desired. These data are intended to be estimates and should be interpreted with caution.
+This report was generated using the PrEP Populations Estimation Tool. The tool was created as part of a partnership between the Centers for Disease Control and Prevention (CDC) and researchers at Emory University's Rollins School of Public Health. The tool applies the approach and assumptions from [Smith et al. 2018](https://doi.org/10.1016/j.annepidem.2018.05.003). Users can estimate the number of individuals with PrEP indications for a specific jurisdiction by selecting that jurisdiction and using preset values for the inputs or adjusting those inputs if desired. These data are intended to be estimates and should be interpreted with caution.
 
 
 ## Approach and Assumptions
