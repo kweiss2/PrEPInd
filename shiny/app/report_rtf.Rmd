@@ -2,7 +2,7 @@
 output: 
 rtf_document:
   fig_caption: true
-  reference_rtf: report.docx
+  reference_rtf: report.rtf
 ---
 
 
@@ -14,7 +14,7 @@ This report was generated using the PrEP Populations Estimation Tool. The tool w
 
 
 ## Approach and Assumptions
-Smith et al. applied a multiplier method based on model inputs, including 2015 HIV case surveillance data, with specified assumptions. First, the number of men who have sex with men (MSM) was estimated by [Grey et al. (20)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4873305/) and updated to population estimates for 2015. The estimated number of MSM in a state was then multiplied by the national estimate of the proportion of MSM who were HIV-negative with indications for PrEP (0.247). This resulted in an estimate of the number of MSM in each state with indications for PrEP. Second, the relative proportions of new HIV diagnoses in each jurisdiction among heterosexuals (HET) compared to MSM, and among persons who inject drugs (PWID) compared to MSM were assumed to approximate the relative risk of HIV exposure for uninfected persons in each transmission risk group in a given jurisdiction. These ratios were multiplied by the number of MSM with PrEP indications to calculate the number of HET and PWID with PrEP indications in that jurisdiction. 
+Smith et al. applied a multiplier method based on model inputs, including 2015 HIV case surveillance data, with specified assumptions. First, the number of men who have sex with men (MSM) was estimated by [Grey et al. (2016)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4873305/) and updated to population estimates for 2015. The estimated number of MSM in a state was then multiplied by the national estimate of the proportion of MSM who were HIV-negative with indications for PrEP (0.247). This resulted in an estimate of the number of MSM in each state with indications for PrEP. Second, the relative proportions of new HIV diagnoses in each jurisdiction among heterosexuals (HET) compared to MSM, and among persons who inject drugs (PWID) compared to MSM were assumed to approximate the relative risk of HIV exposure for uninfected persons in each transmission risk group in a given jurisdiction. These ratios were multiplied by the number of MSM with PrEP indications to calculate the number of HET and PWID with PrEP indications in that jurisdiction. 
 
 Lastly, to produce estimates by race/ethnicity, we used the proportion of new HIV diagnoses in each jurisdiction by race/ethnicity for each transmission risk group to approximate the relative risk of HIV exposure for uninfected persons in each transmission risk and race/ethnicity group. Within each transmission risk group, we multiplied the proportion of HIV diagnoses in 2015 among each race/ethnicity group by the number of persons with PrEP indications in that transmission risk group to calculate estimates for each transmission risk and race/ethnicity group.
 
@@ -88,12 +88,20 @@ num <- c(input$msmprep, input$hetprep, input$pwidprep)
 perc <- c(round(input$msmdiagpct, 1), round(input$hetdiagpct, 1), round(input$pwiddiagpct, 1))
 colnames(df) <- c("Transmission Risk Group", "Number with PrEP Indications", "Percent (%) of Total *")
 df[ , 1:3] <- c(class, num, perc)
-
-kable(df, escape = FALSE, caption = "Table 1: Individuals with Indications for PrEP by Transmission Risk Group")
-cat("* Total may not sum to 100%")
+# 
+# knitr::kable(df, escape = FALSE, caption = "Table 1: Individuals with Indications for PrEP by Transmission Risk Group")
+# cat("* Total may not sum to 100%")
  
 
 ```
+##### Table 1: Individuals with Indications for PrEP by Transmission Risk Group
+
+Transmission Risk Group | Number with PrEP Indications | Percent (%) of Total
+------------------------ | ------:| -----:
+MSM             | `r paste(format(input$msmprep, big.mark=","), sep="")` | `r paste(format(input$msmdiagpct, big.mark=","), sep="")`
+Heterosexuals                | `r paste(format(input$hetprep, big.mark=","), sep="")` | `r paste(format(input$hetdiagpct, big.mark=","), sep="")`
+Persons who inject drugs         | `r paste(format(input$pwidprep, big.mark=","), sep="")` | `r paste(format(input$pwiddiagpct, big.mark=","), sep="")` 
+* Total may not sum to 100% | |
 
 ```{r echo = FALSE, message = FALSE, fig.cap=paste("Figure 1: Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=5, fig.height=4}
 transnums <- NULL
@@ -131,9 +139,16 @@ num <- c(sum(input$blackmsmprep, input$blackhetprep, input$blackpwidprep),
 colnames(df) <- c("Race", "Number with PrEP Indications")
 df[ , 1:2] <- c(class, num)
 
-kable(df, escape = FALSE, caption = "Table 2: Individuals with Indications for PrEP by Race")
-
+# kable(df, escape = FALSE, caption = "Table 2: Individuals with Indications for PrEP by Race")
+# cat("* Total may not sum to 100%")
 ```
+##### Table 2: Individuals with Indications for PrEP by Race
+
+Race | Number with PrEP Indications      
+------------------------ | ------:
+Black             | `r paste(format(as.numeric(input$blackmsmprep) + as.numeric(input$blackhetprep) + as.numeric(input$blackpwidprep), big.mark=","), sep="")`
+Hispanic              | `r paste(format(as.numeric(input$hispmsmprep) + as.numeric(input$hisphetprep) + as.numeric(input$hisppwidprep), big.mark=","), sep="")`
+White              | `r paste(format(as.numeric(input$whitemsmprep) + as.numeric(input$whitehetprep) + as.numeric(input$whitepwidprep), big.mark=","), sep="")`
 
 ```{r echo=FALSE, fig.cap=paste("Figure 2: Individuals Indicated for PrEP by Race"), fig.width=5, fig.height=4}
 racenums <- NULL
@@ -172,8 +187,18 @@ perc <- c(round(input$blackmsmdiagpct, 1), round(input$hispmsmdiagpct, 1), round
 colnames(df) <- c("Race", "Number with PrEP Indications", "Percent (%) of Total MSM *")
 df[ , 1:3] <- c(class, num, perc)
 
-kable(df, escape = FALSE, caption = "Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group")
+# kable(df, escape = FALSE, caption = "Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group")
+# cat("* Total may not sum to 100%")
 ```
+
+##### Table 3: Individuals with Indications for PrEP by Race among MSM Transmission Risk Group
+
+Race | Number with PrEP Indications      | Percent (%) of Total MSM *
+------------------------ | ------:| -----:
+Black MSM             | `r paste(format(input$blackmsmprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(input$blackmsmdiagpct), 1), big.mark=","))`
+Hispanic MSM             | `r paste(format(input$hispmsmprep, big.mark=","), sep="")` |`r paste(format(round(as.numeric(input$hispmsmdiagpct), 1), big.mark=","))`
+White MSM             | `r paste(format(input$whitemsmprep, big.mark=","), sep="")` |`r paste(format(round(as.numeric(input$whitemsmdiagpct), 1), big.mark=","))`
+* Total may not sum to 100% | |
 
 ```{r echo=FALSE, fig.cap=paste("Figure 3: MSM Indicated for PrEP by Race"), fig.width=5, fig.height=4}
 msmnums <- NULL
@@ -210,8 +235,18 @@ perc <- c(round(input$blackhetdiagpct, 1), round(input$hisphetdiagpct, 1), round
 colnames(df) <- c("Race", "Number with PrEP Indications", "Percent (%) of Total HET *")
 df[ , 1:3] <- c(class, num, perc)
 
-kable(df, escape = FALSE, caption = "Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group")
+#kable(df, escape = FALSE, caption = "Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group")
+# cat("* Total may not sum to 100%")
 ```
+
+##### Table 4: Individuals with Indications for PrEP by Race among HET Transmission Risk Group
+
+Race | Number with PrEP Indications      | Percent (%) of Total HET *
+------------------------ | ------:| -----:
+Black HET             | `r paste(format(input$blackhetprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(input$blackhetdiagpct), 1), big.mark=","))`
+Hispanic HET             | `r paste(format(input$hisphetprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(input$hisphetdiagpct), 1), big.mark=","))`
+White HET             | `r paste(format(input$whitehetprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(input$whitehetdiagpct), 1), big.mark=","))`
+* Total may not sum to 100% | |
 
 ```{r echo=FALSE, fig.cap=paste("Figure 4: HET Indicated for PrEP by Race"), fig.width=5, fig.height=4}
 hetnums <- NULL
@@ -248,8 +283,18 @@ perc <- c(round(input$blackpwiddiagpct, 1), round(input$hisppwiddiagpct, 1), rou
 colnames(df) <- c("Race", "Number with PrEP Indications", "Percent (%) of Total PWID *")
 df[ , 1:3] <- c(class, num, perc)
 
-kable(df, escape = FALSE, caption = "Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group")
+#kable(df, escape = FALSE, caption = "Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group")
+#cat("* Total may not sum to 100%")
 ```
+
+##### Table 5: Individuals with Indications for PrEP by Race among PWID Transmission Risk Group
+
+Race | Number with PrEP Indications      | Percent (%) of Total PWID *
+------------------------ | ------:| -----:
+Black PWID             | `r paste(format(input$blackpwidprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(input$blackpwiddiagpct), 1), big.mark=","))`
+Hispanic PWID             | `r paste(format(input$hisppwidprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(input$hisppwiddiagpct), 1), big.mark=","))`
+White PWID             | `r paste(format(input$whitepwidprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(input$whitepwiddiagpct), 1), big.mark=","))`
+* Total may not sum to 100% | |
 
 ```{r echo=FALSE, fig.cap=paste("Figure 5: PWID Indicated for PrEP by Race"), fig.width=5, fig.height=4}
 pwidnums <- NULL
@@ -287,8 +332,17 @@ perc <- c(round(100 * input$blackmsmprep / sums, 1), round(100 * input$blackhetp
 colnames(df) <- c("Risk Group", "Number with PrEP Indications", "Percent (%) of Total Black *")
 df[ , 1:3] <- c(class, num, perc)
 
-kable(df, escape = FALSE, caption = "Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals")
+# kable(df, escape = FALSE, caption = "Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals")
+# cat("* Total may not sum to 100%")
 ```
+##### Table 6: Individuals with Indications for PrEP by Transmission Risk Group among Black Individuals
+
+Risk Group | Number with PrEP Indications      | Percent (%) of Total Black *
+------------------------ | ------:| -----:
+Black MSM             | `r paste(format(input$blackmsmprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(100*input$blackmsmprep  / sums), 1), big.mark=","))`
+Black HET            | `r paste(format(input$blackhetprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(100*input$blackhetprep  / sums), 1), big.mark=","))`
+Black PWID             | `r paste(format(input$blackpwidprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(100*input$blackpwidprep / sums), 1), big.mark=","))`
+* Total may not sum to 100% | |
 
 ```{r echo=FALSE, fig.cap=paste("Figure 6: Black Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=5, fig.height=4}
 blacknums <- NULL
@@ -326,8 +380,18 @@ perc <- c(round(100 * input$hispmsmprep / sums, 1), round(100 * input$hisphetpre
 colnames(df) <- c("Risk Group", "Number with PrEP Indications", "Percent (%) of Total Hispanic *")
 df[ , 1:3] <- c(class, num, perc)
 
-kable(df, escape = FALSE, caption = "Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals")
+# kable(df, escape = FALSE, caption = "Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals")
+# cat("* Total may not sum to 100%")
 ```
+
+##### Table 7: Individuals with Indications for PrEP by Transmission Risk Group among Hispanic Individuals
+
+Risk Group | Number with PrEP Indications      | Percent (%) of Total Hispanic *
+------------------------ | ------:| -----:
+Hispanic MSM             | `r paste(format(input$hispmsmprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(100*input$hispmsmprep  / sums), 1), big.mark=","))`
+Hispanic HET            | `r paste(format(input$hisphetprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(100*input$hisphetprep  / sums), 1), big.mark=","))`
+Hispanic PWID             | `r paste(format(input$hisppwidprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(100*input$hisppwidprep / sums), 1), big.mark=","))`
+* Total may not sum to 100% | |
 
 ```{r echo=FALSE, fig.cap=paste("Figure 7: Hispanic Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=5, fig.height=4}
 hispnums <- NULL
@@ -365,8 +429,18 @@ perc <- c(round(100 * input$whitemsmprep / sums, 1), round(100 * input$whitehetp
 colnames(df) <- c("Risk Group", "Number with PrEP Indications", "Percent (%) of Total White *")
 df[ , 1:3] <- c(class, num, perc)
 
-kable(df, escape = FALSE, caption = "Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals")
+# kable(df, escape = FALSE, caption = "Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals")
+# cat("* Total may not sum to 100%")
 ```
+
+##### Table 8: Individuals with Indications for PrEP by Transmission Risk Group among White Individuals
+
+Risk Group | Number with PrEP Indications      | Percent (%) of Total White *
+------------------------ | ------:| -----:
+White MSM             | `r paste(format(input$whitemsmprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(100*input$whitemsmprep  / sums), 1), big.mark=","))`
+White HET            | `r paste(format(input$whitehetprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(100*input$whitehetprep  / sums), 1), big.mark=","))`
+White PWID             | `r paste(format(input$whitepwidprep, big.mark=","), sep="")` | `r paste(format(round(as.numeric(100*input$whitepwidprep / sums), 1), big.mark=","))`
+* Total may not sum to 100% | |
 
 ```{r echo=FALSE, fig.cap=paste("Figure 8: White Individuals Indicated for PrEP by Transmission Risk Group"), fig.width=5, fig.height=4}
 whitenums <- NULL
